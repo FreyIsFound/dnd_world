@@ -1,14 +1,17 @@
 ---
 tags:
   - Category/Quest
-MyContainer: "[[2-World/Regions/Island of Skulls.md|Island of Skulls]]"
+MyContainer:
+  - "[[2-World/Regions/Island of Skulls.md|Island of Skulls]]"
+  - "[[z_Templates/World Builder Templates/Template-PointofInterest-BASES.md|Template-PointofInterest-BASES]]"
+  - "[[z_Templates/World Builder Templates/Template-PointofInterest.md|Template-PointofInterest]]"
 MyCategory:
 obsidianUIMode: preview
 questObtained:
 questStatus: Not Started
-questGiver:
-questLocationObtained:
-questSessionObtained:
+questGiver: "[[2-World/People/Flip the Famous.md|Flip the Famous]]"
+questLocationObtained: "[[z_Templates/World Builder Templates/Template-Hub.md|Template-Hub]]"
+questSessionObtained: "[[1-Session Journals/2025-01-01.md|2025-01-01]]"
 questNotes:
 questLootAvail:
 questLookEarned:
@@ -80,7 +83,7 @@ Provide a summary of the quest here.
 
 Date Obtained: `INPUT[datePicker:questObtained]` 
 Status: `INPUT[inlineSelect(option(Not Started), option(In Progress), option(Complete)):questStatus]` 
-Quest Giver: `INPUT[suggester(optionQuery(#Category/Person)):questGiver]` 
+Quest Giver: `INPUT[suggester(optionQuery(#Category/People)):questGiver]` 
 Quest Location: `INPUT[suggester(optionQuery(#Category/Hub)):questLocationObtained]` 
 Session Obtained: `INPUT[suggester(optionQuery(#Category/Journal)):questSessionObtained]` 
 Available Loot: `INPUT[suggester(optionQuery(#item)):questLootAvail]` 

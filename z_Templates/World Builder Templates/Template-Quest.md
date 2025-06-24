@@ -109,7 +109,7 @@ Provide a summary of the quest here.
 
 Date Obtained: `INPUT[datePicker:questObtained]` 
 Status: `INPUT[inlineSelect(option(Not Started), option(In Progress), option(Complete)):questStatus]` 
-Quest Giver: `INPUT[suggester(optionQuery(#Category/Person)):questGiver]` 
+Quest Giver: `INPUT[suggester(optionQuery(#Category/People)):questGiver]` 
 Quest Location: `INPUT[suggester(optionQuery(#Category/Hub)):questLocationObtained]` 
 Session Obtained: `INPUT[suggester(optionQuery(#Category/Journal)):questSessionObtained]` 
 Available Loot: `INPUT[suggester(optionQuery(#item)):questLootAvail]` 

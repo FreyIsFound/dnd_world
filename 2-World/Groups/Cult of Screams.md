@@ -195,9 +195,63 @@ The following people are members of this group.
 
 ```dataview
 TABLE WITHOUT ID link(file.name) AS "Name", char_race AS "Race", char_gender AS "Gender"
-FROM "2-Campaign/Quests"
+FROM "2-Campaign/People"
 WHERE contains(Connected_Groups, this.file.link)
 SORT file.name ASC
+```
+
+```base
+properties:
+  property.char_age:
+    displayName: Age
+  property.char_gender:
+    displayName: Gender
+  property.char_race:
+    displayName: Race
+  property.char_status:
+    displayName: Status
+  file.name:
+    displayName: Name
+  note.char_status:
+    displayName: Status
+  note.char_race:
+    displayName: Race
+  note.char_gender:
+    displayName: Gender
+  note.char_age:
+    displayName: Age Range
+views:
+  - type: table
+    name: People
+    filters:
+      and:
+        - file.inFolder("2-World/People")
+        - Connected_Groups.contains(this)
+    order:
+      - file.name
+      - MyContainer
+      - Connected_Groups
+      - MyCategory
+      - char_status
+      - char_race
+      - char_gender
+      - char_age
+    sort:
+      - column: note.char_race
+        direction: ASC
+      - column: note.MyContainer
+        direction: ASC
+      - column: file.name
+        direction: ASC
+    columnSize:
+      file.name: 177
+      note.MyCategory: 221
+      note.MyContainer: 244
+      note.char_status: 137
+      note.char_race: 160
+      note.char_gender: 143
+      note.char_age: 149
+
 ```
 
 # Services

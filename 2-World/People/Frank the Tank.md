@@ -1,6 +1,7 @@
 ---
 MyContainer:
   - "[[2-World/Places/Shop of Stuff.md|Shop of Stuff]]"
+  - "[[z_Templates/World Builder Templates/Template-Place.md|Template-Place]]"
 MyCategory:
 tags:
   - Category/People
@@ -8,9 +9,9 @@ obsidianUIMode: preview
 aliases:
   - characters other name
 NoteStatus: ❓
-char_status: Alive
+char_status: Deceased
 char_race: Human
-char_gender: Male
+char_gender: Female
 char_items: []
 char_age: Adult
 parents:

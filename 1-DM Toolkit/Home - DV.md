@@ -3,13 +3,13 @@ obsidianUIMode: preview
 ---
 
 > [!cards|4]
-> **[[Island of Screams]]**
+> **[[Island of Skulls]]**
 > ![[The Island of Screams.jpg\|sban htiny ctr]]
 > 
 > **[[Journey Board]]**
 > [![[JourneyBoard.png\|sban htiny ctr]]](Journey%20Board)
 >
-> **[[City of Trade]]**
+> **[[City of Screams]]**
 > ![[AdventureIcon.png\|sban htiny ctr]]
 > 
 > **[[Example Party 1]]**

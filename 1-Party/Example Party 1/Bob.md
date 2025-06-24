@@ -5,7 +5,7 @@ tags:
   - Category/Player
 Player: Bob
 Role: Player
-level: 11
+level: 12
 hp: 60
 max_hp: 71
 ac: 66

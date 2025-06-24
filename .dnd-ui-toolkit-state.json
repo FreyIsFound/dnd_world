@@ -4,12 +4,14 @@
       "value": 0
     },
     "din_health": {
-      "current": 50,
+      "current": 59,
       "temporary": 0,
-      "hitdiceUsed": 3
+      "hitdiceUsed": 3,
+      "deathSaveSuccesses": 0,
+      "deathSaveFailures": 0
     },
     "din_spells_1": {
-      "value": 1
+      "value": 0
     },
     "din_spell_2": {
       "value": 0
@@ -31,6 +33,19 @@
     },
     "din_spell_4": {
       "value": 5
+    },
+    "my_character_hp": {
+      "current": 60,
+      "temporary": 0,
+      "hitdiceUsed": 0,
+      "deathSaveSuccesses": 0,
+      "deathSaveFailures": 0
+    },
+    "my_character_spells_1": {
+      "value": 0
+    },
+    "my_character_sneak_attack": {
+      "value": 0
     }
   }
 }

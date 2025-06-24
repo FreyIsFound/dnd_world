@@ -4,136 +4,81 @@
     "type": "split",
     "children": [
       {
-        "id": "01b72241c4791f87",
+        "id": "55d71d92af5ff493",
         "type": "tabs",
         "children": [
           {
-            "id": "9e228f1fe9580cba",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "z_Templates/World Builder Templates/Template-Person.md",
-                "mode": "preview",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Template-Person"
-            }
-          },
-          {
-            "id": "0d9aece2957b003f",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "0-Obsidian TTRPG Tutorial/0-Obsidian TTRPG Tutorial.md",
-                "mode": "preview",
-                "source": true
-              },
-              "icon": "lucide-file",
-              "title": "0-Obsidian TTRPG Tutorial"
-            }
-          },
-          {
-            "id": "b5dbd14dabb7d39b",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "2-World/Quests/The Giants Skull.md",
-                "mode": "preview",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "The Giants Skull"
-            }
-          },
-          {
-            "id": "e2d2511929a755b8",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "1-DM Toolkit/Home - DV.md",
-                "mode": "preview",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Home - DV"
-            }
-          },
-          {
-            "id": "198ac325be1750ce",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "0-Scratch Notes/Untitled.md",
-                "mode": "preview",
-                "source": true
-              },
-              "icon": "lucide-file",
-              "title": "Untitled"
-            }
-          },
-          {
-            "id": "f922b0db3e9201c3",
-            "type": "leaf",
-            "state": {
-              "type": "bases",
-              "state": {
-                "file": "0-Scratch Notes/Bases Test.base",
-                "viewName": "People View"
-              },
-              "icon": "lucide-layout-list",
-              "title": "Bases Test"
-            }
-          },
-          {
-            "id": "c102904adb5ce561",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "3-Mechanics/Bestiary/Bestiary.md",
-                "mode": "preview",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "Bestiary"
-            }
-          },
-          {
-            "id": "746e0d2176052242",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "3-Mechanics/races/races.md",
-                "mode": "source",
-                "source": false
-              },
-              "icon": "lucide-file",
-              "title": "races"
-            }
-          },
-          {
-            "id": "a5e083e22798dd4f",
+            "id": "9ec98201f5c39e62",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
                 "file": "3-Mechanics/Items/New Item.md",
                 "mode": "preview",
-                "source": false
+                "source": true
               },
               "icon": "lucide-file",
               "title": "New Item"
             }
+          },
+          {
+            "id": "17fef801234e1fb8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "2-World/People/Flip the Famous.md",
+                "mode": "preview",
+                "source": true
+              },
+              "icon": "lucide-file",
+              "title": "Flip the Famous"
+            }
+          },
+          {
+            "id": "25a68c2aa962db50",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "z_Templates/World Builder Templates/Template-Place.md",
+                "mode": "preview",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "Template-Place"
+            }
+          },
+          {
+            "id": "d98239cb3fe18af8",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "z_Templates/World Builder Templates/Template-Player.md",
+                "mode": "preview",
+                "source": true
+              },
+              "icon": "lucide-file",
+              "title": "Template-Player"
+            }
+          },
+          {
+            "id": "4ac9b810a82e853a",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "0-Scratch Notes/Untitled 1.md",
+                "mode": "source",
+                "source": true
+              },
+              "icon": "lucide-file",
+              "title": "Untitled 1"
+            }
           }
         ],
-        "currentTab": 7
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -222,7 +167,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 292.5
+    "width": 290.5
   },
   "right": {
     "id": "4376769ea3073bd6",
@@ -231,6 +176,7 @@
       {
         "id": "09384058bb1c4e72",
         "type": "tabs",
+        "dimension": 38.822355289421154,
         "children": [
           {
             "id": "01866bcbc2fd8a19",
@@ -238,7 +184,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "2-World/Places/Shop of Stuff.md",
+                "file": "z_Templates/World Builder Templates/Template-Place-BASES.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -248,7 +194,7 @@
                 "unlinkedCollapsed": false
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Shop of Stuff"
+              "title": "Backlinks for Template-Place-BASES"
             }
           },
           {
@@ -257,12 +203,12 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "2-World/Places/Shop of Stuff.md",
+                "file": "0-Scratch Notes/Untitled 1.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": false
               },
               "icon": "links-going-out",
-              "title": "Outgoing links from Shop of Stuff"
+              "title": "Outgoing links from Untitled 1"
             }
           },
           {
@@ -350,12 +296,28 @@
             }
           }
         ],
-        "currentTab": 7
+        "currentTab": 6
+      },
+      {
+        "id": "98c3df223478a149",
+        "type": "tabs",
+        "dimension": 61.177644710578846,
+        "children": [
+          {
+            "id": "5ca36d08ff2d49f8",
+            "type": "leaf",
+            "state": {
+              "type": "initiative-tracker-creature-view",
+              "state": {},
+              "icon": "initiative-tracker-creature-view",
+              "title": "Combatant"
+            }
+          }
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 433.5,
-    "collapsed": true
+    "width": 433.5
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -380,36 +342,36 @@
       "pexels-banner:🚩 Pixel Banner Menu": false
     }
   },
-  "active": "746e0d2176052242",
+  "active": "d98239cb3fe18af8",
   "lastOpenFiles": [
-    "3-Mechanics/Items/Items.md",
-    "3-Mechanics/CLI/CLI.md",
-    "3-Mechanics/Bestiary/Bestiary.md",
-    "z_Templates/World Builder Templates/Template-Item.md",
-    "3-Mechanics/Items/New Item.md",
-    "1-DM Toolkit/Home - DV.md",
-    "1-DM Toolkit/Home.md",
-    "1-DM Toolkit/Home Embeds.md",
-    "2-World/People/Flip the Famous.md",
-    "2-World/Hubs/City of Screams.md",
-    "3-Mechanics/races/races.md",
-    "0-Obsidian TTRPG Tutorial/0-Obsidian TTRPG Tutorial.md",
-    "z_Templates/World Builder Templates/Template-Journal.md",
+    "z_Templates/World Builder Templates/Template-Player-Demiplane.md",
     "z_Templates/World Builder Templates/Template-Player.md",
-    "2-World/Places/Shop of Stuff.md",
-    "z_Templates/World Builder Templates/Template-Group.md",
-    "2-World/People/Frank the Tank.md",
-    "z_Templates/World Builder Templates/Template-Person.md",
-    "1-DM Toolkit/Home Embeds - DV.md",
+    "1-DM Toolkit/Home - DV.md",
+    "1-DM Toolkit/DnD5e-SideScreen-2014.md",
     "0-Scratch Notes/Untitled.md",
-    "z_Templates/World Builder Templates/Template-Place.md",
-    "z_Assets/Pasted image 20250529234903.png",
-    "0-Scratch Notes/Bases Test.base",
-    "0-Scratch Notes/Template Design.md",
-    "2-World/People/Fred the Slow.md",
+    "0-Scratch Notes/Untitled 1.md",
+    "z_Templates/6_Help Notes/Obsidian Markdown Formatting.md",
     "1-Party/Example Party 1/Bob.md",
-    "z_Templates/World Builder Templates/Template-Quest.md",
-    "z_Templates/World Builder Templates/Template-Hub.md",
+    "1-DM Toolkit/Home.md",
+    "z_Templates/World Builder Templates/Template-Place.md",
+    "2-World/People/Flip the Famous.md",
+    "3-Mechanics/Items/New Item.md",
+    "z_Templates/World Builder Templates/Template-Item.md",
+    "2-World/Groups/Cult of Screams.md",
+    "2-World/Quests/The Giants Skull.md",
+    "2-World/Points of Interest/Skull Cave.md",
+    "2-World/Places/Inn of Drunks.md",
+    "z_Templates/World Builder Templates/Template-Person.md",
+    "z_Templates/World Builder Templates/Template-Group-BASES.md",
+    "2-World/Regions/Island of Skulls.md",
+    "0-Scratch Notes/Template Design.md",
+    "1-DM Toolkit/Island of Screams.md",
+    "2-World/Hubs/City of Slaves.md",
+    "2-World/People/Fred the Frowny.md",
+    "1-DM Toolkit/Home Embeds - DV.md",
+    "1-DM Toolkit/Home Embeds.md",
+    "0-Scratch Notes/Bases Test.base",
+    "z_Assets/Pasted image 20250529234903.png",
     "z_Assets/Fighter Gemmy.png",
     "0-Scratch Notes/Untitled.canvas",
     "z_Assets/Pasted image 20250427093259.png",

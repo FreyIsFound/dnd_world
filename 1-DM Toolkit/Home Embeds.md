@@ -3,22 +3,31 @@
 ```base
 formulas:
   Untitled: ""
-display:
-  property.char_race: Race
-  property.char_gender: Gender
-  property.char_status: Status
-  property.char_class: Class
-  property.char_age: Age
-  property.char_items: Inventory
-  file.name: Character Name
-  property.Player: Player Name
-  property.level: Level
+properties:
+  property.char_race:
+    displayName: Race
+  property.char_gender:
+    displayName: Gender
+  property.char_status:
+    displayName: Status
+  property.char_class:
+    displayName: Class
+  property.char_age:
+    displayName: Age
+  property.char_items:
+    displayName: Inventory
+  file.name:
+    displayName: Character Name
+  property.Player:
+    displayName: Player Name
+  property.level:
+    displayName: Level
 views:
   - type: table
     name: Party Members
     filters:
       and:
-        - property.tags == "Category/Player"
+        - tags == ["Category/Player"]
         - file.folder != "z_Templates/World Builder Templates"
     order:
       - file.name
@@ -90,6 +99,10 @@ views:
       file.folder: 273
       file.ctime: 170
     sort:
+      - column: file.mtime
+        direction: DESC
+      - column: file.ctime
+        direction: ASC
       - column: file.folder
         direction: DESC
       - column: formula.Untitled 2
@@ -165,7 +178,7 @@ views:
       file.ctime: 208
     sort:
       - column: file.name
-        direction: ASC
+        direction: DESC
       - column: property.Status
         direction: DESC
     limit: 10

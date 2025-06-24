@@ -3,3 +3,4 @@ The CLI process is the quickest and easiest way to get your 5e notes into Markdo
 ### DnD 5e
 Follow this process: 
 https://obsidianttrpgtutorials.com/Obsidian+TTRPG+Tutorials/Plugin+Tutorials/TTRPG-Convert-CLI/TTRPG-Convert-CLI+5e
+

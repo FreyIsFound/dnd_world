@@ -6,9 +6,9 @@ tags:
 Player: Bob
 Role: Player
 level: 11
-hp: 60
+hp: 50
 max_hp: 71
-ac: 66
+ac: 80
 modifier: 2
 pasperc: 13
 Status: Active
@@ -123,61 +123,45 @@ _%>
 
 # General
 
-
-```dataviewjs
-const lvl = dv.current().level;
-const ac = dv.current().ac;
-const mod = dv.current().modifier;
-
-// Initiative string with plus sign if positive
-const initStr = (typeof mod === "number" && mod > 0) ? `+${mod}` : `${mod}`;
-
-// Mage Armor = base AC + modifier
-const mageArmor = (typeof ac === "number" && typeof mod === "number") ? ac + mod : ac;
-
-// build badges array
-const badges = [
-  { label: "Level",           value: lvl        },
-  { label: "Initiative",      value: initStr    },
-  { label: "Spell Save",      value: 14         },
-  { label: "AC",              value: ac         },
-  { label: "AC (Mage Armor)", value: mageArmor  }
-];
-
-// serialize to a ```badges block
-let out = "```badges\nitems:\n";
-for (let b of badges) {
-  const v = typeof b.value === "number" ? b.value : `'${b.value}'`;
-  out += `  - label: ${b.label}\n    value: ${v}\n`;
-}
-out += "```";
-
-// render it
-dv.paragraph(out);
+```badges
+items:
+  - label: Race
+    value: 'Half-Orc'
+  - label: Level
+    value: '{{frontmatter.level}}'
+  - label: Initiative
+    value: '{{frontmatter.modifier}}'
 ```
 
-```dataviewjs
-// grab your hp value
-const hp = dv.current().hp;
+<br>
 
-// (optional) if you want hitdice dynamic, you could pull them similarly:
-// const dice = dv.current().hitdice?.dice || "d6";
-// const diceValue = dv.current().hitdice?.value || 3;
-// here we'll hard-code them as in your example:
-const dice = "d6";
-const diceValue = 3;
+```badges
+items:
+  - label: Spell Save
+    value: 14
+  - label: AC
+    value: '{{frontmatter.ac}}'
+  - label: AC (Mage Armor)
+    value: 15
+```
 
-// build the healthpoints YAML block
-let out = "```healthpoints\n";
-out += `state_key: din_health\n`;
-out += `health: ${hp}\n`;
-out += `hitdice:\n`;
-out += `  dice: ${dice}\n`;
-out += `  value: ${diceValue}\n`;
-out += "```";
+<br>
 
-// render it into your note
-dv.paragraph(out);
+```healthpoints
+state_key: din_health
+health: '{{ frontmatter.hp }}'
+reset_on: long-rest
+hitdice:
+  dice: d6
+  value: 4
+```
+
+```event-btns
+items:
+  - name: Short Rest
+    value: short-rest
+  - name: Long Rest
+    value: long-rest
 ```
 
 # Description
@@ -195,9 +179,10 @@ This is the persons description.
 | Gender   | `INPUT[inlineSelect(option(Male), option(Female), option(Other)):char_gender]`                              |
 | Age      | `INPUT[inlineSelect(option(Infant), option(Child), option(Teenager), option(Young Adult), option(Adult), option(Elder)):char_age]`                              |
 | HP       | `INPUT[number:hp]`           |
-| Max HP   | `INPUT[number:player_maxhp]` |
+| Max HP   | `INPUT[number:max_hp]` |
 | AC       | `INPUT[number:ac]`           |
 | Modifier | `INPUT[number:modifier]`     |
+
 
 # GM Notes
 
@@ -207,11 +192,11 @@ Make notes of what you need to track in the town here.
 
 ```ability
 abilities:
-  strength: 9
-  dexterity: 18
-  constitution: 16
-  intelligence: 19
-  wisdom: 12
+  strength: 10
+  dexterity: 10
+  constitution: 10
+  intelligence: 10
+  wisdom: 10
   charisma: 10
 
 proficiencies:
@@ -238,6 +223,7 @@ proficiencies:
 label: ""
 state_key: din_luck_points
 uses: 3
+reset_on: long-rest
 ```
 
 You have inexplicable luck that seems to kick in at just the right moment.
@@ -255,6 +241,7 @@ You regain your expended luck points when you finish a long rest.
 label: ""
 state_key: din_arcane_recovery
 uses: 1
+reset_on: long-rest
 ```
 
 You have learned to regain some of your magical energy by studying your spell book. Once per day when you finish a **short rest**, you can choose expended spell slots to recover. The spell slots can have a combined level that is equal to or **less than half your wizard level** (rounded up), and none of the slots can be 6th level or higher.
@@ -277,10 +264,18 @@ Your DM might rule that the knowledge you seek is secreted away in an almost ina
 items:
   - label: "Level 1"
     state_key: din_spells_1
+    reset_on: long-rest
     uses: 4
   - label: "Level 2"
     state_key: din_spell_2
+    reset_on: long-rest
     uses: 2
+```
+
+```spell-components
+casting_time: 1 bonus action
+range: Self
+duration: Concentration, up to 1 minute
 ```
 
 ### Fey Touched

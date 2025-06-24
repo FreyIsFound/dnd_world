@@ -1,5 +1,8 @@
 ---
-MyContainer: "[[2-World/Regions/Island of Skulls.md|Island of Skulls]]"
+MyContainer:
+  - "[[2-World/Regions/Island of Skulls.md|Island of Skulls]]"
+  - "[[z_Templates/World Builder Templates/Template-Place.md|Template-Place]]"
+  - "[[z_Templates/World Builder Templates/Template-PointofInterest-BASES.md|Template-PointofInterest-BASES]]"
 MyCategory:
 tags:
   - Category/People
@@ -28,9 +31,12 @@ siblings:
   - Flip
 partner:
   - Jane
+  - Mel
 Connected_Quests:
   - "[[z_Templates/World Builder Templates/Template-Quest.md|Template-Quest]]"
-Connected_Groups: "[[z_Templates/World Builder Templates/Template-Group.md|Template-Group]]"
+Connected_Groups:
+  - "[[z_Templates/World Builder Templates/Template-Group.md|Template-Group]]"
+  - "[[2-World/Groups/Cult of Screams.md|Cult of Screams]]"
 ---
 
 
