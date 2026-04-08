@@ -8,7 +8,7 @@ import * as Plugin from "./quartz/plugins"
  */
 const config: QuartzConfig = {
   configuration: {
-    pageTitle: "Quartz 4",
+    pageTitle: "Aisling lore",
     pageTitleSuffix: "",
     enableSPA: true,
     enablePopovers: true,
@@ -16,8 +16,8 @@ const config: QuartzConfig = {
       provider: "plausible",
     },
     locale: "en-US",
-    baseUrl: "quartz.jzhao.xyz",
-    ignorePatterns: ["private", "templates", ".obsidian"],
+    baseUrl: "aisling-wiki.pages.dev",
+    ignorePatterns: ["private", "templates", ".obsidian", "z_Templates", "Adventure Campaign/gm", "tutorial map", .quartz],
     defaultDateType: "modified",
     theme: {
       fontOrigin: "googleFonts",
