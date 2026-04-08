@@ -76,9 +76,9 @@ export default ((opts?: Partial<BreadcrumbOptions>) => {
   })
 
   const playersIndex = allCrumbs.findIndex((crumb) =>
-    crumb.slug === "Adventure Campaign/players" ||
-    crumb.slug.endsWith("/players") ||
-    crumb.slug === "players"
+    crumb.slug === "Adventure Campaign/Players" ||
+    crumb.slug.endsWith("/Players") ||
+    crumb.slug === "Players"
   )
 
   const crumbs =

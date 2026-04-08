@@ -37,11 +37,11 @@ body {
 
 /* === Headings === */
 
-.page-title,
-.article-title,
-h1, h2, h3, h4, h5, h6 {
-  font-family: var(--obs-font-ui);
-}
+// .page-title,
+// .article-title,
+// h1, h2, h3, h4, h5, h6 {
+//   font-family: var(--obs-font-ui);
+// }
 
 /* === Links === */
 
@@ -55,10 +55,10 @@ a:hover {
 
 /* === Explorer / sidebar === */
 
-.explorer {
-  background: var(--obs-bg-secondary);
-  border-right: 1px solid var(--obs-border);
-}
+// .explorer {
+//   background: var(--obs-bg-secondary);
+//   border-right: 1px solid var(--obs-border);
+// }
 
 .folder-button,
 .explorer a {
