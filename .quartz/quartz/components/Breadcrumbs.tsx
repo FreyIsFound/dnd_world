@@ -7,6 +7,7 @@ import { trieFromAllFiles } from "../util/ctx"
 type CrumbData = {
   displayName: string
   path: string
+  slug: string
 }
 
 interface BreadcrumbOptions {
@@ -39,6 +40,7 @@ function formatCrumb(displayName: string, baseSlug: FullSlug, currentSlug: Simpl
   return {
     displayName: displayName.replaceAll("-", " "),
     path: resolveRelative(baseSlug, currentSlug),
+    slug: currentSlug,
   }
 }
 
@@ -58,23 +60,33 @@ export default ((opts?: Partial<BreadcrumbOptions>) => {
       return null
     }
 
-    const crumbs: CrumbData[] = pathNodes.map((node, idx) => {
-      const crumb = formatCrumb(node.displayName, fileData.slug!, simplifySlug(node.slug))
-      if (idx === 0) {
-        crumb.displayName = options.rootName
-      }
+    const allCrumbs: CrumbData[] = pathNodes.map((node, idx) => {
+    const simplifiedSlug = simplifySlug(node.slug)
+    const crumb = formatCrumb(node.displayName, fileData.slug!, simplifiedSlug)
 
-      // For last node (current page), set empty path
-      if (idx === pathNodes.length - 1) {
-        crumb.path = ""
-      }
-
-      return crumb
-    })
-
-    if (!options.showCurrentPage) {
-      crumbs.pop()
+    if (idx === 0) {
+      crumb.displayName = options.rootName
     }
+
+    if (idx === pathNodes.length - 1) {
+      crumb.path = ""
+    }
+
+    return crumb
+  })
+
+  const playersIndex = allCrumbs.findIndex((crumb) =>
+    crumb.slug === "Campaign/players" ||
+    crumb.slug.endsWith("/players") ||
+    crumb.slug === "players"
+  )
+
+  const crumbs =
+    playersIndex >= 0 ? allCrumbs.slice(playersIndex + 1) : allCrumbs
+
+  if (!options.showCurrentPage) {
+    crumbs.pop()
+  }
 
     return (
       <nav class={classNames(displayClass, "breadcrumb-container")} aria-label="breadcrumbs">
