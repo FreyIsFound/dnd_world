@@ -1,11 +1,36 @@
----
+<%*
+const modalForm = app.plugins.plugins.modalforms?.api;
+if (!modalForm) {
+  new Notice("Modal Forms plugin is not enabled.");
+  return;
+}
+
+const result = await modalForm.openForm("New-Quest");
+if (!result || result.status !== "ok") return;
+
+const data = result.getData();
+
+const questName = String(data["SelectQuestName"] ?? "").trim();
+const parentName = String(data["SelectParent"] ?? "").trim();
+
+// Rename note
+if (questName) {
+  await tp.file.rename(questName);
+}
+
+// Build MyContainer link
+let myContainerYaml = "[]";
+if (parentName) {
+  myContainerYaml = `\n  - "[[${parentName}|${parentName}]]"`;
+}
+
+// Write frontmatter
+tR = `---
 tags:
   - Category/Quest
-MyContainer:
-  - "[[z_Templates/World Builder Templates/Template-PointofInterest.md|Template-PointofInterest]]"
-  - "[[z_Templates/World Builder Templates/Template-Place.md|Template-Place]]"
-  - "[[z_Templates/World Builder Templates/Template-Hub.md|Template-Hub]]"
+MyContainer:${myContainerYaml}
 MyCategory:
+image: "Template_Quest_Placeholder.png"
 obsidianUIMode: preview
 questObtained:
 questStatus: Not Started
@@ -17,40 +42,15 @@ questLootAvail:
 questLookEarned:
 NoteIcon: quest
 ---
-
-<%*
-/* 1) Prompt for POI name */
-const poiName = await tp.system.prompt("Enter Quest Name", tp.file.title);
-if (!poiName) return;                     // cancel if blank
-await tp.file.rename(poiName);             // rename the file
-
-/* 2) Gather and pick a container region */
-const regionFiles = tp.app.vault.getMarkdownFiles()
-  .filter(f => f.path.startsWith("2-World/Regions/"));
-const regionChoices = regionFiles.map(f => f.basename);
-const regionValues  = regionFiles.map(f => f.path);
-const chosenPath    = await tp.system.suggester(regionChoices, regionValues, true);
-if (!chosenPath) return;                   // cancel if none chosen
-
-/* Build full wiki-link for MyContainer */
-const regionAlias = chosenPath.split("/").pop().replace(/\.md$/, "");
-const regionLink  = `[[${chosenPath}|${regionAlias}]]`;
-
-/* 4) Write into front-matter */
-setTimeout(() => {
-  const file = tp.file.find_tfile(tp.file.path(true));
-  if (!file) return;
-  app.fileManager.processFrontMatter(file, fm => {
-    fm["MyContainer"] = regionLink;
-  });
-}, 100);
+`;
 %>
 
 > [!NOTE] Parent Region: `INPUT[inlineListSuggester(optionQuery(#Category/Hub),optionQuery(#Category/Region),optionQuery(#Category/Place),optionQuery(#Category/PointofInterest)):MyContainer]`
+%% DISPLAYS NOTES THAT MATCH THE TAGS ABOVE %% 
 
 > [!column|no-i no-t]
 >> [!info|no-title] Map
->> ![[Pasted image 20250427093259.png]]
+>> ![[Template_Quest_Placeholder.png]]
 >
 >> [!note|no-title] Town Name
 >> ~~~meta-bind
@@ -82,7 +82,7 @@ setTimeout(() => {
 > class(tabbed)
 > )]
 > ~~~
->>[!tabbed-box-maxh|div-m]
+>>[!tabbed-box|div-m]
 >>>[!div-m|no-title]
 >>> ![[#Backstory|no-h clean]]
 >>
@@ -115,6 +115,8 @@ Session Obtained: `INPUT[suggester(optionQuery(#Category/Journal)):questSessionO
 Available Loot: `INPUT[suggester(optionQuery(#item)):questLootAvail]` 
 Acquired Loot: `INPUT[suggester(optionQuery(#item)):questLookEarned]` 
 
+`BUTTON[button_item]` 
+
 # GM Notes
 
 Make notes of what you need to track in the region here. 
@@ -131,14 +133,45 @@ Plan your quest out here.
 
 `BUTTON[button_person]` The following people are associated with this quest.
 
-```dataview
-TABLE WITHOUT ID link(file.name) AS "Name", char_race AS "Race", char_gender AS "Gender", Connected_Groups AS "Associated Group"
-FROM "2-World/People"
-WHERE contains(char_status, "Alive")
-WHERE contains(Connected_Quests, this.file.link)
-SORT file.name ASC
+```base
+properties:
+  file.name:
+    displayName: People Name(s)
+  note.char_race:
+    displayName: Race
+  note.char_gender:
+    displayName: Gender
+  note.char_age:
+    displayName: Age
+views:
+  - type: cards
+    name: Star Systems - Cards
+    filters:
+      and:
+        - file.folder == "2-World/People"
+        - list(Connected_Quests).contains(this)
+        - char_status == "Alive"
+    order:
+      - file.name
+      - char_age
+      - char_gender
+      - char_race
+    image: note.image
+  - type: table
+    name: Star Systems - Table
+    filters:
+      and:
+        - file.folder == "2-World/People"
+        - list(Connected_Quests).contains(this)
+        - char_status == "Alive"
+    order:
+      - file.name
+    sort:
+      - property: file.name
+        direction: DESC
+    columnSize:
+      file.name: 182
+
 ```
-
-
 
 

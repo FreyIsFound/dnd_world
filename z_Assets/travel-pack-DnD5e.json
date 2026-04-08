@@ -1,0 +1,377 @@
+{
+  "version": 1,
+  "pack": {
+    "id": "trp-8apwgb",
+    "name": "Dnd5e Travel Pack",
+    "enabled": true,
+    "customUnits": [],
+    "travelTimePresets": [
+      {
+        "id": "tt-4u2n93",
+        "name": "Walking",
+        "distanceValue": 30,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-ryl0fi",
+        "name": "Camel",
+        "distanceValue": 50,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-llexps",
+        "name": "Donkey",
+        "distanceValue": 40,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-i1lkxl",
+        "name": "Mule",
+        "distanceValue": 40,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-180fqw",
+        "name": "Draft Horse",
+        "distanceValue": 40,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-3m7689",
+        "name": "Elephant",
+        "distanceValue": 40,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-gq8fs8",
+        "name": "Mastiff",
+        "distanceValue": 40,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-7gnyzj",
+        "name": "Moorbounder",
+        "distanceValue": 40,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-847cf2",
+        "name": "Pony",
+        "distanceValue": 40,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-u1qvzm",
+        "name": "Rhinoceros",
+        "distanceValue": 40,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-mz125k",
+        "name": "Riding Horse",
+        "distanceValue": 60,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-n2e6di",
+        "name": "Saber-Toothed Tiger",
+        "distanceValue": 40,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-yd56yi",
+        "name": "Warhorse",
+        "distanceValue": 60,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-y6phos",
+        "name": "Griffon [walking]",
+        "distanceValue": 20,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-cp2ne1",
+        "name": "Griffon [flying]",
+        "distanceValue": 80,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-8txo1x",
+        "name": "Hippogriff [walking]",
+        "distanceValue": 40,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-hu4imt",
+        "name": "Hippogriff [flying]",
+        "distanceValue": 60,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-87osb8",
+        "name": "Pegasus [walking]",
+        "distanceValue": 60,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-pvkswt",
+        "name": "Pegasus [flying]",
+        "distanceValue": 90,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-xvlhep",
+        "name": "Peryton [walking]",
+        "distanceValue": 20,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-p5gycj",
+        "name": "Peryton [flying]",
+        "distanceValue": 60,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-rps8sn",
+        "name": "Broom of Flying",
+        "distanceValue": 50,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-hdan0s",
+        "name": "Broom of Flying [over  200 lbs]",
+        "distanceValue": 30,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-xwoid6",
+        "name": "Carpet of Flying [3ft x 5ft]",
+        "distanceValue": 80,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-h6pw6r",
+        "name": "Carpet of Flying [4ft x 6ft]",
+        "distanceValue": 60,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-caen1t",
+        "name": "Carpet of Flying [5ft x 7ft]",
+        "distanceValue": 40,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-12rahj",
+        "name": "Carpet of Flying [6ft x 9ft]",
+        "distanceValue": 30,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-3ti2ul",
+        "name": "Wind Walk",
+        "distanceValue": 300,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-tnyetm",
+        "name": "Cauldron of Flying",
+        "distanceValue": 50,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-leq1nh",
+        "name": "Cart pulled by Horses",
+        "distanceValue": 30,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-2vsbs5",
+        "name": "Cart pulled by PCs",
+        "distanceValue": 30,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-fp9bfk",
+        "name": "PHB Galley",
+        "distanceValue": 40,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-t0cz42",
+        "name": "PHB Keelboat",
+        "distanceValue": 10,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-f0cilm",
+        "name": "PHB Longship",
+        "distanceValue": 30,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-juqds0",
+        "name": "PHB Rowboat",
+        "distanceValue": 15,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-60s419",
+        "name": "PHB Sailing Ship",
+        "distanceValue": 20,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-rb2g23",
+        "name": "PHB Warship",
+        "distanceValue": 25,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-r1to3j",
+        "name": "GOS Sailing Ship",
+        "distanceValue": 50,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-l0vj9k",
+        "name": "Aquisions Inc Battle Balloon",
+        "distanceValue": 45,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-s1ccwe",
+        "name": "Aquisions Inc Mechanical Beholder",
+        "distanceValue": 15,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-eg3r3b",
+        "name": "Ebberon Lyrandar Airship",
+        "distanceValue": 200,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-nk73n0",
+        "name": "Ebberon Lyrandar Galleon",
+        "distanceValue": 100,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-sbst2s",
+        "name": "Ebberon Orien Lightning Rail",
+        "distanceValue": 300,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-lg2hci",
+        "name": "Unicorn",
+        "distanceValue": 50,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      }
+    ],
+    "travelPerDay": {
+      "value": 8,
+      "unit": "h"
+    },
+    "terrains": [],
+    "travelPerDayPresets": [
+      {
+        "id": "tpd-9evpbm",
+        "name": "8hrs Per Day",
+        "value": 8,
+        "unit": "h"
+      }
+    ]
+  },
+  "exportedAt": "2026-01-31T03:22:10.644Z"
+}

@@ -1,63 +1,53 @@
----
-MyContainer: []
-MyCategory: 
+<%*
+const modalForm = app.plugins.plugins.modalforms?.api;
+if (!modalForm) {
+  new Notice("Modal Forms plugin is not enabled.");
+  return;
+}
+
+const result = await modalForm.openForm("New-Item");
+if (!result || result.status !== "ok") return;
+
+const data = result.getData();
+
+const itemName = String(data["SelectItem"] ?? "").trim();
+const parentName = String(data["SelectParent"] ?? "").trim();
+
+// Rename note
+if (itemName) {
+  await tp.file.rename(itemName);
+}
+
+// Build MyContainer
+let myContainerYaml = "[]";
+if (parentName) {
+  myContainerYaml = `
+  - "[[${parentName}|${parentName}]]"`;
+}
+
+// Write frontmatter
+tR = `---
+MyContainer:${myContainerYaml}
+MyCategory:
+image: "Template_Item_Placeholder.png"
 tags:
   - Category/Item
 obsidianUIMode: preview
 aliases:
   - ItemOtherName
 Connected_Quests:
-  - "[[z_Templates/World Builder Templates/Template-Quest.md|Template-Quest]]"
+  - "[[Template-Quest|Template-Quest]]"
 Connected_Groups:
-  - "[[z_Templates/World Builder Templates/Template-Group.md|Template-Group]]"
+  - "[[Template-Group|Template-Group]]"
 ---
-
-<%_*
-
-// 1) Prompt for item name
-const poiName = await tp.system.prompt("Enter Item Name", tp.file.title);
-if (!poiName) return;
-await tp.file.rename(poiName);
-
-// 2) Gather and pick a container from multiple directories
-const containerPaths = [
-  "2-World/Quests/",
-  "2-World/People/",
-  "2-World/Groups/",
-  "2-World/Points of Interest/",
-  "2-World/Places/"
-];
-const containerFiles = tp.app.vault.getMarkdownFiles()
-  .filter(f => containerPaths.some(path => f.path.startsWith(path)));
-
-const containerChoices = containerFiles.map(f => f.basename);
-const containerValues = containerFiles.map(f => f.path);
-
-const chosenPath = await tp.system.suggester(containerChoices, containerValues, true);
-if (!chosenPath) return;
-
-// 3) Build full wiki-link for MyContainer
-const containerFileName = chosenPath.split("/").pop().replace(/\.md$/, "");
-const regionLink = `[[${containerFileName}]]`;
-
-// 4) Write MyContainer into front-matter
-setTimeout(() => {
-  const file = app.vault.getAbstractFileByPath(tp.file.path(true));
-  if (!file) return;
-  app.fileManager.processFrontMatter(file, fm => {
-    fm["MyContainer"] = regionLink;
-  });
-}, 100);
-
+`;
 %>
-
-
-
 > [!NOTE|div-m] Parent Location: `INPUT[inlineListSuggester(optionQuery(#Category/Quest),optionQuery(#Category/People),optionQuery(#Category/Group),optionQuery(#Category/Place),optionQuery(#Category/PointofInterest)):MyContainer]`
+%% DISPLAYS NOTES THAT MATCH THE TAGS ABOVE %% 
 
 > [!column|no-i no-t]
 >> [!div-m|no-title]
->> ![[Pasted image 20250514201228.png]]
+>> ![[Template_Item_Placeholder.png]]
 >
 >> [!div-m|no-title] Place Name
 >> ~~~meta-bind
@@ -69,7 +59,7 @@ setTimeout(() => {
 >> class(tabbed)
 >> )]
 >> ~~~
->>>[!tabbed-box-maxh]
+>>>[!tabbed-box]
 >>> >[!div-m|no-title]
 >>> > ![[#Description|no-h clean]]
 >>>
@@ -97,7 +87,8 @@ Cost: `INPUT[number:cost]`
 
 Weight: `INPUT[number:weight]`
 
-Category: `INPUT[inlineListSuggester(option(Alchemical), option(Artifact), option(Consumable), option(Cursed), option(Intelligent), option(Invested), option(Magical), option(Relic), option(Rune), option(Snare), option(Stance), option(Talisman), option(Worn)):char_gender]`
+Category: `INPUT[template-item-type][:item_type]`
+%% MODIFY OPTIONS IN SETTINGS > COMMUNITY PLUGINS > META-BIND > EDIT TEMPLATES > template-item-type %%
 
 ---
 
@@ -114,5 +105,7 @@ Make notes of what you need to track in the town here.  Secrets perhaps?
 Is the item linked to any groups or quests?
 
 Quests: `INPUT[inlineListSuggester(optionQuery(#Category/Quest)):Connected_Quests]`
+%% DISPLAYS NOTES THAT MATCH THE TAGS ABOVE %% 
 
 Groups: `INPUT[inlineListSuggester(optionQuery(#Category/Group)):Connected_Groups]`
+%% DISPLAYS NOTES THAT MATCH THE TAGS ABOVE %% 

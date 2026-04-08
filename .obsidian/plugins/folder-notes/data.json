@@ -13,7 +13,7 @@
   "whitelistFolders": [],
   "showDeleteConfirmation": true,
   "underlineFolder": false,
-  "stopWhitespaceCollapsing": true,
+  "stopWhitespaceCollapsing": false,
   "underlineFolderInPath": true,
   "openFolderNoteOnClickInPath": true,
   "openInNewTab": false,
@@ -47,7 +47,14 @@
     "disableCollapseIcon": true,
     "alwaysCollapse": false,
     "autoSync": true,
-    "allowDragAndDrop": true
+    "allowDragAndDrop": true,
+    "hideLinkList": true,
+    "hideFolderOverview": false,
+    "useActualLinks": false,
+    "fmtpIntegration": false,
+    "titleSize": 1,
+    "isInCallout": false,
+    "useWikilinks": true
   },
   "useSubmenus": true,
   "syncMove": true,
@@ -56,7 +63,7 @@
     "explorer": true,
     "path": true
   },
-  "settingsTab": "general",
+  "settingsTab": "file_explorer",
   "supportedFileTypes": [
     "md",
     "canvas"
@@ -106,5 +113,10 @@
   "persistentSettingsTab": {
     "afterRestart": true,
     "afterChangingTab": true
-  }
+  },
+  "firstTimeInsertOverview": true,
+  "fvGlobalSettings": {
+    "autoUpdateLinks": false
+  },
+  "hideFolderNoteNameInPath": false
 }

@@ -1,0 +1,158 @@
+{
+  "version": 1,
+  "pack": {
+    "id": "trp-2hac0w",
+    "name": "PF2e Travel Pack",
+    "enabled": true,
+    "customUnits": [],
+    "terrains": [
+      {
+        "id": "ter-mgg427",
+        "name": "Normal",
+        "factor": 1
+      },
+      {
+        "id": "ter-m0qxkk",
+        "name": "Difficult",
+        "factor": 0.5
+      },
+      {
+        "id": "ter-h79rz9",
+        "name": "Severe",
+        "factor": 0.33
+      },
+      {
+        "id": "ter-cd1ua5",
+        "name": "Extreme",
+        "factor": 0.25
+      }
+    ],
+    "travelTimePresets": [
+      {
+        "id": "tt-8lhir4",
+        "name": "Walking Pace",
+        "distanceValue": 2.5,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-mbtwet",
+        "name": "Light Horse",
+        "distanceValue": 5,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-h9i0fm",
+        "name": "Heavy Horse",
+        "distanceValue": 5,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-temsvj",
+        "name": "Pony",
+        "distanceValue": 4,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-8cmjy3",
+        "name": "Riding Dog",
+        "distanceValue": 4,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-1nc5pm",
+        "name": "Donkey or Mule",
+        "distanceValue": 3,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-srd47v",
+        "name": "Cart/Wagon Pulled",
+        "distanceValue": 2,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-lvhld7",
+        "name": "Raft / Barge",
+        "distanceValue": 0.5,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-3zpxje",
+        "name": "Keelboat (rowed)",
+        "distanceValue": 1,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-47fagm",
+        "name": "Rowboat (rowed)",
+        "distanceValue": 1.5,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-baxlw1",
+        "name": "Sailing Ship",
+        "distanceValue": 2,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-wa3oeq",
+        "name": "Warship (rowed+sail)",
+        "distanceValue": 2.5,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-anhl5k",
+        "name": "Longship (rowed+sail)",
+        "distanceValue": 3,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      },
+      {
+        "id": "tt-c09416",
+        "name": "Galley (rowed+sail)",
+        "distanceValue": 4,
+        "distanceUnit": "mi",
+        "timeValue": 1,
+        "timeUnit": "h"
+      }
+    ],
+    "travelPerDayPresets": [
+      {
+        "id": "tpd-yxass9",
+        "name": "Max Travel Time",
+        "value": 8,
+        "unit": "h"
+      }
+    ],
+    "travelPerDay": {
+      "value": 8,
+      "unit": "h"
+    }
+  },
+  "exportedAt": "2026-01-31T04:00:53.310Z"
+}

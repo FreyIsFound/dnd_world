@@ -3,7 +3,6 @@ NoteIcon: player
 aliases:
   - Bob
 tags:
-  - player
   - Category/Player
 Player: Bob
 Role: Player
@@ -45,6 +44,7 @@ siblings:
   - Sister
 obsidianUIMode: preview
 MyContainer:
+image: "Template_Player_Placeholder.png"
 ---
 
 <%*
@@ -62,7 +62,7 @@ _%>
 
 > [!column|no-i no-t]
 >> [!div-m|no-title]
->> ![[Pasted image 20250502075737.png]]
+>> ![[Template_Player_Placeholder.png]]
 >
 >> [!div-m|no-title] Place Name
 >> ~~~meta-bind
@@ -153,7 +153,7 @@ Make notes of what you need to track in the town here.
 
 # Character Sheet
 
-
+%% CONTENTS OF THE CUSTOM FRAME CAN BE SET IN THE CUSTOM FRAME PLUGIN SETTINGS %%
 ```custom-frames
 frame: Demiplane
 style: height: 800px;
@@ -164,13 +164,16 @@ style: height: 800px;
 The following items belong to `= this.file.name`.
 
 Items: `INPUT[inlineListSuggester(optionQuery(#Category/Quest)):char_items]`
+%% DISPLAYS NOTES THAT MATCH THE TAGS ABOVE %%
 
 # Connections
 Is the person linked to any groups or quests?
 
 Quests: `INPUT[inlineListSuggester(optionQuery(#Category/Quest)):Connected_Quests]`
+%% DISPLAYS NOTES THAT MATCH THE TAGS ABOVE %%
 
 Groups: `INPUT[inlineListSuggester(optionQuery(#Category/Group)):Connected_Groups]`
+%% DISPLAYS NOTES THAT MATCH THE TAGS ABOVE %%
 
 # Relationships
 
@@ -214,6 +217,8 @@ dv.paragraph("```mermaid\nflowchart LR\n" +
   `class ${parents.length > 0 ? parents.map((_, index) => `P${index + 1},`).join('') : ''}Current${children.length > 0 ? children.map((_, index) => `C${index + 1},`).join('') : ''}${siblings.length > 0 ? siblings.map((_, index) => `S${index + 1},`).join('') : ''}${enemies.length > 0 ? enemies.map((_, index) => `E${index + 1},`).join('') : ''}${allies.length > 0 ? allies.map((_, index) => `A${index + 1},`).join('') : ''} internal-link;`
 )
 ```
+%% CODE ABOVE CREATED WITH CHAT-GPT. ITS COMPLEX CODE THAT SHOULD NOT BE CHANGED UNLESS YOU KNOW WHAT YOU ARE DOING %%
+%% MERMAID-FIX-TEXT-CLIPPING.CSS is enabled in Settings > Appearance > CSS Snippets. This fixes text clipping and styles the boxes %%
 
 > [!NOTE]- Relationship Config - Enter name of People Notes
 > `BUTTON[button_person]` Nodes will link to notes of the same name. 

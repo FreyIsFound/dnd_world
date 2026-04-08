@@ -4,81 +4,24 @@
     "type": "split",
     "children": [
       {
-        "id": "55d71d92af5ff493",
+        "id": "86c9f7299af0001a",
         "type": "tabs",
         "children": [
           {
-            "id": "9ec98201f5c39e62",
+            "id": "088a46b97e3591a2",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3-Mechanics/Items/New Item.md",
-                "mode": "preview",
-                "source": true
-              },
-              "icon": "lucide-file",
-              "title": "New Item"
-            }
-          },
-          {
-            "id": "17fef801234e1fb8",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "2-World/People/Flip the Famous.md",
-                "mode": "preview",
-                "source": true
-              },
-              "icon": "lucide-file",
-              "title": "Flip the Famous"
-            }
-          },
-          {
-            "id": "25a68c2aa962db50",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "z_Templates/World Builder Templates/Template-Place.md",
-                "mode": "preview",
+                "file": "z_Example Notes/Realm Design Form.md",
+                "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "Template-Place"
-            }
-          },
-          {
-            "id": "d98239cb3fe18af8",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "z_Templates/World Builder Templates/Template-Player.md",
-                "mode": "preview",
-                "source": true
-              },
-              "icon": "lucide-file",
-              "title": "Template-Player"
-            }
-          },
-          {
-            "id": "4ac9b810a82e853a",
-            "type": "leaf",
-            "state": {
-              "type": "markdown",
-              "state": {
-                "file": "0-Scratch Notes/Untitled 1.md",
-                "mode": "source",
-                "source": true
-              },
-              "icon": "lucide-file",
-              "title": "Untitled 1"
+              "title": "Realm Design Form"
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "vertical"
@@ -110,7 +53,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "[\"char_gender\"]",
+                "query": "Jess",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -138,7 +81,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "1-DM Toolkit/DnD5e-SideScreen-2014.md",
+                "file": "tutorial map/1-DM Toolkit/DnD5e-SideScreen-2014.md",
                 "mode": "preview",
                 "source": false
               },
@@ -167,7 +110,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 290.5
+    "width": 370.5
   },
   "right": {
     "id": "4376769ea3073bd6",
@@ -176,7 +119,6 @@
       {
         "id": "09384058bb1c4e72",
         "type": "tabs",
-        "dimension": 38.822355289421154,
         "children": [
           {
             "id": "01866bcbc2fd8a19",
@@ -184,7 +126,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "z_Templates/World Builder Templates/Template-Place-BASES.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -194,7 +135,7 @@
                 "unlinkedCollapsed": false
               },
               "icon": "links-coming-in",
-              "title": "Backlinks for Template-Place-BASES"
+              "title": "Backlinks"
             }
           },
           {
@@ -294,41 +235,133 @@
               "icon": "lucide-archive",
               "title": "All properties"
             }
-          }
-        ],
-        "currentTab": 6
-      },
-      {
-        "id": "98c3df223478a149",
-        "type": "tabs",
-        "dimension": 61.177644710578846,
-        "children": [
+          },
           {
-            "id": "5ca36d08ff2d49f8",
+            "id": "40a04a2cb55e71a4",
             "type": "leaf",
             "state": {
-              "type": "initiative-tracker-creature-view",
+              "type": "initiative-tracker-view",
               "state": {},
-              "icon": "initiative-tracker-creature-view",
-              "title": "Combatant"
+              "icon": "initiative-tracker",
+              "title": "Initiative Tracker"
+            }
+          },
+          {
+            "id": "e2bf4a1ee251e07f",
+            "type": "leaf",
+            "state": {
+              "type": "DICE_ROLLER_VIEW",
+              "state": {},
+              "icon": "dices",
+              "title": "Dice Tray"
+            }
+          },
+          {
+            "id": "ee27dc731d491659",
+            "type": "leaf",
+            "state": {
+              "type": "modal-form-manage-forms-view",
+              "state": {},
+              "icon": "documents",
+              "title": "Manage forms"
+            }
+          },
+          {
+            "id": "c0fe13c9d3301d26",
+            "type": "leaf",
+            "state": {
+              "type": "file-properties",
+              "state": {
+                "file": "1-DM Toolkit/Home.md"
+              },
+              "icon": "lucide-info",
+              "title": "File properties for Home"
+            }
+          },
+          {
+            "id": "ed34a34ed97f7224",
+            "type": "leaf",
+            "state": {
+              "type": "modal-form-edit-form-view",
+              "state": {
+                "title": "New Item",
+                "name": "New-Item",
+                "customClassname": "ModalForm_TTRPG_Tuts_CSS",
+                "fields": [
+                  {
+                    "name": "SelectItem",
+                    "label": "Item Name",
+                    "description": "Enter the name of the item.",
+                    "isRequired": true,
+                    "input": {
+                      "type": "text",
+                      "hidden": false
+                    }
+                  },
+                  {
+                    "name": "SelectParent",
+                    "label": "Select Item's Parent Note.",
+                    "description": "Select the note that this item belongs to. ",
+                    "isRequired": true,
+                    "input": {
+                      "type": "multiselect",
+                      "source": "notes",
+                      "folder": "2-World/People",
+                      "folders": [
+                        "2-World/Places",
+                        "2-Campaign/Quests",
+                        "2-World/Groups",
+                        "2-World/Points of Interest"
+                      ],
+                      "allowUnknownValues": false,
+                      "query": "",
+                      "multi_select_options": []
+                    }
+                  }
+                ],
+                "version": "1"
+              },
+              "icon": "lucide-ghost",
+              "title": "modal-form-edit-form-view"
+            }
+          },
+          {
+            "id": "290d11676ad02097",
+            "type": "leaf",
+            "state": {
+              "type": "initiative-tracker-view",
+              "state": {},
+              "icon": "lucide-ghost",
+              "title": "initiative-tracker-view"
+            }
+          },
+          {
+            "id": "073fcf91a6649ad2",
+            "type": "leaf",
+            "state": {
+              "type": "DICE_ROLLER_VIEW",
+              "state": {},
+              "icon": "dices",
+              "title": "Dice Tray"
             }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
-    "width": 433.5
+    "width": 403.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
-      "obsidian-leaflet-plugin:Open Leaflet Map": false,
+      "bases:Create new base": false,
       "switcher:Open quick switcher": false,
       "command-palette:Open command palette": false,
       "graph:Open graph view": false,
       "canvas:Create new canvas": false,
       "daily-notes:Open today's daily note": false,
       "templates:Insert template": false,
-      "templater-obsidian:Templater": false,
       "obsidian-custom-frames:Open Obsidian Forum": false,
       "obsidian-5e-statblocks:Open Creature pane": false,
       "initiative-tracker:Initiative Tracker Encounter Builder": false,
@@ -339,59 +372,62 @@
       "obsidian-kanban:Create new board": false,
       "helpmate:HelpMate": false,
       "solo-rpg-toolkit:Solo RPG Toolkit": false,
-      "pexels-banner:🚩 Pixel Banner Menu": false
+      "obsidian-leaflet-plugin:Open Leaflet Map": false,
+      "pexels-banner:🚩 Pixel Banner Menu": false,
+      "templater-obsidian:Templater": false,
+      "modalforms:Edit forms": false
     }
   },
-  "active": "d98239cb3fe18af8",
+  "active": "088a46b97e3591a2",
   "lastOpenFiles": [
-    "z_Templates/World Builder Templates/Template-Player-Demiplane.md",
-    "z_Templates/World Builder Templates/Template-Player.md",
-    "1-DM Toolkit/Home - DV.md",
-    "1-DM Toolkit/DnD5e-SideScreen-2014.md",
-    "0-Scratch Notes/Untitled.md",
-    "0-Scratch Notes/Untitled 1.md",
-    "z_Templates/6_Help Notes/Obsidian Markdown Formatting.md",
-    "1-Party/Example Party 1/Bob.md",
-    "1-DM Toolkit/Home.md",
-    "z_Templates/World Builder Templates/Template-Place.md",
-    "2-World/People/Flip the Famous.md",
-    "3-Mechanics/Items/New Item.md",
-    "z_Templates/World Builder Templates/Template-Item.md",
-    "2-World/Groups/Cult of Screams.md",
-    "2-World/Quests/The Giants Skull.md",
-    "2-World/Points of Interest/Skull Cave.md",
-    "2-World/Places/Inn of Drunks.md",
-    "z_Templates/World Builder Templates/Template-Person.md",
-    "z_Templates/World Builder Templates/Template-Group-BASES.md",
-    "2-World/Regions/Island of Skulls.md",
-    "0-Scratch Notes/Template Design.md",
-    "1-DM Toolkit/Island of Screams.md",
-    "2-World/Hubs/City of Slaves.md",
-    "2-World/People/Fred the Frowny.md",
-    "1-DM Toolkit/Home Embeds - DV.md",
-    "1-DM Toolkit/Home Embeds.md",
-    "0-Scratch Notes/Bases Test.base",
-    "z_Assets/Pasted image 20250529234903.png",
-    "z_Assets/Fighter Gemmy.png",
+    "Adventure Campaign/Players/Short info list.md",
+    "Adventure Campaign/Players/index.md",
+    "Adventure Campaign/New folder",
+    "Adventure Campaign/quartz/static/giscus/light.css",
+    "Adventure Campaign/quartz/static/giscus/dark.css",
+    "Adventure Campaign/quartz/plugins/transformers/toc.ts",
+    "Adventure Campaign/quartz/plugins/transformers/syntax.ts",
+    "Adventure Campaign/quartz/plugins/transformers/roam.ts",
+    "Adventure Campaign/quartz/plugins/transformers/oxhugofm.ts",
+    "Adventure Campaign/quartz/plugins/transformers/ofm.ts",
+    "Adventure Campaign/quartz/plugins/transformers/links.ts",
+    "Adventure Campaign/quartz/plugins/transformers/linebreaks.ts",
+    "Adventure Campaign/quartz/static/og-image.png",
+    "Adventure Campaign/quartz/static/icon.png",
+    "Adventure Campaign/node_modules/vfile-location/node_modules/@types/unist/README.md",
+    "Adventure Campaign/node_modules/vfile/node_modules/@types/unist/README.md",
+    "Adventure Campaign/node_modules/unist-util-visit-parents/node_modules/@types/unist/README.md",
+    "Adventure Campaign/node_modules/unist-util-visit-children/node_modules/@types/unist/README.md",
+    "Adventure Campaign/node_modules/unist-util-visit/node_modules/@types/unist/README.md",
+    "Adventure Campaign/node_modules/unist-util-remove-position/node_modules/@types/unist/README.md",
+    "Adventure Campaign/node_modules/unist-util-position/node_modules/@types/unist/README.md",
+    "Adventure Campaign/node_modules/unist-util-modify-children/node_modules/@types/unist/README.md",
+    "Adventure Campaign/node_modules/unist-util-find-after/node_modules/@types/unist/README.md",
+    "Adventure Campaign/node_modules/unist-util-is/node_modules/@types/unist/README.md",
+    "Adventure Campaign/node_modules/unified/node_modules/@types/unist/README.md",
+    "Adventure Campaign/node_modules/parse-latin/node_modules/@types/unist/README.md",
+    "Adventure Campaign/node_modules/mdast-util-to-markdown/node_modules/@types/unist/README.md",
+    "Adventure Campaign/node_modules/mdast-util-mdx-jsx/node_modules/@types/unist/README.md",
+    "Adventure Campaign/node_modules/mdast-util-from-markdown/node_modules/@types/unist/README.md",
+    "Adventure Campaign/node_modules/hast-util-to-text/node_modules/@types/unist/README.md",
+    "Adventure Campaign/node_modules/hast-util-to-jsx-runtime/node_modules/@types/unist/README.md",
+    "Adventure Campaign/node_modules/hast-util-to-html/node_modules/@types/unist/README.md",
+    "Adventure Campaign/node_modules/hast-util-raw/node_modules/@types/unist/README.md",
+    "Adventure Campaign/node_modules/hast-util-from-parse5/node_modules/@types/unist/README.md",
+    "Adventure Campaign/node_modules/hast-util-from-html/node_modules/@types/unist/README.md",
+    "Adventure Campaign/node_modules/@parcel/watcher/node_modules/picomatch/README.md",
+    "Adventure Campaign/node_modules/vfile/node_modules/vfile-message/readme.md",
+    "Adventure Campaign/node_modules/vfile/node_modules/unist-util-stringify-position/readme.md",
+    "Adventure Campaign/node_modules/js-binary-schema-parser/example/horses.gif",
+    "Adventure Campaign/node_modules/js-binary-schema-parser/example/dog.gif",
+    "Adventure Campaign/node_modules/js-binary-schema-parser/example/box.gif",
+    "Adventure Campaign/node_modules/gifuct-js/demo/jblack.gif",
+    "Adventure Campaign/node_modules/gifuct-js/demo/horses.gif",
+    "Adventure Campaign/node_modules/gifuct-js/demo/dog.gif",
+    "Adventure Campaign/node_modules/cli-spinner/img/spinner.gif",
+    "Adventure Campaign/docs/images/social-image-preview-light.png",
     "0-Scratch Notes/Untitled.canvas",
-    "z_Assets/Pasted image 20250427093259.png",
-    "z_Assets/Pasted image 20250425220102.png",
-    "z_Assets/Pasted image 20250427102611.png",
-    "z_Assets/Pasted image 20250514201228.png",
-    "z_Assets/Pasted image 20250514200940.png",
-    "z_Assets/Pasted image 20240630203442.png",
-    "z_Assets/Pasted Image 20240630114135_050.png",
-    "z_Assets/Pasted image 20240627201658.png",
-    "2-World/Quests",
     "0-Scratch Notes/MoC - Canvas Home Page.canvas",
-    "3-Mechanics/races",
-    "pixel-banner-images",
-    "z_Assets/banners",
-    "z_Assets/New folder",
-    "2-World/Places",
-    "z_Templates/World Builder Templates",
-    "2-World/Regions",
-    "2-World/Points of Interest",
     "Untitled.canvas"
   ]
 }

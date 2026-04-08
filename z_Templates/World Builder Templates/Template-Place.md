@@ -1,63 +1,46 @@
+<%*  
+const modalForm = app.plugins.plugins.modalforms?.api;  
+if (!modalForm) {  
+  new Notice("Modal Forms plugin is not enabled.");  
+  return;  
+}  
+  
+const result = await modalForm.openForm("New-Place");  
+if (!result || result.status !== "ok") return;  
+  
+const data = result.getData();  
+  
+const placeName = String(data["PlaceName"] ?? "").trim();
+const hubName = String(data["SelectHub"] ?? "").trim();  
+const categoryNew = result.getValue("SelectPlaceCategory");
+
+// Rename note
+if (placeName) {
+  await tp.file.rename(placeName);
+}
+  
+const containerLinks = [];  
+  
+if (hubName) {  
+  containerLinks.push(`[[2-World/Hubs/${hubName}|${hubName}]]`);  
+}  
+ 
+const myContainerYaml = containerLinks.length  
+  ? containerLinks.map(link => ` - "${link}"`).join("\n")  
+  : ` - "None"`;  
+  
+tR = `---
+tags:  
+- Category/Place  
+MyContainer:  
+${myContainerYaml}  
+MyCategory: "${categoryNew}"  
+obsidianUIMode: preview  
+image: Template_Place_Placeholder.png  
 ---
-tags:
-  - Category/Place
-MyContainer: "[[z_Templates/World Builder Templates/Template-Hub.md|Template-Hub]]"
-MyCategory: Commerce
-obsidianUIMode: preview
----
-
-<%*
-// 1) Prompt for Hub name (always)
-const title = await tp.system.prompt("Enter Place Name", tp.file.title);
-// if they cancel or leave blank, stop
-if (!title) return;
-// rename the file to that title
-await tp.file.rename(title);
-
-// 2) Gather all region notes under 2-World/Regions
-const regionFiles = tp.app.vault.getMarkdownFiles()
-  .filter(f => f.path.startsWith("2-World/Hubs/"));
-
-// 3) Pick a region: show basenames, return full paths
-const regionChoices = regionFiles.map(f => f.basename);
-const regionValues  = regionFiles.map(f => f.path);
-const chosenRegionPath = await tp.system.suggester(regionChoices, regionValues, true);
-if (!chosenRegionPath) return;
-
-// 4) Build the wiki-link for MyContainer
-const regionAlias = chosenRegionPath.split("/").pop().replace(/\.md$/, "");
-const regionLink  = `[[${chosenRegionPath}|${regionAlias}]]`;
-
-// 5) Pick a category from your list
-const categoryOptions = [
-  "Commerce",
-  "Agriculture",
-  "Military",
-  "Philosophy",
-  "Industrial",
-  "Nesting",
-  "Government"
-];
-const chosenCat = await tp.system.suggester(categoryOptions, categoryOptions, true);
-if (!chosenCat) return;
-
-// 6) Write both properties into front-matter
-setTimeout(() => {
-  const file = tp.file.find_tfile(tp.file.path(true));
-  if (!file) return;
-  app.fileManager.processFrontMatter(file, fm => {
-    fm["MyContainer"] = regionLink;
-    fm["MyCategory"]  = chosenCat;
-  });
-}, 100);
+`;  
 %>
-
-
-
-
-
-
-> [!NOTE] Parent Hub: `INPUT[suggester(optionQuery(#Category/Hub)):MyContainer]`
+> [!NOTE] Parent Hub: `INPUT[inlineListSuggester(optionQuery(#Category/Hub)):MyContainer]`
 
 > [!column|no-title]
 >> [!note|no-title]
@@ -93,7 +76,7 @@ setTimeout(() => {
 > class(tabbed)
 > )]
 > ~~~
-> >[!tabbed-box-maxh]
+> >[!tabbed-box]
 > > >[!div-m|no-title]
 > > > ![[#Selling|no-h clean]]
 > >
@@ -111,8 +94,10 @@ setTimeout(() => {
 # General
 
 Select Settlement: `INPUT[suggester(optionQuery(#Category/Hub)):MyContainer]`
+%% DISPLAYS NOTES THAT MATCH THE TAGS ABOVE %% 
 
-Select Category: `INPUT[inlineSelect(option(Commerce), option(Agriculture), option(Military), option(Philosophy), option(Industrial), option(Nesting), option(Government)):MyCategory]`
+Select Category: `INPUT[template-place-category][:MyCategory]`
+%% MODIFY OPTIONS IN SETTINGS > COMMUNITY PLUGINS > META-BIND > EDIT TEMPLATES > template-place-category %%
 
 This is the places description. 
 
@@ -120,12 +105,47 @@ This is the places description.
 
 `BUTTON[button_person]` The following people are associated with this place.
 
-```dataview
-TABLE WITHOUT ID link(file.name) AS "Name", char_race AS "Race", char_gender AS "Gender"
-FROM "2-World/People"
-WHERE contains(char_status, "Alive")
-WHERE contains(MyContainer, this.file.link)
-SORT file.name ASC
+```base
+properties:
+  file.name:
+    displayName: Star Systems Name
+  note.MyCategory:
+    displayName: Type of Star System
+  note.char_race:
+    displayName: Race
+  note.char_gender:
+    displayName: Gender
+  note.char_age:
+    displayName: Age
+views:
+  - type: cards
+    name: Star Systems - Cards
+    filters:
+      and:
+        - file.folder == "2-World/People"
+        - list(MyContainer).contains(this)
+        - char_status.contains("Alive")
+    order:
+      - file.name
+      - char_age
+      - char_gender
+      - char_race
+    image: note.image
+  - type: table
+    name: Star Systems - Table
+    filters:
+      and:
+        - file.folder == "2-World/People"
+        - list(MyContainer).contains(this)
+        - char_status.contains("Alive")
+    order:
+      - file.name
+    sort:
+      - property: file.name
+        direction: DESC
+    columnSize:
+      file.name: 182
+
 ```
 
 # GM Notes
@@ -135,19 +155,20 @@ Make notes of what you need to track in the town here.
 
 # Selling
 
-The following items are available for purchase. 
+`BUTTON[button_item]`  The following items are available for purchase. 
 
 ```dataviewjs
+// This dataviewjs code grabs a random item(s) from the folder below. You can remove this if that's not useful. It's an example of what's possible. 
 // 1. grab all pages in the folder
 let pages = dv.pages('"3-Mechanics/Items"').values;
 
-// 2. shuffle (Fisher–Yates)
+// 2. shuffle
 for (let i = pages.length - 1; i > 0; i--) {
   const j = Math.floor(Math.random() * (i + 1));
   [pages[i], pages[j]] = [pages[j], pages[i]];
 }
 
-// 3. take the first two
+// 3. take the first X where (0, X) should be the number of items to return
 let pick = pages.slice(0, 1);
 
 // 4. render table of clickable links + Gender
@@ -163,7 +184,7 @@ dv.table(
 
 # Buying
 
-List of things this merchant will purchase. 
+`BUTTON[button_item]`  List of things this merchant will purchase. 
 
 | Item   | Cost | Weight |
 | ------ | ---- | ------ |
@@ -184,5 +205,5 @@ Services offered.
 Anything the party might over hear?
 
 # Image
-![[Pasted image 20250425220102.png|500]]
+![[Template_Place_Placeholder.png|500]]
 

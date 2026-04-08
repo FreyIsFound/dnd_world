@@ -1,0 +1,104 @@
+{
+  "size": {
+    "w": 5000,
+    "h": 4000
+  },
+  "layers": [
+    {
+      "id": "default",
+      "name": "Default",
+      "visible": true,
+      "locked": false
+    },
+    {
+      "id": "layer_7ntwy7",
+      "name": "Pings",
+      "visible": true,
+      "locked": false
+    }
+  ],
+  "markers": [
+    {
+      "type": "pin",
+      "id": "marker_xl4rol",
+      "x": 0.5911595448855257,
+      "y": 0.2521656927121356,
+      "layer": "default",
+      "link": "Test Hub Assigned",
+      "iconKey": "pinRed",
+      "tooltip": ""
+    },
+    {
+      "type": "pin",
+      "id": "marker_dhwrau",
+      "x": 0.5607560779714478,
+      "y": 0.2273988235967351,
+      "layer": "default",
+      "link": "Test  Star System",
+      "iconKey": "pinBlue",
+      "tooltip": ""
+    },
+    {
+      "type": "pin",
+      "id": "marker_pgrowl",
+      "x": 0.5419674186425232,
+      "y": 0.28547286152250184,
+      "layer": "default",
+      "link": "Test Species",
+      "iconKey": "pinBlue",
+      "tooltip": ""
+    },
+    {
+      "type": "pin",
+      "id": "marker_4sp4qu",
+      "x": 0.5197626394356123,
+      "y": 0.21672344897802795,
+      "layer": "default",
+      "link": "Test Planet",
+      "iconKey": "pinRed",
+      "tooltip": ""
+    },
+    {
+      "id": "ping_ddve0g",
+      "type": "ping",
+      "x": 0.5521762657554288,
+      "y": 0.2531963706559882,
+      "layer": "layer_7ntwy7",
+      "iconKey": "PartyIcon",
+      "tooltip": "Party: PARTY (10 km)",
+      "pingPresetId": "ping-ct2jxe",
+      "pingRadius": 10,
+      "pingRadiusUnit": "km",
+      "pingNotePath": "ZoomMap/Pings/Party - PARTY - 10 km - ping_ddve0g.md",
+      "link": "Party - PARTY - 10 km - ping_ddve0g"
+    }
+  ],
+  "bases": [
+    {
+      "path": "z_Assets/Placeholder Images/Hex Map Example.png"
+    }
+  ],
+  "overlays": [],
+  "activeBase": "z_Assets/Placeholder Images/Hex Map Example.png",
+  "measurement": {
+    "scales": {
+      "z_Assets/Placeholder Images/Hex Map Example.png": 28.168065058367944
+    },
+    "customUnitPxPerUnit": {},
+    "travelTimePresetIds": [
+      "tt-8lhir4",
+      "tt-mbtwet",
+      "tt-srd47v",
+      "tt-8cmjy3",
+      "tt-temsvj"
+    ],
+    "travelDaysEnabled": false,
+    "displayUnit": "mi",
+    "metersPerPixel": 28.168065058367944
+  },
+  "pinSizeOverrides": {},
+  "panClamp": true,
+  "drawLayers": [],
+  "drawings": [],
+  "textLayers": []
+}

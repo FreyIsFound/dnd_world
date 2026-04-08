@@ -1,4 +1,5 @@
 ---
+image: Pasted image 20250819074603.png
 NoteIcon: journal
 aat-render-enabled: true
 fc-category:
@@ -18,30 +19,22 @@ tags:
   - journal
   - "#Category/Journal"
 obsidianUIMode: preview
+sessionRoster:
 ---
-
-<%*
-const hasTitle = !tp.file.title.startsWith("NewJournal");
-let title;
-if (!hasTitle) {
-    title = await tp.system.prompt("Enter Date (yyyy-mm-dd)");
-    await tp.file.rename(title);
-} else {
-    title = tp.file.title;
-}
-_%>
 
 # Roster 
 
 %% Keep track of who turned up. %%
 
 `INPUT[inlineListSuggester(optionQuery(#Category/Player)):sessionRoster]`
+%% DISPLAYS NOTES THAT MATCH THE TAGS ABOVE %% 
 
 ## Absent
 
 %% Keep track of who didn't turn up. %%
 
 `INPUT[inlineListSuggester(optionQuery(#Category/Player)):sessionAbsent]`
+%% DISPLAYS NOTES THAT MATCH THE TAGS ABOVE %% 
 
 # Session Overview
 

@@ -24,9 +24,7 @@ char_class:
 char_gender: Male
 char_status: Alive
 char_age: Young Adult
-char_items:
-  - "[[Locate the Eye Ball|Locate the Eye Ball]]"
-  - "[[z_Templates/World Builder Templates/Template-Quest.md|Template-Quest]]"
+char_items: []
 Connected_Quests: []
 Connected_Groups: []
 parents:
@@ -46,6 +44,7 @@ siblings:
 obsidianUIMode: preview
 MyContainer:
 MyCategory:
+image: "Template_Player_Placeholder.png"
 ---
 
 <%*
@@ -63,7 +62,7 @@ _%>
 
 > [!column|no-i no-t]
 >> [!div-m|no-title]
->> ![[Pasted image 20250502075737.png]]
+>> ![[Template_Player_Placeholder.png]]
 >
 >> [!div-m|no-title] Place Name
 >> ~~~meta-bind
@@ -122,17 +121,15 @@ _%>
 ---
 
 # General
-
 ```badges
 items:
   - label: Race
-    value: 'Half-Orc'
+    value: '{{frontmatter.char_race}}'
   - label: Level
     value: '{{frontmatter.level}}'
   - label: Initiative
     value: '{{frontmatter.modifier}}'
 ```
-
 <br>
 
 ```badges
@@ -170,14 +167,16 @@ This is the persons description.
 
 # Configure
 
+%% MODIFY OPTIONS IN SETTINGS > COMMUNITY PLUGINS > META-BIND > EDIT TEMPLATES > template-name %%
+
 | Stat     | Value                        |
 | -------- | ---------------------------- |
-| Status   | `INPUT[inlineSelect(option(Alive), option(Dead)):char_status]`                             |
-| Race     |   `INPUT[template-Race][:char_race]`                            |
-| Class    | `INPUT[inlineSelect(option(Artificer), option(Barbarian), option(Bard), option(Cleric), option(Druid), option(Fighter), option(Monk), option(Paladin), option(Ranger), option(Rogue), option(Sorcerer), option(Warlock), option(Wizard)):char_class]`                              |
+| Status   | `INPUT[template-person-status][:char_status]`                             |
+| Race     | `INPUT[template-person-race][:char_race]`                            |
+| Class    | `INPUT[template-person-class][:char_class]`                              |
 | Level    | `INPUT[number:level]`        |
-| Gender   | `INPUT[inlineSelect(option(Male), option(Female), option(Other)):char_gender]`                              |
-| Age      | `INPUT[inlineSelect(option(Infant), option(Child), option(Teenager), option(Young Adult), option(Adult), option(Elder)):char_age]`                              |
+| Gender   | `INPUT[template-person-gender][:char_gender]`|
+| Age      | `INPUT[template-person-age-range][:char_age]`                              |
 | HP       | `INPUT[number:hp]`           |
 | Max HP   | `INPUT[number:max_hp]` |
 | AC       | `INPUT[number:ac]`           |
@@ -189,6 +188,9 @@ This is the persons description.
 Make notes of what you need to track in the town here. 
 
 # Skills
+
+%% COMPONENTS BELOW ARE PART OF THE 'DND UI TOOLKIT' PLUGIN. NOT RELEASED, CURRENTLY INSTALLED VIA BRAT
+%% PLUGIN URL: https://github.com/hay-kot/obsidian-dnd-ui-toolkit %%
 
 ```ability
 abilities:
@@ -298,9 +300,10 @@ items:
 
 # Inventory
 
-The following items belong to `= this.file.name`.
+`BUTTON[button_item]` The following items belong to `= this.file.name`.
 
 Items: `INPUT[inlineListSuggester(optionQuery(#Category/Quest)):char_items]`
+%% DISPLAYS NOTES THAT MATCH THE TAGS ABOVE %% 
 
 #### Ring of Investigation
 ```consumable
@@ -315,8 +318,10 @@ _May the ability to see also provide you with a clear vision" Grants +1 to Inves
 Is the person linked to any groups or quests?
 
 Quests: `INPUT[inlineListSuggester(optionQuery(#Category/Quest)):Connected_Quests]`
+%% DISPLAYS NOTES THAT MATCH THE TAGS ABOVE %% 
 
 Groups: `INPUT[inlineListSuggester(optionQuery(#Category/Group)):Connected_Groups]`
+%% DISPLAYS NOTES THAT MATCH THE TAGS ABOVE %% 
 
 # Relationships
 
@@ -360,6 +365,8 @@ dv.paragraph("```mermaid\nflowchart LR\n" +
   `class ${parents.length > 0 ? parents.map((_, index) => `P${index + 1},`).join('') : ''}Current${children.length > 0 ? children.map((_, index) => `C${index + 1},`).join('') : ''}${siblings.length > 0 ? siblings.map((_, index) => `S${index + 1},`).join('') : ''}${enemies.length > 0 ? enemies.map((_, index) => `E${index + 1},`).join('') : ''}${allies.length > 0 ? allies.map((_, index) => `A${index + 1},`).join('') : ''} internal-link;`
 )
 ```
+%% CODE ABOVE CREATED WITH CHAT-GPT. ITS COMPLEX CODE THAT SHOULD NOT BE CHANGED UNLESS YOU KNOW WHAT YOU ARE DOING %%
+%% MERMAID-FIX-TEXT-CLIPPING.CSS is enabled in Settings > Appearance > CSS Snippets. This fixes text clipping and styles the boxes %%
 
 > [!NOTE]- Relationship Config - Enter name of People Notes
 > `BUTTON[button_person]` Nodes will link to notes of the same name. 

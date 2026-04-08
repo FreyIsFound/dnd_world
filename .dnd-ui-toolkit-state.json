@@ -4,9 +4,9 @@
       "value": 0
     },
     "din_health": {
-      "current": 59,
+      "current": 50,
       "temporary": 0,
-      "hitdiceUsed": 3,
+      "hitdiceUsed": 0,
       "deathSaveSuccesses": 0,
       "deathSaveFailures": 0
     },

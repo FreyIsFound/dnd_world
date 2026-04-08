@@ -1,0 +1,690 @@
+{
+  "icons": [
+    {
+      "key": "PartyIcon",
+      "pathOrDataUrl": "data:image/svg+xml;charset=UTF-8,%3C%3Fxml%20version%3D%221.0%22%20encoding%3D%22utf-8%22%3F%3E%0A%3C!--%20Generator%3A%20Adobe%20Illustrator%2017.0.0%2C%20SVG%20Export%20Plug-In%20.%20SVG%20Version%3A%206.00%20Build%200)%20%20--%3E%0A%3C!DOCTYPE%20svg%20PUBLIC%20%22-%2F%2FW3C%2F%2FDTD%20SVG%201.1%2F%2FEN%22%20%22http%3A%2F%2Fwww.w3.org%2FGraphics%2FSVG%2F1.1%2FDTD%2Fsvg11.dtd%22%3E%0A%3Csvg%20version%3D%221.1%22%20id%3D%22Layer_1%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20xmlns%3Axlink%3D%22http%3A%2F%2Fwww.w3.org%2F1999%2Fxlink%22%20x%3D%220px%22%20y%3D%220px%22%0A%09%20width%3D%22613px%22%20height%3D%22613px%22%20viewBox%3D%220%200%20613%20613%22%20enable-background%3D%22new%200%200%20613%20613%22%20xml%3Aspace%3D%22preserve%22%20fill%3D%22%23000000%22%3E%0A%3Cpath%20d%3D%22M527.18%2C194.212L324.588%2C310.145c-5.886%2C6.402-10.799%2C14.302-14.088%2C22.518v225.391c5.433%2C7.283%2C15.321%2C8.545%2C26.621%2C2.02%0A%09l175.63-101.419c17.15-9.904%2C31.054-33.987%2C31.054-53.792V216.364C543.805%2C202.576%2C537.062%2C194.506%2C527.18%2C194.212z%20M451.831%2C363.73%0A%09c0.029%2C16.487-11.989%2C36.831-26.842%2C45.438c-14.853%2C8.608-26.918%2C2.22-26.947-14.267c0-0.039%2C0-0.078%2C0-0.117%0A%09c-0.029-16.487%2C11.989-36.831%2C26.842-45.438c14.853-8.608%2C26.918-2.22%2C26.947%2C14.267%0A%09C451.831%2C363.652%2C451.831%2C363.691%2C451.831%2C363.73z%22%2F%3E%0A%3Cpath%20d%3D%22M519.339%2C157.975L336.752%2C52.355c-17.143-9.917-44.937-9.917-62.081%2C0L92.084%2C157.975%0A%09c-12.197%2C7.056-15.707%2C17.229-10.548%2C26.084l213.977%2C122.178c6.435%2C0.884%2C13.145%2C0.928%2C19.603%2C0.112l215.274-123.19%0A%09C534.808%2C174.521%2C531.124%2C164.792%2C519.339%2C157.975z%20M190.824%2C190.911c-14.916%2C8.85-39.099%2C8.85-54.014%2C0%0A%09c-14.916-8.85-14.915-23.199%2C0-32.049c14.916-8.85%2C39.099-8.85%2C54.014%2C0C205.74%2C167.711%2C205.74%2C182.06%2C190.824%2C190.911z%0A%09%20M333.269%2C191.222c-14.916%2C8.85-39.099%2C8.85-54.014%2C0c-14.916-8.85-14.916-23.199%2C0-32.049c14.916-8.85%2C39.099-8.85%2C54.014%2C0%0A%09C348.185%2C168.023%2C348.185%2C182.372%2C333.269%2C191.222z%20M475.192%2C191.223c-14.916%2C8.85-39.099%2C8.85-54.014%2C0s-14.915-23.199%2C0-32.049%0A%09c14.916-8.85%2C39.099-8.85%2C54.014%2C0C490.108%2C168.024%2C490.107%2C182.372%2C475.192%2C191.223z%22%2F%3E%0A%3Cpath%20d%3D%22M299.917%2C328.693c-2.886-6.133-6.644-11.974-10.993-17.007L83.373%2C194.32c-9.013%2C1.072-15.042%2C9.002-15.042%2C22.042v188.499%0A%09c0%2C19.805%2C13.903%2C43.888%2C31.054%2C53.792l175.63%2C101.419c10.194%2C5.887%2C19.241%2C5.438%2C24.902-0.053L299.917%2C328.693L299.917%2C328.693z%0A%09%20M147.162%2C430.02c-0.029%2C16.487-12.094%2C22.875-26.947%2C14.267s-26.871-28.951-26.842-45.438c0-0.039%2C0-0.078%2C0-0.117%0A%09c0.029-16.487%2C12.094-22.875%2C26.947-14.267s26.871%2C28.951%2C26.842%2C45.438C147.162%2C429.943%2C147.162%2C429.981%2C147.162%2C430.02z%0A%09%20M281.037%2C360.636c-0.029%2C16.487-12.094%2C22.875-26.947%2C14.267s-26.871-28.951-26.842-45.438c0-0.039%2C0-0.078%2C0-0.117%0A%09c0.029-16.487%2C12.094-22.875%2C26.947-14.267s26.871%2C28.951%2C26.842%2C45.438C281.037%2C360.558%2C281.037%2C360.597%2C281.037%2C360.636z%22%2F%3E%0A%3C%2Fsvg%3E%0A",
+      "size": 24,
+      "anchorX": 12,
+      "anchorY": 12,
+      "defaultLink": "",
+      "inCollections": true
+    },
+    {
+      "key": "pinRed",
+      "pathOrDataUrl": "data:image/svg+xml;charset=UTF-8,%0A%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%3E%0A%20%20%3Cpath%20fill%3D%22%23d23c3c%22%20d%3D%22M12%202a7%207%200%200%200-7%207c0%205.25%207%2013%207%2013s7-7.75%207-13a7%207%200%200%200-7-7m0%209.5A2.5%202.5%200%201%201%2012%206.5a2.5%202.5%200%200%201%200%205Z%22%2F%3E%0A%3C%2Fsvg%3E",
+      "size": 24,
+      "anchorX": 12,
+      "anchorY": 12,
+      "inCollections": true
+    },
+    {
+      "key": "pinBlue",
+      "pathOrDataUrl": "data:image/svg+xml;charset=UTF-8,%0A%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2224%22%20height%3D%2224%22%20viewBox%3D%220%200%2024%2024%22%3E%0A%20%20%3Cpath%20fill%3D%22%233c62d2%22%20d%3D%22M12%202a7%207%200%200%200-7%207c0%205.25%207%2013%207%2013s7-7.75%207-13a7%207%200%200%200-7-7m0%209.5A2.5%202.5%200%201%201%2012%206.5a2.5%202.5%200%200%201%200%205Z%22%2F%3E%0A%3C%2Fsvg%3E",
+      "size": 24,
+      "anchorX": 12,
+      "anchorY": 12,
+      "inCollections": true
+    }
+  ],
+  "defaultIconKey": "pinRed",
+  "wheelZoomFactor": 1.1,
+  "panMouseButton": "left",
+  "hoverMaxWidth": 360,
+  "applyHoverPopoverSizeGlobally": false,
+  "hoverMaxHeight": 260,
+  "showLinkFileNameInTooltip": false,
+  "presets": [],
+  "stickerPresets": [],
+  "defaultWidth": "100%",
+  "defaultHeight": "480px",
+  "defaultResizable": false,
+  "defaultResizeHandle": "right",
+  "forcePopoverWithoutModKey": true,
+  "measureLineColor": "#ff0000",
+  "measureLineWidth": 6,
+  "storageDefault": "json",
+  "defaultWidthWrapped": "50%",
+  "baseCollections": [
+    {
+      "id": "col-ymmc2w",
+      "name": "New Collection",
+      "bindings": {
+        "basePaths": []
+      },
+      "include": {
+        "pinKeys": [],
+        "favorites": [],
+        "stickers": [],
+        "swapPins": [],
+        "pingPins": [
+          {
+            "id": "ping-ct2jxe",
+            "name": "PARTY",
+            "iconKey": "PartyIcon",
+            "layerName": "Pings",
+            "distances": [
+              2,
+              5,
+              10
+            ],
+            "unit": "km",
+            "travelPackId": "trp-2hac0w",
+            "noteFolder": "ZoomMap/Pings",
+            "filterTags": [],
+            "filterProps": {},
+            "relatedLookup": "tags",
+            "searchLayersMode": "all",
+            "searchLayerNames": []
+          }
+        ]
+      }
+    },
+    {
+      "id": "col-9jdy57",
+      "name": "New Collection",
+      "bindings": {
+        "basePaths": []
+      },
+      "include": {
+        "pinKeys": [],
+        "favorites": [],
+        "stickers": [],
+        "swapPins": [],
+        "pingPins": [
+          {
+            "id": "ping-nd49x9",
+            "name": "Ping 1",
+            "iconKey": "pinBlue",
+            "layerName": "Pings",
+            "distances": [
+              2,
+              5,
+              10
+            ],
+            "unit": "km",
+            "travelPackId": "trp-uzn433",
+            "noteFolder": "ZoomMap/Pings",
+            "filterTags": [],
+            "filterProps": {},
+            "relatedLookup": "tags",
+            "searchLayersMode": "all",
+            "searchLayerNames": []
+          }
+        ]
+      }
+    }
+  ],
+  "pinPlaceOpensEditor": false,
+  "libraryFilePath": "ZoomMap/library.json",
+  "faFolderPath": "ZoomMap/SVGs",
+  "customUnits": [],
+  "travelTimePresets": [],
+  "travelPerDay": {
+    "value": 8,
+    "unit": "h"
+  },
+  "travelRulesPacks": [
+    {
+      "id": "trp-8apwgb",
+      "name": "Dnd5e Travel Pack",
+      "enabled": false,
+      "customUnits": [],
+      "travelTimePresets": [
+        {
+          "id": "tt-4u2n93",
+          "name": "Walking",
+          "distanceValue": 30,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-ryl0fi",
+          "name": "Camel",
+          "distanceValue": 50,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-llexps",
+          "name": "Donkey",
+          "distanceValue": 40,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-i1lkxl",
+          "name": "Mule",
+          "distanceValue": 40,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-180fqw",
+          "name": "Draft Horse",
+          "distanceValue": 40,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-3m7689",
+          "name": "Elephant",
+          "distanceValue": 40,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-gq8fs8",
+          "name": "Mastiff",
+          "distanceValue": 40,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-7gnyzj",
+          "name": "Moorbounder",
+          "distanceValue": 40,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-847cf2",
+          "name": "Pony",
+          "distanceValue": 40,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-u1qvzm",
+          "name": "Rhinoceros",
+          "distanceValue": 40,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-mz125k",
+          "name": "Riding Horse",
+          "distanceValue": 60,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-n2e6di",
+          "name": "Saber-Toothed Tiger",
+          "distanceValue": 40,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-yd56yi",
+          "name": "Warhorse",
+          "distanceValue": 60,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-y6phos",
+          "name": "Griffon [walking]",
+          "distanceValue": 20,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-cp2ne1",
+          "name": "Griffon [flying]",
+          "distanceValue": 80,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-8txo1x",
+          "name": "Hippogriff [walking]",
+          "distanceValue": 40,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-hu4imt",
+          "name": "Hippogriff [flying]",
+          "distanceValue": 60,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-87osb8",
+          "name": "Pegasus [walking]",
+          "distanceValue": 60,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-pvkswt",
+          "name": "Pegasus [flying]",
+          "distanceValue": 90,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-xvlhep",
+          "name": "Peryton [walking]",
+          "distanceValue": 20,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-p5gycj",
+          "name": "Peryton [flying]",
+          "distanceValue": 60,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-rps8sn",
+          "name": "Broom of Flying",
+          "distanceValue": 50,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-hdan0s",
+          "name": "Broom of Flying [over  200 lbs]",
+          "distanceValue": 30,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-xwoid6",
+          "name": "Carpet of Flying [3ft x 5ft]",
+          "distanceValue": 80,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-h6pw6r",
+          "name": "Carpet of Flying [4ft x 6ft]",
+          "distanceValue": 60,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-caen1t",
+          "name": "Carpet of Flying [5ft x 7ft]",
+          "distanceValue": 40,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-12rahj",
+          "name": "Carpet of Flying [6ft x 9ft]",
+          "distanceValue": 30,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-3ti2ul",
+          "name": "Wind Walk",
+          "distanceValue": 300,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-tnyetm",
+          "name": "Cauldron of Flying",
+          "distanceValue": 50,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-leq1nh",
+          "name": "Cart pulled by Horses",
+          "distanceValue": 30,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-2vsbs5",
+          "name": "Cart pulled by PCs",
+          "distanceValue": 30,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-fp9bfk",
+          "name": "PHB Galley",
+          "distanceValue": 40,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-t0cz42",
+          "name": "PHB Keelboat",
+          "distanceValue": 10,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-f0cilm",
+          "name": "PHB Longship",
+          "distanceValue": 30,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-juqds0",
+          "name": "PHB Rowboat",
+          "distanceValue": 15,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-60s419",
+          "name": "PHB Sailing Ship",
+          "distanceValue": 20,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-rb2g23",
+          "name": "PHB Warship",
+          "distanceValue": 25,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-r1to3j",
+          "name": "GOS Sailing Ship",
+          "distanceValue": 50,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-l0vj9k",
+          "name": "Aquisions Inc Battle Balloon",
+          "distanceValue": 45,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-s1ccwe",
+          "name": "Aquisions Inc Mechanical Beholder",
+          "distanceValue": 15,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-eg3r3b",
+          "name": "Ebberon Lyrandar Airship",
+          "distanceValue": 200,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-nk73n0",
+          "name": "Ebberon Lyrandar Galleon",
+          "distanceValue": 100,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-sbst2s",
+          "name": "Ebberon Orien Lightning Rail",
+          "distanceValue": 300,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-lg2hci",
+          "name": "Unicorn",
+          "distanceValue": 50,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        }
+      ],
+      "travelPerDay": {
+        "value": 8,
+        "unit": "h"
+      },
+      "terrains": [
+        {
+          "id": "ter-xjbcdt",
+          "name": "Normal",
+          "factor": 1
+        },
+        {
+          "id": "ter-j8oy9n",
+          "name": "Difficult",
+          "factor": 0.5
+        },
+        {
+          "id": "ter-d9rf02",
+          "name": "Severe",
+          "factor": 0.33
+        },
+        {
+          "id": "ter-8f9424",
+          "name": "Extreme",
+          "factor": 0.25
+        }
+      ],
+      "travelPerDayPresets": [
+        {
+          "id": "tpd-9evpbm",
+          "name": "Max Travel Time",
+          "value": 8,
+          "unit": "h"
+        }
+      ]
+    },
+    {
+      "id": "trp-2hac0w",
+      "name": "PF2e Travel Pack",
+      "enabled": true,
+      "customUnits": [],
+      "terrains": [
+        {
+          "id": "ter-mgg427",
+          "name": "Normal",
+          "factor": 1
+        },
+        {
+          "id": "ter-m0qxkk",
+          "name": "Difficult",
+          "factor": 0.5
+        },
+        {
+          "id": "ter-h79rz9",
+          "name": "Severe",
+          "factor": 0.33
+        },
+        {
+          "id": "ter-cd1ua5",
+          "name": "Extreme",
+          "factor": 0.25
+        }
+      ],
+      "travelTimePresets": [
+        {
+          "id": "tt-8lhir4",
+          "name": "Walking Pace",
+          "distanceValue": 2.5,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-mbtwet",
+          "name": "Light Horse",
+          "distanceValue": 5,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-h9i0fm",
+          "name": "Heavy Horse",
+          "distanceValue": 5,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-temsvj",
+          "name": "Pony",
+          "distanceValue": 4,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-8cmjy3",
+          "name": "Riding Dog",
+          "distanceValue": 4,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-1nc5pm",
+          "name": "Donkey or Mule",
+          "distanceValue": 3,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-srd47v",
+          "name": "Cart/Wagon Pulled",
+          "distanceValue": 2,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-lvhld7",
+          "name": "Raft / Barge",
+          "distanceValue": 0.5,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-3zpxje",
+          "name": "Keelboat (rowed)",
+          "distanceValue": 1,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-47fagm",
+          "name": "Rowboat (rowed)",
+          "distanceValue": 1.5,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-baxlw1",
+          "name": "Sailing Ship",
+          "distanceValue": 2,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-wa3oeq",
+          "name": "Warship (rowed+sail)",
+          "distanceValue": 2.5,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-anhl5k",
+          "name": "Longship (rowed+sail)",
+          "distanceValue": 3,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        },
+        {
+          "id": "tt-c09416",
+          "name": "Galley (rowed+sail)",
+          "distanceValue": 4,
+          "distanceUnit": "mi",
+          "timeValue": 1,
+          "timeUnit": "h"
+        }
+      ],
+      "travelPerDayPresets": [
+        {
+          "id": "tpd-yxass9",
+          "name": "Max Travel Time",
+          "value": 8,
+          "unit": "h"
+        }
+      ],
+      "travelPerDay": {
+        "value": 8,
+        "unit": "h"
+      }
+    }
+  ],
+  "defaultScaleLikeSticker": false,
+  "enableDrawing": false,
+  "preferActiveLayerInEditor": false,
+  "enableTextLayers": false,
+  "enableMeasurePro": true,
+  "enableSessionImageCache": false,
+  "sessionImageCacheMb": 512,
+  "keepOverlaysLoaded": false,
+  "preferCanvasImagesWhenCaching": false,
+  "svgRasterMaxScale": 8,
+  "showImageIconPreviewInSettings": false,
+  "middleClickOpensLinkInNewTab": false,
+  "enableSecondScreen": false,
+  "secondScreenFolder": "ZoomMap/SecondScreen"
+}

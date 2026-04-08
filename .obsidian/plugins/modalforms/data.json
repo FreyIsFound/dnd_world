@@ -1,0 +1,964 @@
+{
+  "editorPosition": "right",
+  "attachShortcutToGlobalWindow": false,
+  "globalNamespace": "MF",
+  "formDefinitions": [
+    {
+      "title": "Example form",
+      "name": "example-form",
+      "fields": [
+        {
+          "name": "name",
+          "label": "Name",
+          "description": "It is named how?",
+          "isRequired": true,
+          "input": {
+            "type": "text",
+            "hidden": false
+          }
+        },
+        {
+          "name": "age",
+          "label": "Age",
+          "description": "How old",
+          "isRequired": true,
+          "input": {
+            "type": "number",
+            "hidden": false
+          }
+        },
+        {
+          "name": "dateOfBirth",
+          "label": "Date of Birth",
+          "description": "When were you born?",
+          "input": {
+            "type": "date",
+            "hidden": false
+          }
+        },
+        {
+          "name": "timeOfDay",
+          "label": "Time of day",
+          "description": "The time you can do this",
+          "input": {
+            "type": "time",
+            "hidden": false
+          }
+        },
+        {
+          "name": "is_family",
+          "label": "Is family",
+          "description": "If it is part of the family",
+          "input": {
+            "type": "toggle",
+            "hidden": false
+          }
+        },
+        {
+          "name": "favorite_book",
+          "label": "Favorite book",
+          "description": "Pick one",
+          "isRequired": false,
+          "input": {
+            "type": "note",
+            "folder": "Books"
+          }
+        },
+        {
+          "name": "folder",
+          "label": "The destination folder",
+          "description": "It offers auto-completion to existing folders",
+          "input": {
+            "type": "folder"
+          }
+        },
+        {
+          "name": "multi_example",
+          "label": "Multi select folder",
+          "description": "Allows to pick many notes from a folder",
+          "isRequired": false,
+          "input": {
+            "type": "multiselect",
+            "source": "notes",
+            "folder": "Books"
+          }
+        },
+        {
+          "name": "multi_example_folders",
+          "label": "Multi select multiple folders",
+          "description": "Allows to pick many notes from multiple folders",
+          "isRequired": false,
+          "input": {
+            "type": "multiselect",
+            "source": "notes",
+            "folder": "Books",
+            "folders": [
+              "People"
+            ]
+          }
+        },
+        {
+          "name": "multi_example_2",
+          "label": "Multi select fixed",
+          "description": "Allows to pick many notes from a fixed list",
+          "isRequired": false,
+          "input": {
+            "type": "multiselect",
+            "source": "fixed",
+            "multi_select_options": [
+              "Android",
+              "iOS",
+              "Windows",
+              "MacOS",
+              "Linux",
+              "Solaris",
+              "MS2"
+            ],
+            "allowUnknownValues": false
+          }
+        },
+        {
+          "name": "multi_select_dataview",
+          "label": "Multi select dataview",
+          "description": "Allows to pick several values from a dv query",
+          "isRequired": false,
+          "input": {
+            "type": "multiselect",
+            "source": "dataview",
+            "query": "dv.pages(\"#person\").map(p => p.file.name)",
+            "allowUnknownValues": true
+          }
+        },
+        {
+          "name": "best_fried",
+          "label": "Best friend",
+          "description": "Select of type note from a folder",
+          "input": {
+            "type": "select",
+            "source": "notes",
+            "folder": "People"
+          }
+        },
+        {
+          "name": "dataview_example",
+          "label": "Dataview example",
+          "description": "Only people matching the dataview query will be shown",
+          "isRequired": false,
+          "input": {
+            "type": "dataview",
+            "query": "dv.pages(\"#person\").filter(p => p.age < 30).map(p => p.file.name)"
+          }
+        },
+        {
+          "name": "friendship_level",
+          "label": "Friendship level",
+          "description": "How good friends are you?",
+          "input": {
+            "type": "slider",
+            "min": 0,
+            "max": 10
+          }
+        },
+        {
+          "name": "favorite_meal",
+          "label": "Favorite meal",
+          "description": "Pick one option",
+          "input": {
+            "type": "select",
+            "source": "fixed",
+            "options": [
+              {
+                "value": "pizza",
+                "label": "🍕 Pizza"
+              },
+              {
+                "value": "pasta",
+                "label": "🍝 Pasta"
+              },
+              {
+                "value": "burger",
+                "label": "🍔 Burger"
+              },
+              {
+                "value": "salad",
+                "label": "🥗 Salad"
+              },
+              {
+                "value": "steak",
+                "label": "🥩 Steak"
+              },
+              {
+                "value": "sushi",
+                "label": "🍣 Sushi"
+              },
+              {
+                "value": "ramen",
+                "label": "🍜 Ramen"
+              },
+              {
+                "value": "tacos",
+                "label": "🌮 Tacos"
+              },
+              {
+                "value": "fish",
+                "label": "🐟 Fish"
+              },
+              {
+                "value": "chicken",
+                "label": "🍗 Chicken"
+              }
+            ]
+          }
+        },
+        {
+          "name": "some notes",
+          "label": "Multi line notes",
+          "description": "Put your thoughts here",
+          "input": {
+            "type": "textarea",
+            "hidden": false
+          }
+        },
+        {
+          "name": "hidden_field",
+          "label": "This field is hidden",
+          "description": "It is useful for internal data",
+          "isRequired": false,
+          "input": {
+            "type": "text",
+            "hidden": true
+          }
+        },
+        {
+          "name": "Tags",
+          "description": "Tags input example",
+          "isRequired": false,
+          "input": {
+            "type": "tag",
+            "hidden": false
+          }
+        },
+        {
+          "name": "profile_picture",
+          "label": "Profile Picture",
+          "description": "Upload a profile picture. It will be saved in the attachments folder with the current date.",
+          "input": {
+            "type": "image",
+            "filenameTemplate": "profile-{{datetime}}.png",
+            "saveLocation": "attachments/profile_pictures"
+          }
+        },
+        {
+          "name": "pdf",
+          "description": "PDF example",
+          "isRequired": false,
+          "input": {
+            "type": "file",
+            "folder": "attachments/pdfs",
+            "allowedExtensions": [
+              "pdf"
+            ]
+          }
+        },
+        {
+          "name": "document",
+          "description": "Document block example",
+          "input": {
+            "type": "document_block",
+            "body": "return `Hello ${form.name}!<br> Your best friend is <b>${form.best_fried}</b>`"
+          }
+        }
+      ],
+      "version": "1"
+    },
+    {
+      "title": "New Place (Within District)",
+      "name": "New-Place-Within-District",
+      "customClassname": "ModalForm_TTRPG_Tuts_CSS",
+      "fields": [
+        {
+          "name": "PlaceName",
+          "label": "Place Name",
+          "description": "What is this place called?",
+          "isRequired": true,
+          "input": {
+            "type": "text",
+            "hidden": false
+          }
+        },
+        {
+          "name": "SelectHub",
+          "label": "Select Parent Hub",
+          "description": "Select the Hub this Place resides within. ",
+          "isRequired": false,
+          "input": {
+            "type": "select",
+            "source": "notes",
+            "folder": "2-World/Hubs"
+          }
+        },
+        {
+          "name": "SelectDistrict",
+          "label": "Select Parent District",
+          "description": "Select the District this Place resides within. ",
+          "isRequired": false,
+          "input": {
+            "type": "select",
+            "source": "notes",
+            "folder": "2-World/Districts"
+          }
+        },
+        {
+          "name": "SelectPlaceCategory",
+          "label": "Select Place Category",
+          "description": "What type of place is this?",
+          "isRequired": false,
+          "input": {
+            "type": "select",
+            "source": "fixed",
+            "options": [
+              {
+                "value": "Commerce",
+                "label": "Commerce"
+              },
+              {
+                "value": "Agriculture",
+                "label": "Agriculture"
+              },
+              {
+                "value": "Military",
+                "label": "Military"
+              },
+              {
+                "value": "Philosophy",
+                "label": "Philosophy"
+              },
+              {
+                "value": "Industrial",
+                "label": "Industrial"
+              },
+              {
+                "value": "Nesting",
+                "label": "Nesting"
+              },
+              {
+                "value": "Government",
+                "label": "Government"
+              }
+            ]
+          }
+        }
+      ],
+      "version": "1"
+    },
+    {
+      "title": "New Star System",
+      "name": "New-Star-System",
+      "customClassname": "ModalForm_TTRPG_Tuts_CSS",
+      "fields": [
+        {
+          "name": "SelectStarSystemName",
+          "label": "Enter Star System Name",
+          "description": "Enter the name of the star system. ",
+          "isRequired": true,
+          "input": {
+            "type": "text",
+            "hidden": false
+          }
+        },
+        {
+          "name": "SelectStarSystem",
+          "label": "Select Galaxy",
+          "description": "Select the Galaxy this Star System resides within. ",
+          "isRequired": false,
+          "input": {
+            "type": "select",
+            "source": "notes",
+            "folder": "2-World/Galaxies"
+          }
+        }
+      ],
+      "version": "1"
+    },
+    {
+      "title": "New Planet",
+      "name": "New-Planet",
+      "customClassname": "ModalForm_TTRPG_Tuts_CSS",
+      "fields": [
+        {
+          "name": "SelectPlanetName",
+          "label": "Select Planet Name",
+          "description": "Enter the name of the planet. ",
+          "isRequired": true,
+          "input": {
+            "type": "text",
+            "hidden": false
+          }
+        },
+        {
+          "name": "SelectStarSystem",
+          "label": "Select Star System",
+          "description": "Select the Star System this Planet resides within. ",
+          "isRequired": false,
+          "input": {
+            "type": "select",
+            "source": "notes",
+            "folder": "2-World/Star Systems"
+          }
+        }
+      ],
+      "version": "1"
+    },
+    {
+      "title": "New Continent",
+      "name": "New-Continent",
+      "customClassname": "ModalForm_TTRPG_Tuts_CSS",
+      "fields": [
+        {
+          "name": "SelectContinentName",
+          "label": "Enter Continent Name",
+          "description": "Enter the name of the continent. ",
+          "isRequired": true,
+          "input": {
+            "type": "text",
+            "hidden": false
+          }
+        },
+        {
+          "name": "SelectPlanet",
+          "label": "Select Planet",
+          "description": "Select the Planet this Continent resides within. ",
+          "isRequired": false,
+          "input": {
+            "type": "select",
+            "source": "notes",
+            "folder": "2-World/Planets"
+          }
+        }
+      ],
+      "version": "1"
+    },
+    {
+      "title": "New Region",
+      "name": "New-Region",
+      "customClassname": "ModalForm_TTRPG_Tuts_CSS",
+      "fields": [
+        {
+          "name": "SelectRegionName",
+          "label": "Enter Region Name",
+          "description": "Enter the name of the region. ",
+          "isRequired": true,
+          "input": {
+            "type": "text",
+            "hidden": false
+          }
+        },
+        {
+          "name": "SelectContinent",
+          "label": "Select Continent",
+          "description": "Select the Continent this Region resides within. ",
+          "isRequired": false,
+          "input": {
+            "type": "select",
+            "source": "notes",
+            "folder": "2-World/Continents"
+          }
+        }
+      ],
+      "version": "1"
+    },
+    {
+      "title": "New Hub",
+      "name": "New-Hub",
+      "customClassname": "ModalForm_TTRPG_Tuts_CSS",
+      "fields": [
+        {
+          "name": "SelectHubName",
+          "label": "Enter Hub Name",
+          "description": "Enter the name of the hub. ",
+          "isRequired": true,
+          "input": {
+            "type": "text",
+            "hidden": false
+          }
+        },
+        {
+          "name": "SelectRegion",
+          "label": "Select Region",
+          "description": "Select the Region this Hub resides within. ",
+          "isRequired": false,
+          "input": {
+            "type": "select",
+            "source": "notes",
+            "folder": "2-World/Regions"
+          }
+        },
+        {
+          "name": "SelectCategory",
+          "label": "Select Hub Category",
+          "description": "",
+          "isRequired": false,
+          "input": {
+            "type": "select",
+            "source": "fixed",
+            "options": [
+              {
+                "value": "City +1500",
+                "label": "City +1500"
+              },
+              {
+                "value": "Town +200",
+                "label": "Town +200"
+              },
+              {
+                "value": "Village +80",
+                "label": "Village +80"
+              },
+              {
+                "value": "Hamlet <80",
+                "label": "Hamlet <80"
+              },
+              {
+                "value": "Encampment",
+                "label": "Encampment"
+              },
+              {
+                "value": "Keep",
+                "label": "Keep"
+              },
+              {
+                "value": "Fortress",
+                "label": "Fortress"
+              },
+              {
+                "value": "Stronghold",
+                "label": "Stronghold"
+              }
+            ]
+          }
+        }
+      ],
+      "version": "1"
+    },
+    {
+      "title": "New Point of Interest",
+      "name": "New-PointOfInterest",
+      "customClassname": "ModalForm_TTRPG_Tuts_CSS",
+      "fields": [
+        {
+          "name": "SelectPOVName",
+          "label": "Enter Point of Interest Name",
+          "description": "Enter the name of the point of interest. ",
+          "isRequired": true,
+          "input": {
+            "type": "text",
+            "hidden": false
+          }
+        },
+        {
+          "name": "SelectParent",
+          "label": "Select POV's Parent",
+          "description": "Select the Parent that this POV resides within. ",
+          "isRequired": true,
+          "input": {
+            "type": "multiselect",
+            "source": "notes",
+            "folder": "2-World/Regions",
+            "folders": [
+              "2-World/Star Systems",
+              "2-World/Hubs",
+              "2-World/Districts"
+            ]
+          }
+        }
+      ],
+      "version": "1"
+    },
+    {
+      "title": "New Group",
+      "name": "New-Group",
+      "customClassname": "ModalForm_TTRPG_Tuts_CSS",
+      "fields": [
+        {
+          "name": "SelectGroupName",
+          "label": "Groups Name",
+          "description": "Enter the name of the group.",
+          "isRequired": true,
+          "input": {
+            "type": "text",
+            "hidden": false
+          }
+        },
+        {
+          "name": "SelectParent",
+          "label": "Select Group's Parent",
+          "description": "Select the area that this group is most commonly found in. ",
+          "isRequired": true,
+          "input": {
+            "type": "multiselect",
+            "source": "notes",
+            "folder": "2-World/Regions",
+            "folders": [
+              "2-World/Star Systems",
+              "2-World/Hubs",
+              "2-World/Districts",
+              "2-World/Regions"
+            ]
+          }
+        }
+      ],
+      "version": "1"
+    },
+    {
+      "title": "New Quest",
+      "name": "New-Quest",
+      "customClassname": "ModalForm_TTRPG_Tuts_CSS",
+      "fields": [
+        {
+          "name": "SelectQuestName",
+          "label": "Quest Name",
+          "description": "Enter the name of the quest.",
+          "isRequired": true,
+          "input": {
+            "type": "text",
+            "hidden": false
+          }
+        },
+        {
+          "name": "SelectParent",
+          "label": "Select Quests Parent",
+          "description": "Select the area where this quest is found. ",
+          "isRequired": true,
+          "input": {
+            "type": "multiselect",
+            "source": "notes",
+            "folder": "2-World/Regions",
+            "folders": [
+              "2-World/Star Systems",
+              "2-World/Hubs",
+              "2-World/Districts",
+              "2-World/Regions"
+            ]
+          }
+        }
+      ],
+      "version": "1"
+    },
+    {
+      "title": "New Place",
+      "name": "New-Place",
+      "customClassname": "ModalForm_TTRPG_Tuts_CSS",
+      "fields": [
+        {
+          "name": "PlaceName",
+          "label": "Place Name",
+          "description": "Enter the name of the place.",
+          "isRequired": true,
+          "input": {
+            "type": "text",
+            "hidden": false
+          }
+        },
+        {
+          "name": "SelectHub",
+          "label": "Select the Hub this place belongs to.",
+          "description": "Select the Hub this Place resides within. ",
+          "isRequired": false,
+          "input": {
+            "type": "select",
+            "source": "notes",
+            "folder": "2-World/Hubs"
+          }
+        },
+        {
+          "name": "SelectPlaceCategory",
+          "label": "Select the Place category",
+          "description": "What type of place is this?",
+          "isRequired": false,
+          "input": {
+            "type": "select",
+            "source": "fixed",
+            "options": [
+              {
+                "value": "Commerce",
+                "label": "Commerce"
+              },
+              {
+                "value": "Agriculture",
+                "label": "Agriculture"
+              },
+              {
+                "value": "Military",
+                "label": "Military"
+              },
+              {
+                "value": "Philosophy",
+                "label": "Philosophy"
+              },
+              {
+                "value": "Industrial",
+                "label": "Industrial"
+              },
+              {
+                "value": "Nesting",
+                "label": "Nesting"
+              },
+              {
+                "value": "Government",
+                "label": "Government"
+              }
+            ]
+          }
+        }
+      ],
+      "version": "1"
+    },
+    {
+      "title": "New Hub (+Districts)",
+      "name": "New-Hub-With-Districts",
+      "customClassname": "ModalForm_TTRPG_Tuts_CSS",
+      "fields": [
+        {
+          "name": "SelectHubName",
+          "label": "Enter Hub Name",
+          "description": "Enter the name of the hub. ",
+          "isRequired": true,
+          "input": {
+            "type": "text",
+            "hidden": false
+          }
+        },
+        {
+          "name": "SelectRegion",
+          "label": "Select Region",
+          "description": "Select the Region this Hub resides within. ",
+          "isRequired": false,
+          "input": {
+            "type": "select",
+            "source": "notes",
+            "folder": "2-World/Regions"
+          }
+        },
+        {
+          "name": "SelectCategory",
+          "label": "Select Hub Category",
+          "description": "",
+          "isRequired": false,
+          "input": {
+            "type": "select",
+            "source": "fixed",
+            "options": [
+              {
+                "value": "City +1500",
+                "label": "City +1500"
+              },
+              {
+                "value": "Town +200",
+                "label": "Town +200"
+              },
+              {
+                "value": "Village +80",
+                "label": "Village +80"
+              },
+              {
+                "value": "Hamlet <80",
+                "label": "Hamlet <80"
+              },
+              {
+                "value": "Encampment",
+                "label": "Encampment"
+              },
+              {
+                "value": "Keep",
+                "label": "Keep"
+              },
+              {
+                "value": "Fortress",
+                "label": "Fortress"
+              },
+              {
+                "value": "Stronghold",
+                "label": "Stronghold"
+              }
+            ]
+          }
+        }
+      ],
+      "version": "1"
+    },
+    {
+      "title": "New District",
+      "name": "New-District",
+      "customClassname": "ModalForm_TTRPG_Tuts_CSS",
+      "fields": [
+        {
+          "name": "SelectDistrictName",
+          "label": "Enter District Name",
+          "description": "Enter the name of the district. ",
+          "isRequired": true,
+          "input": {
+            "type": "text",
+            "hidden": false
+          }
+        },
+        {
+          "name": "SelectHub",
+          "label": "Select Hub",
+          "description": "Select the Hub this District resides within. ",
+          "isRequired": false,
+          "input": {
+            "type": "select",
+            "source": "notes",
+            "folder": "2-World/Hubs"
+          }
+        },
+        {
+          "name": "SelectCategory",
+          "label": "Select Hub Category",
+          "description": "",
+          "isRequired": false,
+          "input": {
+            "type": "select",
+            "source": "fixed",
+            "options": [
+              {
+                "value": "Generic District",
+                "label": "Generic District"
+              },
+              {
+                "value": "Government & Nobility",
+                "label": "Government & Nobility"
+              },
+              {
+                "value": "Commerce & Craft",
+                "label": "Commerce & Craft"
+              },
+              {
+                "value": "Residential",
+                "label": "Residential"
+              },
+              {
+                "value": "Faith & Knowledge",
+                "label": "Faith & Knowledge"
+              },
+              {
+                "value": "Military & Order",
+                "label": "Military & Order"
+              },
+              {
+                "value": "Hidden & Fringe",
+                "label": "Hidden & Fringe"
+              }
+            ]
+          }
+        }
+      ],
+      "version": "1"
+    },
+    {
+      "title": "New Person",
+      "name": "New-Person",
+      "customClassname": "ModalForm_TTRPG_Tuts_CSS",
+      "fields": [
+        {
+          "name": "SelectPersonName",
+          "label": "Persons Name",
+          "description": "Enter the name of the person.",
+          "isRequired": true,
+          "input": {
+            "type": "text",
+            "hidden": false
+          }
+        },
+        {
+          "name": "SelectParent",
+          "label": "Select Person's Parent Location ",
+          "description": "Select the area or place that this person s most commonly found in. ",
+          "isRequired": true,
+          "input": {
+            "type": "multiselect",
+            "source": "notes",
+            "folder": "2-World/Regions",
+            "folders": [
+              "2-World/Hubs",
+              "2-World/Points of Interest",
+              "2-World/Places",
+              "2-World/Districts",
+              "2-World/Quests"
+            ]
+          }
+        }
+      ],
+      "version": "1"
+    },
+    {
+      "title": "New Sapient Species",
+      "name": "New-Sapient-Species",
+      "customClassname": "ModalForm_TTRPG_Tuts_CSS",
+      "fields": [
+        {
+          "name": "SelectSpeciesName",
+          "label": "Species Name",
+          "description": "Enter the name of the person.",
+          "isRequired": true,
+          "input": {
+            "type": "text",
+            "hidden": false
+          }
+        },
+        {
+          "name": "SelectParent",
+          "label": "Select Person's Parent Location ",
+          "description": "Select the area or place that this person s most commonly found in. ",
+          "isRequired": true,
+          "input": {
+            "type": "multiselect",
+            "source": "notes",
+            "folder": "2-World/Galaxies",
+            "folders": [
+              "2-World/Star Systems",
+              "2-World/Planets",
+              "2-World/Continents"
+            ]
+          }
+        }
+      ],
+      "version": "1"
+    },
+    {
+      "title": "New Item",
+      "name": "New-Item",
+      "customClassname": "ModalForm_TTRPG_Tuts_CSS",
+      "fields": [
+        {
+          "name": "SelectItem",
+          "label": "Item Name",
+          "description": "Enter the name of the item.",
+          "isRequired": true,
+          "input": {
+            "type": "text",
+            "hidden": false
+          }
+        },
+        {
+          "name": "SelectParent",
+          "label": "Select Item's Parent Note.",
+          "description": "Select the note that this item belongs to. ",
+          "isRequired": true,
+          "input": {
+            "type": "multiselect",
+            "source": "notes",
+            "folder": "2-World/People",
+            "folders": [
+              "2-World/Places",
+              "2-Campaign/Quests",
+              "2-World/Groups",
+              "2-World/Points of Interest"
+            ]
+          }
+        }
+      ],
+      "version": "1"
+    }
+  ]
+}

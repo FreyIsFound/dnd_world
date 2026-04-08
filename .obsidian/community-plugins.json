@@ -1,6 +1,5 @@
 [
   "obsidian-excel-to-markdown-table",
-  "templater-obsidian",
   "obsidian-custom-frames",
   "obsidian-5e-statblocks",
   "initiative-tracker",
@@ -27,9 +26,13 @@
   "supercharged-links-obsidian",
   "solo-rpg-toolkit",
   "obsidian-leaflet-plugin",
-  "granite",
   "dnd-ui-toolkit",
   "pexels-banner",
   "js-engine",
-  "various-complements"
+  "various-complements",
+  "templater-obsidian",
+  "maps",
+  "zoom-map",
+  "simple-timeline",
+  "modalforms"
 ]

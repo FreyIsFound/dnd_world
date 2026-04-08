@@ -21,8 +21,8 @@
   "ITS@@mini": false,
   "ITS@@notion": false,
   "ITS@@its-d": false,
-  "ITS@@select": "none",
-  "supercharged-links@@b076-3eaf-before": "🧑",
+  "ITS@@select": "wotc-beyond",
+  "supercharged-links@@b076-3eaf-before": "😊",
   "supercharged-links@@3862-844d-before": "📑",
   "supercharged-links@@3862-844d-weight": "bold",
   "supercharged-links@@3862-844d-decoration": "initial",
@@ -37,7 +37,14 @@
   "supercharged-links@@2536-bfc1-before": "🗺️",
   "supercharged-links@@39b9-b976-before": "⚔️",
   "supercharged-links@@39b9-b976-color": "#AE1099",
-  "supercharged-links@@71fe-7d8c-before": "🧑‍🦰",
+  "supercharged-links@@71fe-7d8c-before": "🧙",
   "supercharged-links@@71fe-7d8c-color": "#9FDC17",
-  "ITS@@writing": false
+  "ITS@@writing": false,
+  "supercharged-links@@6e80-f6c7-before": "👽",
+  "supercharged-links@@428c-a510-before": "🗺️",
+  "supercharged-links@@4551-46a1-before": "🌎",
+  "ITS@@hr-icon-symbol": "\"⚡\"",
+  "ITS@@ITS-folder-arrows": "folder-arrow-display",
+  "supercharged-links@@354b-4106-before": "🌌",
+  "supercharged-links@@3da6-c017-before": "💫"
 }

@@ -1,9 +1,24 @@
 {
   "pluginList": [
+    "Jareika/Simple-Timeline",
+    "Jareika/zoom-map",
+    "SilentVoid13/Templater",
     "hay-kot/obsidian-dnd-ui-toolkit",
     "ObsidianTTRPGProject/gemmy_ttrpg"
   ],
   "pluginSubListFrozenVersion": [
+    {
+      "repo": "Jareika/Simple-Timeline",
+      "version": "latest"
+    },
+    {
+      "repo": "Jareika/zoom-map",
+      "version": "latest"
+    },
+    {
+      "repo": "SilentVoid13/Templater",
+      "version": "2.13.1"
+    },
     {
       "repo": "hay-kot/obsidian-dnd-ui-toolkit",
       "version": "latest"
@@ -19,5 +34,7 @@
   "debuggingMode": true,
   "notificationsEnabled": true,
   "personalAccessToken": "",
+  "selectLatestPluginVersionByDefault": false,
+  "allowIncompatiblePlugins": false,
   "ribbonIconEnabled": true
 }

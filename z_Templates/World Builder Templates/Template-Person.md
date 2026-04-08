@@ -1,80 +1,73 @@
+<%*  
+const modalForm = app.plugins.plugins.modalforms?.api;  
+if (!modalForm) {  
+new Notice("Modal Forms plugin is not enabled.");  
+return;  
+}  
+  
+const result = await modalForm.openForm("New-Person");  
+if (!result || result.status !== "ok") return;  
+  
+const data = result.getData();  
+  
+const personName = String(data["SelectPersonName"] ?? "").trim();  
+const parentName = String(data["SelectParent"] ?? "").trim();  
+  
+// Rename note  
+if (personName) {  
+await tp.file.rename(personName);  
+}  
+  
+// Build MyContainer  
+let myContainerYaml = "[]";  
+if (parentName) {  
+myContainerYaml = `  
+- "[[${parentName}|${parentName}]]"`;  
+}  
+  
+// Write frontmatter  
+tR = `---
+MyContainer:${myContainerYaml}  
+MyCategory:  
+image: "Template_Person_Placeholder.png"  
+tags:  
+- Category/People  
+obsidianUIMode: preview  
+aliases:  
+- characters other name  
+NoteStatus: ❓  
+char_status: Alive  
+char_race: Human  
+char_gender: Male  
+char_items:  
+char_age: Adult  
+parents:  
+- Josh  
+- Susan  
+children:  
+- Bob  
+- Fred  
+enemies:  
+- Zander  
+allies:  
+- Emyerson  
+- Bob  
+- Frank  
+siblings:  
+- Flip  
+partner:  
+- Jane  
+Connected_Quests: []  
+Connected_Groups: []  
 ---
-MyContainer:
-  - "[[z_Templates/World Builder Templates/Template-Place.md|Template-Place]]"
-MyCategory:
-tags:
-  - Category/People
-obsidianUIMode: preview
-aliases:
-  - characters other name
-NoteStatus: ❓
-char_status: Alive
-char_race: Human
-char_gender: Male
-char_items:
-char_age: Adult
-parents:
-  - Josh
-  - Susan
-children:
-  - Bob
-  - Fred
-enemies:
-  - Zander
-allies:
-  - Emyerson
-  - Bob
-  - Frank
-siblings:
-  - Flip
-partner:
-  - Jane
-Connected_Quests:
-  - "[[z_Templates/World Builder Templates/Template-Quest.md|Template-Quest]]"
-Connected_Groups: "[[z_Templates/World Builder Templates/Template-Group.md|Template-Group]]"
----
-
-<%*
-  // 1) Prompt for Person’s Name and rename file
-  const personName = await tp.system.prompt("Enter Person’s Name", tp.file.title);
-  if (!personName) return;
-  await tp.file.rename(personName);
-
-  // 2) Gather all potential residence notes
-  const allFiles = tp.app.vault.getMarkdownFiles();
-  const locationFiles = allFiles.filter(f =>
-    f.path.startsWith("2-World/Hubs/") ||
-    f.path.startsWith("2-World/Points of Interest/") ||
-    f.path.startsWith("2-World/Regions/") ||
-    f.path.startsWith("2-World/Places/")
-  );
-
-  // 3) Prompt to choose one location
-  const locationChoices = locationFiles.map(f => f.basename);
-  const locationValues  = locationFiles.map(f => f.path);
-  const chosenPath = await tp.system.suggester(locationChoices, locationValues, true);
-  if (!chosenPath) return;
-
-  // 4) Build wiki-link
-  const alias = chosenPath.split("/").pop().replace(/\.md$/, "");
-  const locationLink = `[[${chosenPath}|${alias}]]`;
-
-  // 5) Insert into front-matter as MyContainer
-  setTimeout(() => {
-    const file = tp.file.find_tfile(tp.file.path(true));
-    if (!file) return;
-    app.fileManager.processFrontMatter(file, fm => {
-      fm["MyContainer"] = locationLink;
-    });
-  }, 100);
+`;  
 %>
-
-
 > [!NOTE|div-m] Parent Location: `INPUT[inlineListSuggester(optionQuery(#Category/Hub),optionQuery(#Category/Region),optionQuery(#Category/Place),optionQuery(#Category/PointofInterest)):MyContainer]`
+%% DISPLAYS NOTES THAT MATCH THE TAGS ABOVE %% 
 
 > [!column|no-i no-t]
 >> [!div-m|no-title]
->> ![[Pasted image 20250427102611.png]]
+>> ![[Template_Person_Placeholder.png]]
 >
 >> [!div-m|no-title] Place Name
 >> ~~~meta-bind
@@ -105,7 +98,7 @@ Connected_Groups: "[[z_Templates/World Builder Templates/Template-Group.md|Templ
 > class(tabbed)
 > )]
 > ~~~
-> >[!tabbed-box-maxh]
+> >[!tabbed-box]
 > > >[!div-m|no-title]
 > > > ![[#Inventory|no-h clean]]
 > >
@@ -121,15 +114,18 @@ Connected_Groups: "[[z_Templates/World Builder Templates/Template-Group.md|Templ
 
 Name: `= this.file.name`
 
-Status: `INPUT[inlineSelect(option(Alive), option(Dead)):char_status]`
 
-Race/Species: `INPUT[template-Race][:char_race]`
+Status: `INPUT[template-person-status][:char_status]`
+%% MODIFY OPTIONS IN SETTINGS > COMMUNITY PLUGINS > META-BIND > EDIT TEMPLATES > template-person-status %%
 
-%% The options in the drop-down above are controlled via the Meta Bind Input Field Templates in the Settings %%
+Race/Species: `INPUT[template-person-race][:char_race]`
+%% MODIFY OPTIONS IN SETTINGS > COMMUNITY PLUGINS > META-BIND > EDIT TEMPLATES > template-person-race %%
 
-Gender: `INPUT[inlineSelect(option(Male), option(Female), option(Other)):char_gender]` 
+Gender: `INPUT[template-person-gender][:char_gender]`
+%% MODIFY OPTIONS IN SETTINGS > COMMUNITY PLUGINS > META-BIND > EDIT TEMPLATES > template-person-gender %%
 
-Age: `INPUT[inlineSelect(option(Infant), option(Child), option(Teenager), option(Young Adult), option(Adult), option(Elder)):char_age]`
+Age: `INPUT[template-person-age-range][:char_age]`
+%% MODIFY OPTIONS IN SETTINGS > COMMUNITY PLUGINS > META-BIND > EDIT TEMPLATES > template-person-age-range %%
 
 ---
 
@@ -147,9 +143,12 @@ Make notes of what you need to track in the town here.
 
 # Inventory
 
+`BUTTON[button_item]` 
+
 The following items belong to `= this.file.name`.
 
 ```dataviewjs
+// This dataviewjs code grabs a random item(s) from the folder below. You can remove this if that's not useful. It's an example of what's possible. 
 // 1. grab all pages in the folder
 let pages = dv.pages('"3-Mechanics/Items"').values;
 
@@ -177,8 +176,10 @@ dv.table(
 Is the person linked to any groups or quests?
 
 Quests: `INPUT[inlineListSuggester(optionQuery(#Category/Quest)):Connected_Quests]`
+%% DISPLAYS NOTES THAT MATCH THE TAGS ABOVE %% 
 
 Groups: `INPUT[inlineListSuggester(optionQuery(#Category/Group)):Connected_Groups]`
+%% DISPLAYS NOTES THAT MATCH THE TAGS ABOVE %% 
 
 # Relationships
 
@@ -222,6 +223,8 @@ dv.paragraph("```mermaid\nflowchart LR\n" +
   `class ${parents.length > 0 ? parents.map((_, index) => `P${index + 1},`).join('') : ''}Current${children.length > 0 ? children.map((_, index) => `C${index + 1},`).join('') : ''}${siblings.length > 0 ? siblings.map((_, index) => `S${index + 1},`).join('') : ''}${enemies.length > 0 ? enemies.map((_, index) => `E${index + 1},`).join('') : ''}${allies.length > 0 ? allies.map((_, index) => `A${index + 1},`).join('') : ''} internal-link;`
 )
 ```
+%% CODE ABOVE CREATED WITH CHAT-GPT. ITS COMPLEX CODE THAT SHOULD NOT BE CHANGED UNLESS YOU KNOW WHAT YOU ARE DOING %%
+%% MERMAID-FIX-TEXT-CLIPPING.CSS is enabled in Settings > Appearance > CSS Snippets. This fixes text clipping and styles the boxes %%
 
 > [!NOTE]- Relationship Config - Enter name of People Notes
 > `BUTTON[button_person]` Nodes will link to notes of the same name. 

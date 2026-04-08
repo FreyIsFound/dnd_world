@@ -1,62 +1,66 @@
----
+<%*
+const modalForm = app.plugins.plugins.modalforms?.api;
+if (!modalForm) {
+  new Notice("Modal Forms plugin is not enabled.");
+  return;
+}
+
+const result = await modalForm.openForm("New-PointOfInterest");
+if (!result || result.status !== "ok") return;
+
+const data = result.getData();
+
+const poiName = String(data["SelectPOVName"] ?? "").trim();
+const parentName = String(data["SelectParent"] ?? "").trim();
+
+// Rename note
+if (poiName) {
+  await tp.file.rename(poiName);
+}
+
+// Build MyContainer link
+let myContainerValue = "None";
+if (parentName) {
+  myContainerValue = `[[${parentName}|${parentName}]]`;
+}
+
+// Write frontmatter
+tR = `---
 tags:
   - Category/PointofInterest
 MyContainer:
-  - "[[Jungle of Screams|Jungle of Screams]]"
+  - "${myContainerValue}"
 MyCategory: Encounter
 obsidianUIMode: preview
+image: "A Cave.png"
 ---
-
-<%*
-/* 1) Prompt for POI name */
-const poiName = await tp.system.prompt("Enter Point of Interest Name", tp.file.title);
-if (!poiName) return;                     // cancel if blank
-await tp.file.rename(poiName);             // rename the file
-
-/* 2) Gather and pick a container region */
-const regionFiles = tp.app.vault.getMarkdownFiles()
-  .filter(f => f.path.startsWith("2-World/Regions/"));
-const regionChoices = regionFiles.map(f => f.basename);
-const regionValues  = regionFiles.map(f => f.path);
-const chosenPath    = await tp.system.suggester(regionChoices, regionValues, true);
-if (!chosenPath) return;                   // cancel if none chosen
-
-/* 3) Build full wiki-link for MyContainer */
-const regionAlias = chosenPath.split("/").pop().replace(/\.md$/, "");
-const regionLink  = `[[${chosenPath}|${regionAlias}]]`;
-
-/* 4) Write MyContainer into front-matter */
-setTimeout(() => {
-  const file = tp.file.find_tfile(tp.file.path(true));
-  if (!file) return;
-  app.fileManager.processFrontMatter(file, fm => {
-    fm["MyContainer"] = regionLink;
-  });
-}, 100);
+`;
 %>
 
-
-
-> [!NOTE] Parent Region: `INPUT[suggester(optionQuery(#Category/Region)):MyContainer]`
+> [!NOTE] Parent Region: `INPUT[suggester(optionQuery(#Category/Region),optionQuery(#Category/StarSystem)):MyContainer]`
 
 > [!column|no-i no-t]
 >> [!info|no-title] Map
->> ```leaflet  
->> id: ZalkorsFerry ### Must be unique with no spaces  
->> image: [[A Cave.png]] ### Link to the map image file. Do not add a ! in front of the image  
->> bounds: [[0,0], [6491, 6479]] ### Size of the map in px Height_y, Width_x. Ignore 0,0  
->> height: 500px ### Size of the leaflet embed in px on your screen  
->> width: 95% ### Size of the leaflet embed in your note  
->> lat: 3200 ### To center the map, make this half of the map height.  
->> long: 3200 ### To center the map, make this half of the map width.  
->> minZoom: -5 ### Controls how far away from the map you can zoom out. Hover over the target icon to see the current level.  
->> maxZoom: 1 ### Controls how far towards the map you can zoom in. Hover over the target icon to see the current level.  
->> defaultZoom: -4 ### Sets the default zoom level when the map loads. Hover over the target icon to see the current level.  
->> zoomDelta: 0.5 ### Adjust how much the zoom changes when you zoom in or out.  
->> unit: mi ### The value displayed when measuring so you know what type of unit is being measure.  
->> scale: 0.09328358208955223 ### Real units/px (resolution) of your map  
->> recenter: false  
->> darkmode: false ### marker
+>> ```zoommap
+>> imageBases:
+>>   - path: z_Assets/A Cave.png
+>> markers: z_Assets/A Cave.markers.json
+>> markerLayers:
+>>   - Default
+>> minZoom: 0.00005
+>> maxZoom: 2
+>> wrap: false
+>> responsive: false
+>> width: 1221px
+>> height: 490px
+>> resizable: false
+>> resizeHandle: native
+>> render: dom
+>> id: map-mkx4t9jr
+>> view:
+>>   zoom: 0.0752
+>>   centerX: 0.479370
+>>   centerY: 0.543033
 >> ```
 >
 >> [!note|no-title] Town Name
@@ -89,7 +93,7 @@ setTimeout(() => {
 > class(tabbed)
 > )]
 > ~~~
-> >[!tabbed-box-maxh|no-title]
+> >[!tabbed-box|no-title]
 > > >[!div-m|no-title]
 > > > ![[#Scene Summary|no-h1 clean]]
 > >
@@ -108,10 +112,8 @@ setTimeout(() => {
 ---
 # General
 
-Select Category: `INPUT[template-PoIType][:MyCategory]`
-
-%% The options in the drop-down above are controlled via the Meta Bind Input Field Templates in the Settings %%
-
+Select Category: `INPUT[template-poi-type][:MyCategory]`
+%% MODIFY OPTIONS IN SETTINGS > COMMUNITY PLUGINS > META-BIND > EDIT TEMPLATES > template-poi-type %%
 
 This is the description for the location.
 
@@ -148,37 +150,112 @@ This is inside
 
 # Quests
 
-`BUTTON[button_quest]` 
+`BUTTON[button_quest]` `BUTTON[button_item]` 
 
 - [ ]  Locate the human remains. 
 - [ ] Recover the journal. 
 
-```dataview
-TABLE WITHOUT ID link(file.name) AS "Name", questStatus AS "Status", questGiver AS "Quest Giver"
-FROM "2-World/Quests"
-WHERE contains(MyContainer, this.file.link)
-SORT file.name ASC
+```base
+views:
+  - type: cards
+    name: Quests - Cards
+    filters:
+      and:
+        - file.folder == "2-World/Quests"
+        - list(MyContainer).contains(this)
+    order:
+      - file.name
+    image: note.image
+  - type: table
+    name: Quests - Table
+    filters:
+      and:
+        - file.folder == "2-World/Quests"
+        - list(MyContainer).contains(this)
+    order:
+      - file.name
+    sort:
+      - property: file.name
+        direction: DESC
+    columnSize:
+      file.name: 182
+
 ```
 
 # People
 
 `BUTTON[button_person]`  The following people are associated with this location.
 
-```dataview
-TABLE WITHOUT ID link(file.name) AS "Name", char_race AS "Race", char_gender AS "Gender", Connected_Groups AS "Associated Group"
-FROM "2-World/People"
-WHERE contains(char_status, "Alive")
-WHERE contains(MyContainer, this.file.link)
-SORT file.name ASC
-```
+```base
+properties:
+  note.Connected_Quests:
+    displayName: Associated Quests
+  note.Connected_Groups:
+    displayName: Associated Groups
+  note.char_race:
+    displayName: Race
+  note.char_gender:
+    displayName: Gender
+  note.char_age:
+    displayName: Age
+views:
+  - type: cards
+    name: People - Cards
+    filters:
+      and:
+        - file.folder == "2-World/People"
+        - list(MyContainer).contains(this)
+        - char_status == "Alive"
+    order:
+      - file.name
+      - char_age
+      - char_gender
+      - char_race
+    image: note.image
+  - type: table
+    name: People - Table
+    filters:
+      and:
+        - file.folder == "2-World/People"
+        - list(MyContainer).contains(this)
+    order:
+      - file.name
+      - char_race
+      - char_gender
+      - char_age
+      - Connected_Groups
+      - Connected_Quests
+    sort:
+      - property: Connected_Groups
+        direction: ASC
+      - property: char_gender
+        direction: ASC
+      - property: file.name
+        direction: DESC
+    columnSize:
+      file.name: 182
 
+```
 
 # Encounter
 
 Lists any mentioned monsters in this note.
-```dataview
-TABLE WITHOUT ID link(file.name) AS Monster
-WHERE contains(file.inlinks, this.file.link) AND SourceType = "Bestiary"
+
+%% The filter below should be updated based on your own monster notes. Find a way to filter on all monsters %%
+
+```base
+views:
+  - type: cards
+    name: Mentioned Monsters
+    filters:
+      and:
+        - this.hasLink(file)
+        - noteType == "pf2eMonster"
+    image: note.image
+    cardSize: 200
+    imageFit: contain
+    imageAspectRatio: 1
+
 ```
 
 ```encounter
@@ -186,13 +263,4 @@ name: Example
 creatures:
  - 3: Goblin, 5, 15, 2, 25 # 1 goblin with HP: 7, AC: 15, MOD: 2 worth 25 XP will be added.
 ```
-
-
-
-
-
-
-
-
-
 

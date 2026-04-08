@@ -34,6 +34,8 @@
     "Connected_Quests": "multitext",
     "Connected_Groups": "multitext",
     "leader": "text",
-    "MyContainer": "multitext"
+    "MyContainer": "multitext",
+    "excalidraw-embed-md": "checkbox",
+    "excalidraw-export-internal-links": "checkbox"
   }
 }

@@ -1,0 +1,34 @@
+{
+  "size": {
+    "w": 6479,
+    "h": 6491
+  },
+  "layers": [
+    {
+      "id": "default",
+      "name": "Default",
+      "visible": true,
+      "locked": false
+    }
+  ],
+  "markers": [],
+  "bases": [
+    {
+      "path": "z_Assets/A Cave.png"
+    }
+  ],
+  "overlays": [],
+  "activeBase": "z_Assets/A Cave.png",
+  "measurement": {
+    "scales": {},
+    "customUnitPxPerUnit": {},
+    "travelTimePresetIds": [],
+    "travelDaysEnabled": false,
+    "displayUnit": "km"
+  },
+  "pinSizeOverrides": {},
+  "panClamp": false,
+  "drawLayers": [],
+  "drawings": [],
+  "textLayers": []
+}

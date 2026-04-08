@@ -1,9 +1,37 @@
----
+<%*
+const modalForm = app.plugins.plugins.modalforms?.api;
+if (!modalForm) {
+  new Notice("Modal Forms plugin is not enabled.");
+  return;
+}
+
+const result = await modalForm.openForm("New-Group");
+if (!result || result.status !== "ok") return;
+
+const data = result.getData();
+
+const groupName = String(data["SelectGroupName"] ?? "").trim();
+const parentName = String(data["SelectParent"] ?? "").trim();
+
+// Rename note
+if (groupName) {
+  await tp.file.rename(groupName);
+}
+
+// Build MyContainer link
+let myContainerValue = "None";
+if (parentName) {
+  myContainerValue = `[[${parentName}|${parentName}]]`;
+}
+
+// Write frontmatter
+tR = `---
 tags:
   - Category/Group
 MyContainer:
-  - "[[Jungle of Screams|Jungle of Screams]]"
+  - "${myContainerValue}"
 MyCategory: Knightly Order
+image: "Template_Group_Placeholder.png"
 obsidianUIMode: preview
 leader: Bob
 officers:
@@ -27,40 +55,7 @@ benefits:
   - standing: 3
     reward: What do they get at level 3?
 ---
-
-<%*
-/* 1) “NewHub” title logic */
-const hasTitle = !tp.file.title.startsWith("NewGroup");
-let title;
-if (!hasTitle) {
-  title = await tp.system.prompt("Enter Group Name");
-  await tp.file.rename(title);
-} else {
-  title = tp.file.title;
-}
-
-/* 2) Gather all region files under 2-World/Regions */
-const regionFiles = tp.app.vault.getMarkdownFiles()
-  .filter(f => f.path.startsWith("2-World/Regions/"));
-
-/* 3) Suggester for picking the container note */
-const regionChoices = regionFiles.map(f => f.basename);
-const regionValues  = regionFiles.map(f => f.path);
-const chosenPath   = await tp.system.suggester(regionChoices, regionValues, true);
-if (!chosenPath) return;  // cancelled
-
-/* 4) Build the wiki-link syntax */
-const chosenAlias = chosenPath.split("/").pop().replace(/\.md$/, "");
-const wikiLink    = `[[${chosenPath}|${chosenAlias}]]`;
-
-/* 5) Delay slightly, then write both properties into frontmatter */
-setTimeout(() => {
-  const newFile = tp.file.find_tfile(tp.file.path(true));
-  if (!newFile) return;
-  app.fileManager.processFrontMatter(newFile, fm => {
-    fm["MyContainer"] = wikiLink;
-  });
-}, 50);
+`;
 %>
 
 
@@ -72,7 +67,7 @@ setTimeout(() => {
 
 > [!column|no-i no-t]
 >> [!note|no-title]
->> ![[Pasted image 20250427093629.png]]
+>> ![[Template_Group_Placeholder.png]]
 >
 >> [!note|div-m] Place Name
 >> ~~~meta-bind
@@ -100,16 +95,20 @@ setTimeout(() => {
 > ~~~meta-bind
 > INPUT[select(
 > option(1, 🔗Hierarchy),
-> option(2, ⚡Enemies/Allies),
-> option(3, 🛠️Services),
-> option(4,➕Membership),
-> option(5, 🛡️Ranks),
+> option(2, 🔗People),
+> option(3, ⚡Enemies/Allies),
+> option(4, 🛠️Services),
+> option(5,➕Membership),
+> option(6, 🛡️Ranks),
 > class(tabbed)
 > )]
 > ~~~
-> >[!tabbed-box-maxh]
+> >[!tabbed-box]
 > > >[!div-m|no-title]
 > > > ![[#Hierarchy|no-h clean]]
+> >
+> > > [!div-m|no-title]
+> > > ![[#People|no-h clean]]
 > >
 > > > [!div-m|no-title]
 > > > ![[#Enemies/Allies|no-h clean]]
@@ -130,8 +129,10 @@ setTimeout(() => {
 # General
 
 **Select Parent:** `INPUT[suggester(optionQuery(#Category/Hub),optionQuery(#Category/Region)):MyContainer]`
+%% DISPLAYS NOTES THAT MATCH THE TAGS ABOVE %% 
 
-**Select Category:** `INPUT[inlineSelect(option(Knightly Order), option(Religious Order), option(Magic Academy), option(Artisan Guild), option(Merchant Consortium), option(Criminal Syndicate), option(Mercenary Company), option(Noble House), option(Secret Society or Cult), option(Adventurers’ Guild)):MyCategory]`
+**Select Category:** `INPUT[template-group-type][:MyCategory]`
+%% DISPLAYS NOTES THAT MATCH THE TAGS ABOVE %% 
 
 **Values:** The syndicate values skill and ambition, but also discretion and loyalty.
 
@@ -208,6 +209,7 @@ dv.paragraph(
   "```"
 )
 ```
+%% CODE ABOVE CREATED WITH CHAT-GPT. ITS COMPLEX CODE THAT SHOULD NOT BE CHANGED UNLESS YOU KNOW WHAT YOU ARE DOING %%
 
 > [!NOTE]- Relationship Config - Enter name of People Notes
 > | Leader    | Officers    | 
@@ -220,78 +222,60 @@ dv.paragraph(
 
 # Enemies/Allies
 **Enemies:** `INPUT[inlineListSuggester(optionQuery(#Category/Group),optionQuery(#Category/People)):MyEnemies]`
+%% DISPLAYS NOTES THAT MATCH THE TAGS ABOVE %% 
 
 **Allies:** `INPUT[inlineListSuggester(optionQuery(#Category/Group),optionQuery(#Category/People)):MyAllies]`
+%% DISPLAYS NOTES THAT MATCH THE TAGS ABOVE %% 
 
 # People
 
 The following people are members of this group.  
 
-```dataview
-TABLE WITHOUT ID link(file.name) AS "Name", char_race AS "Race", char_gender AS "Gender"
-FROM "2-Campaign/Quests"
-WHERE contains(Connected_Groups, this.file.link)
-SORT file.name ASC
-```
-
-
 ```base
 properties:
-  property.char_age:
-    displayName: Age
-  property.char_gender:
-    displayName: Gender
-  property.char_race:
-    displayName: Race
-  property.char_status:
-    displayName: Status
   file.name:
-    displayName: Name
-  note.char_status:
-    displayName: Status
+    displayName: Star Systems Name
+  note.MyCategory:
+    displayName: Type of Star System
   note.char_race:
     displayName: Race
   note.char_gender:
     displayName: Gender
   note.char_age:
-    displayName: Age Range
+    displayName: Age
 views:
-  - type: table
-    name: People
+  - type: cards
+    name: Group Members - Cards
     filters:
       and:
-        - file.inFolder("2-World/People")
-        - MyContainer.contains(this.file.path)
+        - file.folder == "2-World/People"
+        - list(Connected_Groups).contains(this)
     order:
       - file.name
-      - MyContainer
-      - MyCategory
-      - char_status
-      - char_race
-      - char_gender
       - char_age
+      - char_gender
+      - char_race
+    image: note.image
+  - type: table
+    name: Group Members - Table
+    filters:
+      and:
+        - file.folder == "2-World/People"
+        - list(Connected_Groups).contains(this)
+    order:
+      - file.name
     sort:
-      - column: note.char_race
-        direction: ASC
-      - column: note.MyContainer
-        direction: ASC
-      - column: file.name
-        direction: ASC
+      - property: file.name
+        direction: DESC
     columnSize:
-      file.name: 177
-      note.MyCategory: 221
-      note.MyContainer: 244
-      note.char_status: 137
-      note.char_race: 160
-      note.char_gender: 143
-      note.char_age: 149
+      file.name: 182
 
 ```
 
 
 # Services
 
-Services offered. 
+`BUTTON[button_item]`  Services offered. 
 
 
 > [!NOTE]+ Public Services

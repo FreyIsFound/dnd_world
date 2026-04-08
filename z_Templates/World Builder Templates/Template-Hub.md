@@ -1,82 +1,65 @@
----
-tags:
-  - Category/Hub
-container: Test
-MyContainer: "[[Jungle of Screams|Jungle of Screams]]"
-MyCategory: Hamlet <80
-obsidianUIMode: preview
----
 <%*
-/* 1) “NewHub” title logic */
-const hasTitle = !tp.file.title.startsWith("NewHub");
-let title;
-if (!hasTitle) {
-  title = await tp.system.prompt("Enter Hub Name");
-  await tp.file.rename(title);
-} else {
-  title = tp.file.title;
+const modalForm = app.plugins.plugins.modalforms?.api;
+if (!modalForm) {
+  new Notice("Modal Forms plugin is not enabled.");
+  return;
 }
 
-/* 2) Gather all region files under 2-World/Regions */
-const regionFiles = tp.app.vault.getMarkdownFiles()
-  .filter(f => f.path.startsWith("2-World/Regions/"));
+const result = await modalForm.openForm("New-Hub");
+if (!result || result.status !== "ok") return;
 
-/* 3) Suggester for picking the container note */
-const regionChoices = regionFiles.map(f => f.basename);
-const regionValues  = regionFiles.map(f => f.path);
-const chosenPath   = await tp.system.suggester(regionChoices, regionValues, true);
-if (!chosenPath) return;  // cancelled
+const data = result.getData();
 
-/* 4) Build the wiki-link syntax */
-const chosenAlias = chosenPath.split("/").pop().replace(/\.md$/, "");
-const wikiLink    = `[[${chosenPath}|${chosenAlias}]]`;
+const hubName = String(data["SelectHubName"] ?? "").trim();
+const regionName = String(data["SelectRegion"] ?? "").trim();
+const category = String(data["SelectCategory"] ?? "").trim();
 
-/* 5) Prompt for Hub type (MyCategory) */
-const categoryOptions = [
-  "City +1500",
-  "Town +200",
-  "Village +80",
-  "Hamlet <80",
-  "Encampment",
-  "Keep",
-  "Fortress",
-  "Stronghold"
-];
-const chosenCat = await tp.system.suggester(categoryOptions, categoryOptions, true);
-if (!chosenCat) return;  // cancelled
+// Rename note
+if (hubName) {
+  await tp.file.rename(hubName);
+}
 
-/* 6) Delay slightly, then write both properties into frontmatter */
-setTimeout(() => {
-  const newFile = tp.file.find_tfile(tp.file.path(true));
-  if (!newFile) return;
-  app.fileManager.processFrontMatter(newFile, fm => {
-    fm["MyContainer"] = wikiLink;
-    fm["MyCategory"]  = chosenCat;
-  });
-}, 50);
+// Build MyContainer link
+let myContainerValue = "None";
+if (regionName) {
+  myContainerValue = `[[2-World/Regions/${regionName}|${regionName}]]`;
+}
+
+// Write frontmatter
+tR = `---
+tags:
+  - Category/Hub
+MyContainer: "${myContainerValue}"
+MyCategory: "${category}"
+obsidianUIMode: preview
+image: "Zelkor's Ferry.png"
+---
+`;
 %>
-
-
-> [!NOTE|div-m] Parent Region: `INPUT[suggester(optionQuery(#Category/Region)):MyContainer]`
+> [!NOTE|div-m] Parent Region: `INPUT[inlineListSuggester(optionQuery(#Category/Region)):MyContainer]`
+%% DISPLAYS NOTES THAT MATCH THE TAGS ABOVE %% 
 
 > [!column|no-i no-t]
 >> [!info|no-title] Map
->> ```leaflet  
->> id: ZalkorsFerry ### Must be unique with no spaces  
->> image: [[Zelkor's Ferry.png]] ### Link to the map image file. Do not add a ! in front of the image  
->> bounds: [[0,0], [5000, 4025]] ### Size of the map in px Height_y, Width_x. Ignore 0,0  
->> height: 500px ### Size of the leaflet embed in px on your screen  
->> width: 95% ### Size of the leaflet embed in your note  
->> lat: 2500 ### To center the map, make this half of the map height.  
->> long: 2012.5 ### To center the map, make this half of the map width.  
->> minZoom: -3 ### Controls how far away from the map you can zoom out. Hover over the target icon to see the current level.  
->> maxZoom: 1 ### Controls how far towards the map you can zoom in. Hover over the target icon to see the current level.  
->> defaultZoom: -3 ### Sets the default zoom level when the map loads. Hover over the target icon to see the current level.  
->> zoomDelta: 0.5 ### Adjust how much the zoom changes when you zoom in or out.  
->> unit: mi ### The value displayed when measuring so you know what type of unit is being measure.  
->> scale: 0.09328358208955223 ### Real units/px (resolution) of your map  
->> recenter: false  
->> darkmode: false ### marker
+>> ```zoommap
+>> imageBases:
+>>   - path: z_Assets/Zelkor's Ferry.png
+>> markers: z_Assets/Zelkor's Ferry.markers.json
+>> markerLayers:
+>>   - Default
+>> minZoom: 0.00005
+>> maxZoom: 8
+>> wrap: false
+>> responsive: false
+>> height: 476px
+>> resizable: false
+>> resizeHandle: native
+>> render: dom
+>> id: map-mkx4rs29
+>> view:
+>>   zoom: 0.0952
+>>   centerX: 0.499765
+>>   centerY: 0.5
 >> ```
 >
 >> [!note|no-title] Town Name
@@ -116,7 +99,7 @@ setTimeout(() => {
 > class(tabbed)
 > )]
 > ~~~
-> >[!tabbed-box-maxh]
+> >[!tabbed-box]
 > > >[!div-m|no-title]
 > > > ![[#Commerce|no-h clean]]
 > >
@@ -142,8 +125,10 @@ setTimeout(() => {
 # General
 
 Select Settlement: `INPUT[suggester(optionQuery(#Category/Region)):MyContainer]`
+%% DISPLAYS NOTES THAT MATCH THE TAGS ABOVE %% 
 
-Select Category: `INPUT[inlineSelect(option(City +1500), option(Town +200), option(Village +80), option(Hamlet <80), option(Encampment), option(Keep), option(Fortress), option(Stronghold)):MyCategory]`
+Select Category: `INPUT[template-hub-category][:MyCategory]`
+%% MODIFY OPTIONS IN SETTINGS > COMMUNITY PLUGINS > META-BIND > EDIT TEMPLATES > template-hub-category %%
 
 This is the town description. 
 
@@ -151,73 +136,50 @@ This is the town description.
 
 `BUTTON[button_person]` List important NPCs here. 
 
-```dataviewjs
-// 1) Hub’s vault-relative path
-const hubPath = dv.current().file.path;
+```base
+filters:
+  and:
+    - file.inFolder("2-World/People")
+formulas:
+  LinkedViaPlace: |
+    list(MyContainer)                                          
+      .filter( file(value)                                     
+               && list(file(value).properties.MyContainer)     
+                    .contains(this) )                          
+      .length > 0
+  PlacesForThis: |
+    list(MyContainer)
+      .filter( file(value)
+               && list(file(value).properties.MyContainer).contains(this) )
+      .map( link(value, file(value).name) )
+properties:
+  file.name:
+    displayName: Person
+  PlacesForThis:
+    displayName: Places (for this note)
+  note.char_race:
+    displayName: Race
+  note.char_gender:
+    displayName: Gender
+  note.char_age:
+    displayName: Age
+views:
+  - type: cards
+    name: People linked via Places → this note
+    filters:
+      or:
+        - formula.LinkedViaPlace
+        - list(MyContainer).contains(this)
+    order:
+      - file.name
+      - char_age
+      - char_gender
+      - char_race
+    image: note.image
+    cardSize: 100
+  - type: table
+    name: View
 
-// 2) Helper to extract the path from a "[[path|alias]]" entry
-function extractPaths(mc) {
-  if (!mc) return [];
-  const arr = Array.isArray(mc) ? mc : [mc];
-  return arr
-    .map(link => {
-      const m = String(link).match(/\[\[(.*?)\|/);
-      return m ? m[1] : null;
-    })
-    .filter(Boolean);
-}
-
-// 3) Find all Places whose MyContainer points to this Hub
-const placePages = dv.pages(`"2-World/Places"`)
-  .where(p => extractPaths(p.MyContainer).includes(hubPath))
-  .values;
-// collect their **paths**
-const placePaths = placePages.map(p => p.file.path);
-
-// 4a) Indirect People: whose MyContainer links to any of those placePaths
-const indirect = dv.pages(`"2-World/People"`)
-  .where(p => {
-    const paths = extractPaths(p.MyContainer);
-    return paths.some(path => placePaths.includes(path));
-  })
-  .values;
-
-// 4b) Direct People: whose MyContainer links **directly** to this Hub
-const direct = dv.pages(`"2-World/People"`)
-  .where(p => extractPaths(p.MyContainer).includes(hubPath))
-  .values;
-
-// 5) Merge & dedupe by file path
-const allPeople = [...indirect, ...direct];
-const unique = Array.from(
-  new Map(allPeople.map(p => [p.file.path, p])).values()
-);
-
-// 6) Build rows (Name clickable, Race, Gender, Associated Group)
-const rows = unique.map(p => {
-  const linkEl = dv.el("a", p.file.name, {
-    href: "#",
-    cls: "dataview-link",
-  });
-  linkEl.addEventListener("click", e => {
-    e.preventDefault();
-    app.workspace.openLinkText(p.file.path, dv.current().file.path);
-  });
-
-  const race = p.char_race ?? "";
-  const gender = p.char_gender ?? "";
-  let groups = p.Connected_Groups ?? [];
-  if (!Array.isArray(groups)) groups = [groups];
-  const assoc = groups.join(", ");
-
-  return [linkEl, race, gender, assoc];
-});
-
-// 7) Render the table
-dv.table(
-  ["Name", "Race", "Gender", "Associated Group"],
-  rows
-);
 ```
 
 # GM Notes
@@ -248,89 +210,285 @@ G - Government (Legislation and Judicial) - Town Halls, Courthouses, Tourist Sto
 
 ## Commerce
 
-This is the content
-
 `BUTTON[button_place]` `BUTTON[button_person]` **C - Commerce** (Economics and Entertainment) - Shops, Malls, Theatres, Markets, Carnivals, Electronics
 
-```dataview
-TABLE WITHOUT ID link(file.name) AS "Place(s)", MyCategory AS "Type"
-FROM "2-World/Places"
-WHERE contains(MyContainer, this.file.link)
-  AND MyCategory = "Commerce"
-SORT file.name ASC
+```base
+properties:
+  file.name:
+    displayName: Places Name
+  note.MyCategory:
+    displayName: Type of Place
+views:
+  - type: cards
+    name: Region - Cards
+    filters:
+      and:
+        - file.folder == "2-World/Places"
+        - list(MyContainer).contains(this)
+        - MyCategory == "Commerce"
+    order:
+      - file.name
+      - MyCategory
+    image: note.image
+  - type: table
+    name: Region - Table
+    filters:
+      and:
+        - file.folder == "2-World/Places"
+        - list(MyContainer).contains(this)
+        - MyCategory == "Commerce"
+    order:
+      - file.name
+      - MyContainer
+    sort:
+      - property: file.name
+        direction: ASC
+    columnSize:
+      file.name: 182
+
 ```
+
 
 ## Agriculture
 
 `BUTTON[button_place]` `BUTTON[button_person]` **A - Agriculture** (Resource Production and Collection) - Farms, Mines, Fisheries, Lumber Yards, Oil Rigs, Power Plants
 
-```dataview
-TABLE WITHOUT ID link(file.name) AS "Place(s)", MyCategory AS "Type"
-FROM "2-World/Places"
-WHERE contains(MyContainer, this.file.link)
-  AND MyCategory = "Agriculture"
-SORT file.name ASC
+```base
+properties:
+  file.name:
+    displayName: Places Name
+  note.MyCategory:
+    displayName: Type of Place
+views:
+  - type: cards
+    name: Region - Cards
+    filters:
+      and:
+        - file.folder == "2-World/Places"
+        - list(MyContainer).contains(this)
+        - MyCategory == "Agriculture"
+    order:
+      - file.name
+      - MyCategory
+    image: note.image
+  - type: table
+    name: Region - Table
+    filters:
+      and:
+        - file.folder == "2-World/Places"
+        - list(MyContainer).contains(this)
+        - MyCategory == "Agriculture"
+    order:
+      - file.name
+      - MyContainer
+    sort:
+      - property: file.name
+        direction: ASC
+    columnSize:
+      file.name: 182
+
 ```
 
 ## Military
 
 `BUTTON[button_place]` `BUTTON[button_person]` **M - Military** (Protection and Transportation) - Forts, Bases, Armories, Walls, Seaports, Airports, Spaceports
 
-```dataview
-TABLE WITHOUT ID link(file.name) AS "Place(s)", MyCategory AS "Type"
-FROM "2-World/Places"
-WHERE contains(MyContainer, this.file.link)
-  AND MyCategory = "Military"
-SORT file.name ASC
-```
+```base
+properties:
+  file.name:
+    displayName: Places Name
+  note.MyCategory:
+    displayName: Type of Place
+views:
+  - type: cards
+    name: Region - Cards
+    filters:
+      and:
+        - file.folder == "2-World/Places"
+        - list(MyContainer).contains(this)
+        - MyCategory == "Military"
+    order:
+      - file.name
+      - MyCategory
+    image: note.image
+  - type: table
+    name: Region - Table
+    filters:
+      and:
+        - file.folder == "2-World/Places"
+        - list(MyContainer).contains(this)
+        - MyCategory == "Military"
+    order:
+      - file.name
+      - MyContainer
+    sort:
+      - property: file.name
+        direction: ASC
+    columnSize:
+      file.name: 182
 
+```
 
 ## Philosophy
 
 `BUTTON[button_place]` `BUTTON[button_person]` **P - Philosophy** (Religion and Education) - Houses of Worship, Schools, Universities, Laboratories, Arboretums
 
-```dataview
-TABLE WITHOUT ID link(file.name) AS "Place(s)", MyCategory AS "Type"
-FROM "2-World/Places"
-WHERE contains(MyContainer, this.file.link)
-  AND MyCategory = "Philosophy"
-SORT file.name ASC
+```base
+properties:
+  file.name:
+    displayName: Places Name
+  note.MyCategory:
+    displayName: Type of Place
+views:
+  - type: cards
+    name: Region - Cards
+    filters:
+      and:
+        - file.folder == "2-World/Places"
+        - list(MyContainer).contains(this)
+        - MyCategory == "Philosophy"
+    order:
+      - file.name
+      - MyCategory
+    image: note.image
+  - type: table
+    name: Region - Table
+    filters:
+      and:
+        - file.folder == "2-World/Places"
+        - list(MyContainer).contains(this)
+        - MyCategory == "Philosophy"
+    order:
+      - file.name
+      - MyContainer
+    sort:
+      - property: file.name
+        direction: ASC
+    columnSize:
+      file.name: 182
+
 ```
 
 ## Industrial
 
 `BUTTON[button_place]` `BUTTON[button_person]` **I - Industrial** (Resource Utilization and Processing) - Factories, Metalworks, Bakeries, Artisans, Jewelers
 
-```dataview
-TABLE WITHOUT ID link(file.name) AS "Place(s)", MyCategory AS "Type"
-FROM "2-World/Places"
-WHERE contains(MyContainer, this.file.link)
-  AND MyCategory = "Industrial"
-SORT file.name ASC
+```base
+properties:
+  file.name:
+    displayName: Places Name
+  note.MyCategory:
+    displayName: Type of Place
+views:
+  - type: cards
+    name: Region - Cards
+    filters:
+      and:
+        - file.folder == "2-World/Places"
+        - list(MyContainer).contains(this)
+        - MyCategory == "Industrial"
+    order:
+      - file.name
+      - MyCategory
+    image: note.image
+  - type: table
+    name: Region - Table
+    filters:
+      and:
+        - file.folder == "2-World/Places"
+        - list(MyContainer).contains(this)
+        - MyCategory == "Industrial"
+    order:
+      - file.name
+      - MyContainer
+    sort:
+      - property: file.name
+        direction: ASC
+    columnSize:
+      file.name: 182
+
 ```
 
 ## Nesting
 
 `BUTTON[button_place]` `BUTTON[button_person]` **N - Nesting** (Housing and Civil Engineering) - Residential Areas, Bridges, Parks, Inns/Hotels
 
-```dataview
-TABLE WITHOUT ID link(file.name) AS "Place(s)", MyCategory AS "Type"
-FROM "2-World/Places"
-WHERE contains(MyContainer, this.file.link)
-  AND MyCategory = "Nesting"
-SORT file.name ASC
+```base
+properties:
+  file.name:
+    displayName: Places Name
+  note.MyCategory:
+    displayName: Type of Place
+views:
+  - type: cards
+    name: Region - Cards
+    filters:
+      and:
+        - file.folder == "2-World/Places"
+        - list(MyContainer).contains(this)
+        - MyCategory == "Nesting"
+    order:
+      - file.name
+      - MyCategory
+    image: note.image
+  - type: table
+    name: Region - Table
+    filters:
+      and:
+        - file.folder == "2-World/Places"
+        - list(MyContainer).contains(this)
+        - MyCategory == "Nesting"
+    order:
+      - file.name
+      - MyContainer
+    sort:
+      - property: file.name
+        direction: ASC
+    columnSize:
+      file.name: 182
+
 ```
 
 ## Government
 
 `BUTTON[button_place]` `BUTTON[button_person]` **G - Government** (Legislation and Judicial) - Town Halls, Courthouses, Tourist Stops, Monuments/Landmarks
 
-```dataview
-TABLE WITHOUT ID link(file.name) AS "Place(s)", MyCategory AS "Type"
-FROM "2-World/Places"
-WHERE contains(MyContainer, this.file.link)
-  AND MyCategory = "Government"
-SORT file.name ASC
+```base
+properties:
+  file.name:
+    displayName: Places Name
+  note.MyCategory:
+    displayName: Type of Place
+views:
+  - type: cards
+    name: Region - Cards
+    filters:
+      and:
+        - file.folder == "2-World/Places"
+        - list(MyContainer).contains(this)
+        - MyCategory == "Government"
+    order:
+      - file.name
+      - MyCategory
+    image: note.image
+  - type: table
+    name: Region - Table
+    filters:
+      and:
+        - file.folder == "2-World/Places"
+        - list(MyContainer).contains(this)
+        - MyCategory == "Government"
+    order:
+      - file.name
+      - MyContainer
+    sort:
+      - property: file.name
+        direction: ASC
+    columnSize:
+      file.name: 182
+
 ```
+
+
 
 
