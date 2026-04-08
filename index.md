@@ -1,6 +1,8 @@
 ---
-title: Welcome to Quartz
+title: Welcome to Aisling wiki
 ---
 
-This is a blank Quartz installation.
-See the [documentation](https://quartz.jzhao.xyz) for how to get started.
+Use the navigation on the side to see lore.
+
+This is a work in progress very much in the early stages
+
