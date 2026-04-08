@@ -32,8 +32,8 @@ const defaultOptions: Options = {
 
     // Rename the players folder so it feels like the root of the public wiki
     if (
-      slug === "Campaign/players" ||
-      slug.endsWith("/Campaign/players") ||
+      slug === "Adventure Campaign/players" ||
+      slug.endsWith("/Adventure Campaign/players") ||
       displayName === "players"
     ) {
       node.displayName = "Aisling Wiki"
@@ -64,7 +64,7 @@ const defaultOptions: Options = {
 
     // Hide obvious non-public folders
     if (
-      slug.startsWith("Campaign/gm") ||
+      slug.startsWith("Adventure Campaign/gm") ||
       slug.startsWith("Tutorial") ||
       slug.startsWith(".quartz") ||
       slug.startsWith(".obsidian") ||
@@ -78,9 +78,9 @@ const defaultOptions: Options = {
     return (
       slug === "" ||
       slug === "index" ||
-      slug === "Campaign" ||
-      slug === "Campaign/players" ||
-      slug.startsWith("Campaign/players/")
+      slug === "Adventure Campaign" ||
+      slug === "Adventure Campaign/players" ||
+      slug.startsWith("Adventure Campaign/players/")
     )
   },
   order: ["filter", "map", "sort"],
