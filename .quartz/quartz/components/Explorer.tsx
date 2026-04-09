@@ -23,26 +23,17 @@ export interface Options {
 }
 
 const defaultOptions: Options = {
-  folderDefaultState: "open",
+  folderDefaultState: "collapsed",
   folderClickBehavior: "link",
   useSavedState: true,
   mapFn: (node) => {
-    const slug = node.slug ?? ""
-    const displayName = node.displayName?.toLowerCase?.() ?? ""
-
-    // Rename the players folder so it feels like the root of the public wiki
-    if (
-      slug === "Adventure Campaign/Players" ||
-      slug.endsWith("/Adventure Campaign/Players") ||
-      displayName === "Players"
-    ) {
-      node.displayName = "Aisling Wiki"
-    }
-
     return node
   },
   sortFn: (a, b) => {
+    // Sort order: folders first, then files. Sort folders and files alphabeticall
     if ((!a.isFolder && !b.isFolder) || (a.isFolder && b.isFolder)) {
+      // numeric: true: Whether numeric collation should be used, such that "1" < "2" < "10"
+      // sensitivity: "base": Only strings that differ in base letters compare as unequal. Examples: a ≠ b, a = á, a = A
       return a.displayName.localeCompare(b.displayName, undefined, {
         numeric: true,
         sensitivity: "base",
@@ -55,34 +46,7 @@ const defaultOptions: Options = {
       return -1
     }
   },
-  filterFn: (node) => {
-    const slug = node.slug ?? ""
-    const segment = node.slugSegment ?? ""
-
-    // Always hide tags
-    if (segment === "tags") return false
-
-    // Hide obvious non-public folders
-    if (
-      slug.startsWith("Adventure Campaign/gm") ||
-      slug.startsWith("Tutorial") ||
-      slug.startsWith(".quartz") ||
-      slug.startsWith(".obsidian") ||
-      slug.startsWith("z_Templates") ||
-      slug.startsWith("z_Assets")
-    ) {
-      return false
-    }
-
-    // Allow root, Campaign, players, and everything inside players
-    return (
-      slug === "" ||
-      slug === "index" ||
-      slug === "Adventure Campaign" ||
-      slug === "Adventure Campaign/Players" ||
-      slug.startsWith("Adventure Campaign/Players/")
-    )
-  },
+  filterFn: (node) => node.slugSegment !== "tags",
   order: ["filter", "map", "sort"],
 }
 

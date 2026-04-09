@@ -72,38 +72,38 @@ a:hover {
 
 /* === Breadcrumbs === */
 
-.breadcrumb-container a {
-  color: var(--obs-text-muted);
-}
+// .breadcrumb-container a {
+//   color: var(--obs-text-muted);
+// }
 
-.breadcrumb-container a:hover {
-  color: var(--obs-accent);
-}
+// .breadcrumb-container a:hover {
+//   color: var(--obs-accent);
+// }
 
 /* === Code blocks === */
 
-code,
-pre {
-  font-family: var(--obs-font-mono);
-  border-radius: var(--obs-radius);
-}
+// code,
+// pre {
+//   font-family: var(--obs-font-mono);
+//   border-radius: var(--obs-radius);
+// }
 
 /* === Callouts / blockquotes === */
 
-blockquote {
-  border-left: 3px solid var(--obs-accent);
-  background: color-mix(in srgb, var(--obs-accent) 10%, var(--obs-bg-secondary));
-  padding: 0.75rem 1rem;
-  border-radius: var(--obs-radius);
-}
+// blockquote {
+//   border-left: 3px solid var(--obs-accent);
+//   background: color-mix(in srgb, var(--obs-accent) 10%, var(--obs-bg-secondary));
+//   padding: 0.75rem 1rem;
+//   border-radius: var(--obs-radius);
+// }
 
 /* === Page containers === */
 
-.page-header,
-.page-footer,
-.callout,
-pre {
-  background: var(--obs-bg-secondary);
-  border: 1px solid var(--obs-border);
-  border-radius: var(--obs-radius);
-}
+// .page-header,
+// .page-footer,
+// .callout,
+// pre {
+//   background: var(--obs-bg-secondary);
+//   border: 1px solid var(--obs-border);
+//   border-radius: var(--obs-radius);
+// }

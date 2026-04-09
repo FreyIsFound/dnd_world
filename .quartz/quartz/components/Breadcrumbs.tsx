@@ -11,27 +11,15 @@ type CrumbData = {
 }
 
 interface BreadcrumbOptions {
-  /**
-   * Symbol between crumbs
-   */
   spacerSymbol: string
-  /**
-   * Name of first crumb
-   */
   rootName: string
-  /**
-   * Whether to look up frontmatter title for folders (could cause performance problems with big vaults)
-   */
   resolveFrontmatterTitle: boolean
-  /**
-   * Whether to display the current page in the breadcrumbs.
-   */
   showCurrentPage: boolean
 }
 
 const defaultOptions: BreadcrumbOptions = {
   spacerSymbol: "❯",
-  rootName: "Home",
+  rootName: "Aisling Wiki",
   resolveFrontmatterTitle: true,
   showCurrentPage: true,
 }
@@ -46,6 +34,7 @@ function formatCrumb(displayName: string, baseSlug: FullSlug, currentSlug: Simpl
 
 export default ((opts?: Partial<BreadcrumbOptions>) => {
   const options: BreadcrumbOptions = { ...defaultOptions, ...opts }
+
   const Breadcrumbs: QuartzComponent = ({
     fileData,
     allFiles,
@@ -61,32 +50,51 @@ export default ((opts?: Partial<BreadcrumbOptions>) => {
     }
 
     const allCrumbs: CrumbData[] = pathNodes.map((node, idx) => {
-    const simplifiedSlug = simplifySlug(node.slug)
-    const crumb = formatCrumb(node.displayName, fileData.slug!, simplifiedSlug)
+      const simplifiedSlug = simplifySlug(node.slug)
+      const crumb = formatCrumb(node.displayName, fileData.slug!, simplifiedSlug)
 
-    if (idx === 0) {
-      crumb.displayName = options.rootName
+      if (idx === 0) {
+        crumb.displayName = options.rootName
+      }
+
+      if (idx === pathNodes.length - 1) {
+        crumb.path = ""
+      }
+
+      return crumb
+    })
+
+    const normalizeSlug = (slug: string) => slug.toLowerCase().replace(/\/+$/, "")
+
+    const playersIndex = allCrumbs.findIndex((crumb) => {
+      const slug = normalizeSlug(crumb.slug)
+      return (
+        slug === "adventure-campaign/players" ||
+        slug.endsWith("/players") ||
+        slug === "players"
+      )
+    })
+
+    let crumbs: CrumbData[]
+
+    if (playersIndex >= 0) {
+      const playersAndBelow = allCrumbs.slice(playersIndex + 1)
+
+      crumbs = [
+        {
+          displayName: options.rootName,
+          path: resolveRelative(fileData.slug!, simplifySlug("index")),
+          slug: "index",
+        },
+        ...playersAndBelow,
+      ]
+    } else {
+      crumbs = allCrumbs
     }
 
-    if (idx === pathNodes.length - 1) {
-      crumb.path = ""
+    if (!options.showCurrentPage) {
+      crumbs.pop()
     }
-
-    return crumb
-  })
-
-  const playersIndex = allCrumbs.findIndex((crumb) =>
-    crumb.slug === "Adventure Campaign/Players" ||
-    crumb.slug.endsWith("/Players") ||
-    crumb.slug === "Players"
-  )
-
-  const crumbs =
-    playersIndex >= 0 ? allCrumbs.slice(playersIndex + 1) : allCrumbs
-
-  if (!options.showCurrentPage) {
-    crumbs.pop()
-  }
 
     return (
       <nav class={classNames(displayClass, "breadcrumb-container")} aria-label="breadcrumbs">
@@ -99,7 +107,7 @@ export default ((opts?: Partial<BreadcrumbOptions>) => {
       </nav>
     )
   }
-  Breadcrumbs.css = breadcrumbsStyle
 
+  Breadcrumbs.css = breadcrumbsStyle
   return Breadcrumbs
 }) satisfies QuartzComponentConstructor

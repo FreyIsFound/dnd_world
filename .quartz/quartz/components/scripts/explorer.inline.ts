@@ -209,9 +209,45 @@ async function setupExplorer(currentSlug: FullSlug) {
     const explorerUl = explorer.querySelector(".explorer-ul")
     if (!explorerUl) continue
 
-    // Create and insert new content
+    const normalizeSlug = (slug: string) => slug.toLowerCase().replace(/\/+$/, "")
+
+    function findNodeBySlug(node: FileTrieNode, matcher: (node: FileTrieNode) => boolean): FileTrieNode | null {
+      if (matcher(node)) return node
+
+      for (const child of node.children) {
+        const found = findNodeBySlug(child, matcher)
+        if (found) return found
+      }
+
+      return null
+    }
+
+    let renderRoot = trie
+    const publicRoot = findNodeBySlug(trie, (node) => {
+      const slug = normalizeSlug(node.slug)
+      return (
+        slug === "adventure-campaign/players" ||
+        slug === "adventure-campaign/players/index" ||
+        slug.endsWith("/players") ||
+        slug.endsWith("/players/index") ||
+        slug === "players" ||
+        slug === "players/index"
+      )
+    })
+
+    if (publicRoot) {
+      renderRoot = publicRoot
+    }
+    console.log("Explorer render root:", renderRoot.slug, renderRoot.displayName)
+console.log("Explorer children:", renderRoot.children.map((c) => [c.slug, c.displayName]))
+
+    const oldItems = explorerUl.querySelectorAll(":scope > li:not(.overflow-end)")
+    for (const item of oldItems) {
+      item.remove()
+    }
+    // Create and insert new content from the effective root
     const fragment = document.createDocumentFragment()
-    for (const child of trie.children) {
+    for (const child of renderRoot.children) {
       const node = child.isFolder
         ? createFolderNode(currentSlug, child, opts)
         : createFileNode(currentSlug, child)

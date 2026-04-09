@@ -69,6 +69,22 @@ function sluggify(s: string): string {
     .replace(/\/$/, "")
 }
 
+function stripPublicPrefix(slug: string): string {
+  const normalized = slug.toLowerCase()
+  const prefixes = [
+    "adventure-campaign/players/",
+    "adventure-campaign/players",
+  ]
+
+  for (const prefix of prefixes) {
+    if (normalized.startsWith(prefix)) {
+      return slug.slice(prefix.length).replace(/^\/+/, "")
+    }
+  }
+
+  return slug
+}
+
 export function slugifyFilePath(fp: FilePath, excludeExt?: boolean): FullSlug {
   fp = stripSlashes(fp) as FilePath
   let ext = getFileExtension(fp)
@@ -78,6 +94,9 @@ export function slugifyFilePath(fp: FilePath, excludeExt?: boolean): FullSlug {
   }
 
   let slug = sluggify(withoutFileExt)
+
+  // strip the public vault prefix from canonical URLs
+  slug = stripPublicPrefix(slug)
 
   // treat _index as index
   if (endsWith(slug, "_index")) {
