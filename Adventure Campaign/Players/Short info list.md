@@ -1,6 +1,3 @@
----
-permalink: /short-info-list
----
 Here is a short list of relevant information to use as inspiration with character creation.
 Later there will be links to full information pages for them.
 

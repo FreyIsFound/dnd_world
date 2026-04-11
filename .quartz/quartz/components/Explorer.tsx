@@ -30,6 +30,16 @@ const defaultOptions: Options = {
     return node
   },
   sortFn: (a, b) => {
+
+    const aName = a.displayName.toLowerCase()
+    const bName = b.displayName.toLowerCase()
+
+    const aIsPinned = aName === "short info list"
+    const bIsPinned = bName === "short info list"
+
+    if (aIsPinned && !bIsPinned) return -1
+    if (bIsPinned && !aIsPinned) return 1
+
     // Sort order: folders first, then files. Sort folders and files alphabeticall
     if ((!a.isFolder && !b.isFolder) || (a.isFolder && b.isFolder)) {
       // numeric: true: Whether numeric collation should be used, such that "1" < "2" < "10"
