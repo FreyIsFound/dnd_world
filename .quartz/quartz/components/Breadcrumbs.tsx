@@ -49,6 +49,11 @@ export default ((opts?: Partial<BreadcrumbOptions>) => {
       return null
     }
 
+    const normalizeSlug = (slug: string) => slug.toLowerCase().replace(/\/+$/, "")
+
+    const existingSlugs = new Set(allFiles.map((f) => normalizeSlug(simplifySlug(f.slug!))))
+    const hasPage = (slug: string) => existingSlugs.has(normalizeSlug(slug))
+
     const allCrumbs: CrumbData[] = pathNodes.map((node, idx) => {
       const simplifiedSlug = simplifySlug(node.slug)
       const crumb = formatCrumb(node.displayName, fileData.slug!, simplifiedSlug)
@@ -63,8 +68,6 @@ export default ((opts?: Partial<BreadcrumbOptions>) => {
 
       return crumb
     })
-
-    const normalizeSlug = (slug: string) => slug.toLowerCase().replace(/\/+$/, "")
 
     const playersIndex = allCrumbs.findIndex((crumb) => {
       const slug = normalizeSlug(crumb.slug)
@@ -98,12 +101,20 @@ export default ((opts?: Partial<BreadcrumbOptions>) => {
 
     return (
       <nav class={classNames(displayClass, "breadcrumb-container")} aria-label="breadcrumbs">
-        {crumbs.map((crumb, index) => (
-          <div class="breadcrumb-element">
-            <a href={crumb.path}>{crumb.displayName}</a>
-            {index !== crumbs.length - 1 && <p>{` ${options.spacerSymbol} `}</p>}
-          </div>
-        ))}
+        {crumbs.map((crumb, index) => {
+          const clickable = Boolean(crumb.path) && hasPage(crumb.slug)
+
+          return (
+            <div class="breadcrumb-element">
+              {clickable ? (
+                <a href={crumb.path}>{crumb.displayName}</a>
+              ) : (
+                <span>{crumb.displayName}</span>
+              )}
+              {index !== crumbs.length - 1 && <p>{` ${options.spacerSymbol} `}</p>}
+            </div>
+          )
+        })}
       </nav>
     )
   }

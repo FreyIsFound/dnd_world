@@ -55,4 +55,5 @@ export default ((opts?: Partial<ContentMetaOptions>) => {
   ContentMetadata.css = style
 
   return ContentMetadata
+  // return null
 }) satisfies QuartzComponentConstructor

@@ -1,7 +1,7 @@
 Here is a short list of relevant information to use as inspiration with character creation.
 Later there will be links to full information pages for them.
 
-# Deity System
+## Deity System
 
 In this world there are different types of deities with different rules and limitations
 
@@ -28,7 +28,7 @@ These are normal inhabitants of the material realm that have achieved the status
 This can be through many different means. From grand achievements, powerful rituals or achieving a pinnacle of influence in one way or the other.
 Examples are: the founders of the adventurer guild, the heroes that helped shape the realm and the king of nothing.
 
-# The Sun and Moon
+## The Sun and Moon
 
 The sun and moon are a strange  case of deities where not much is known what type they originally where
 They are twin deities that reside in different realms
@@ -37,7 +37,7 @@ The sun on the other hand resides in the realm of devils that is a fiery place t
 The connection between the 2 entities creates a portal that allows the sun to bring light to this realm at the cost of devils being able to enter when the power of the twins is strongest.
 As the seasons progress the power of the 2 fluctuates and the portal becomes weaker and stronger which influences how much sunlight the world receives.
 
-# Important notes
+## Important notes
 
 ### Death and their contractors
 

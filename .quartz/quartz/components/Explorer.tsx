@@ -31,14 +31,20 @@ const defaultOptions: Options = {
   },
   sortFn: (a, b) => {
 
-    const aName = a.displayName.toLowerCase()
-    const bName = b.displayName.toLowerCase()
+    const aName = a.displayName.toLowerCase().trim()
+    const bName = b.displayName.toLowerCase().trim()
 
-    const aIsPinned = aName === "short info list"
-    const bIsPinned = bName === "short info list"
+    const pinnedOrder = ["aisling calendar", "short info list"]
 
-    if (aIsPinned && !bIsPinned) return -1
-    if (bIsPinned && !aIsPinned) return 1
+    const aPinnedIndex = pinnedOrder.indexOf(aName)
+    const bPinnedIndex = pinnedOrder.indexOf(bName)
+
+    const aIsPinned = aPinnedIndex !== -1
+    const bIsPinned = bPinnedIndex !== -1
+
+    if (aIsPinned && bIsPinned) return aPinnedIndex - bPinnedIndex
+    if (aIsPinned) return -1
+    if (bIsPinned) return 1
 
     // Sort order: folders first, then files. Sort folders and files alphabeticall
     if ((!a.isFolder && !b.isFolder) || (a.isFolder && b.isFolder)) {

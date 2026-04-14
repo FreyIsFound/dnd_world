@@ -1,27 +1,28 @@
 import { QuartzComponent, QuartzComponentConstructor, QuartzComponentProps } from "../types"
 
 import style from "../styles/listPage.scss"
-import { PageList, SortFn } from "../PageList"
 import { Root } from "hast"
 import { htmlToJsx } from "../../util/jsx"
 import { i18n } from "../../i18n"
-import { QuartzPluginData } from "../../plugins/vfile"
 import { ComponentChildren } from "preact"
 import { concatenateResources } from "../../util/resources"
 import { trieFromAllFiles } from "../../util/ctx"
+import { resolveRelative } from "../../util/path"
 
 interface FolderContentOptions {
-  /**
-   * Whether to display number of folders
-   */
   showFolderCount: boolean
   showSubfolders: boolean
-  sort?: SortFn
 }
 
 const defaultOptions: FolderContentOptions = {
   showFolderCount: true,
   showSubfolders: true,
+}
+
+type TreeEntry = {
+  title: string
+  slug?: string
+  children?: TreeEntry[]
 }
 
 export default ((opts?: Partial<FolderContentOptions>) => {
@@ -36,65 +37,84 @@ export default ((opts?: Partial<FolderContentOptions>) => {
       return null
     }
 
-    const allPagesInFolder: QuartzPluginData[] =
-      folder.children
-        .map((node) => {
-          // regular file, proceed
-          if (node.data) {
-            return node.data
+    const buildTree = (node: any): TreeEntry[] => {
+      return node.children.flatMap((child: any) => {
+        // Real page, including folder pages with index.md
+        if (child.data) {
+          const title =
+            child.data.frontmatter?.title ??
+            child.displayName ??
+            child.slug.split("/").at(-1)?.replaceAll("-", " ") ??
+            "Untitled"
+
+          return [
+            {
+              title,
+              slug: child.slug,
+            },
+          ]
+        }
+
+        // Folder without index.md
+        if (child.isFolder && options.showSubfolders) {
+          const nestedChildren = buildTree(child)
+
+          if (nestedChildren.length === 0) {
+            return []
           }
 
-          if (node.isFolder && options.showSubfolders) {
-            // folders that dont have data need synthetic files
-            const getMostRecentDates = (): QuartzPluginData["dates"] => {
-              let maybeDates: QuartzPluginData["dates"] | undefined = undefined
-              for (const child of node.children) {
-                if (child.data?.dates) {
-                  // compare all dates and assign to maybeDates if its more recent or its not set
-                  if (!maybeDates) {
-                    maybeDates = { ...child.data.dates }
-                  } else {
-                    if (child.data.dates.created > maybeDates.created) {
-                      maybeDates.created = child.data.dates.created
-                    }
+          return [
+            {
+              title: child.displayName.replaceAll("-", " "),
+              children: nestedChildren,
+            },
+          ]
+        }
 
-                    if (child.data.dates.modified > maybeDates.modified) {
-                      maybeDates.modified = child.data.dates.modified
-                    }
+        return []
+      })
+    }
 
-                    if (child.data.dates.published > maybeDates.published) {
-                      maybeDates.published = child.data.dates.published
-                    }
-                  }
-                }
-              }
-              return (
-                maybeDates ?? {
-                  created: new Date(),
-                  modified: new Date(),
-                  published: new Date(),
-                }
-              )
-            }
+    const countPages = (entries: TreeEntry[]): number => {
+      return entries.reduce((count, entry) => {
+        if (entry.slug) {
+          return count + 1
+        }
 
-            return {
-              slug: node.slug,
-              dates: getMostRecentDates(),
-              frontmatter: {
-                title: node.displayName,
-                tags: [],
-              },
-            }
-          }
-        })
-        .filter((page) => page !== undefined) ?? []
+        if (entry.children) {
+          return count + countPages(entry.children)
+        }
+
+        return count
+      }, 0)
+    }
+
+    const renderTree = (entries: TreeEntry[]) => {
+      if (entries.length === 0) {
+        return null
+      }
+
+      return (
+        <ul class="folder-tree">
+          {entries.map((entry) => (
+            <li class="folder-tree-item">
+              {entry.slug ? (
+                <a href={resolveRelative(fileData.slug!, entry.slug)}>{entry.title}</a>
+              ) : (
+                <span class="folder-tree-label">{entry.title}</span>
+              )}
+              {entry.children && renderTree(entry.children)}
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    const itemsTree = buildTree(folder)
+    const visiblePageCount = countPages(itemsTree)
+
     const cssClasses: string[] = fileData.frontmatter?.cssclasses ?? []
     const classes = cssClasses.join(" ")
-    const listProps = {
-      ...props,
-      sort: options.sort,
-      allFiles: allPagesInFolder,
-    }
 
     const content = (
       (tree as Root).children.length === 0
@@ -109,18 +129,58 @@ export default ((opts?: Partial<FolderContentOptions>) => {
           {options.showFolderCount && (
             <p>
               {i18n(cfg.locale).pages.folderContent.itemsUnderFolder({
-                count: allPagesInFolder.length,
+                count: visiblePageCount,
               })}
             </p>
           )}
-          <div>
-            <PageList {...listProps} />
-          </div>
+          <div>{renderTree(itemsTree)}</div>
         </div>
       </div>
     )
   }
 
-  FolderContent.css = concatenateResources(style, PageList.css)
+    FolderContent.css = concatenateResources(
+  style,
+  `
+  .folder-tree {
+    list-style-type: disc;
+    padding-left: 1.5rem;
+    margin: 0.5rem 0;
+  }
+
+  .folder-tree .folder-tree {
+    list-style-type: circle;
+    margin-top: 0.2rem;
+  }
+
+  .folder-tree .folder-tree .folder-tree {
+    list-style-type: square;
+  }
+
+  .folder-tree .folder-tree .folder-tree .folder-tree {
+    list-style-type: disc;
+  }
+
+  .folder-tree .folder-tree .folder-tree .folder-tree .folder-tree {
+    list-style-type: circle;
+  }
+
+  .folder-tree-item {
+    margin: 0.2rem 0;
+  }
+
+  .folder-tree-item > a,
+  .folder-tree-item > .folder-tree-label {
+    display: inline-block;
+    margin-bottom: 0.1rem;
+  }
+
+  .folder-tree-label {
+    font-weight: 600;
+    color: var(--gray);
+  }
+  `,
+)
+
   return FolderContent
 }) satisfies QuartzComponentConstructor

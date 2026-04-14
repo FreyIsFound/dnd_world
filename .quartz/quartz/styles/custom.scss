@@ -1,2 +1,496 @@
 @use "./base.scss";
 
+/* =========================
+   ADVENTURE GUILD THEME
+   ========================= */
+
+:root {
+  --guild-font-body: "Literata", "Georgia", "Times New Roman", serif;
+  --guild-font-display: "Marcellus", "Cinzel", "Georgia", serif;
+  --guild-font-ui: "Inter", "Segoe UI", sans-serif;
+
+  --guild-radius: 10px;
+  --guild-border-width: 1px;
+  --guild-shadow-light: 0 2px 10px rgba(60, 40, 10, 0.08);
+  --guild-shadow-dark: 0 3px 14px rgba(0, 0, 0, 0.28);
+}
+
+/* =========================
+   LIGHT MODE
+   ========================= */
+
+:root[saved-theme="light"] {
+  --guild-bg-main: #e7d6ae;
+  --guild-bg-paper: #f4e8c8;
+  --guild-bg-paper-2: #eadbb1;
+  --guild-bg-panel: rgba(248, 238, 211, 0.60);
+  --guild-bg-panel-strong: rgba(248, 238, 211, 0.75);
+
+  --guild-text: #2b2115;
+  --guild-text-soft: #5c4934;
+  --guild-link: #6d3f20;
+  --guild-link-hover: #8d5328;
+
+  --guild-border: #b59561;
+  --guild-rule: #9e7a43;
+
+  --guild-h1: #7f2f22;
+  --guild-h2: #2f5f4d;
+  --guild-h3: #425e8d;
+  --guild-h4: #7b5d22;
+  --guild-h5: #6c4d7b;
+  --guild-h6: #5f5b53;
+
+  --guild-accent: #8a6b31;
+  --guild-accent-2: #39564e;
+  --guild-code-bg: rgba(80, 55, 25, 0.09);
+  --guild-selection: rgba(122, 90, 31, 0.18);
+}
+
+/* =========================
+   DARK MODE
+   ========================= */
+
+:root[saved-theme="dark"] {
+  --guild-bg-main: #17120e;
+  --guild-bg-paper: #241c14;
+  --guild-bg-paper-2: #2d2419;
+  --guild-bg-panel: rgba(27, 20, 15, 0.60);
+  --guild-bg-panel-strong: rgba(27, 20, 15, 0.75);
+
+  --guild-text: #eadfca;
+  --guild-text-soft: #b9aa8f;
+  --guild-link: #d0a35c;
+  --guild-link-hover: #e8c17e;
+
+  --guild-border: #705735;
+  --guild-rule: #8e7145;
+
+  --guild-h1: #cbaba4;
+  --guild-h2: #87c2ab;
+  --guild-h3: #99b1db;
+  --guild-h4: #d8bf7b;
+  --guild-h5: #c8a4d8;
+  --guild-h6: #aaa39a;
+
+  --guild-accent: #c39a55;
+  --guild-accent-2: #6d9487;
+  --guild-code-bg: rgba(255, 231, 192, 0.08);
+  --guild-selection: rgba(209, 164, 90, 0.22);
+}
+
+/* =========================
+   SITE FOUNDATION
+   ========================= */
+
+html,
+body {
+  min-height: 100%;
+  color: var(--guild-text);
+  font-family: var(--guild-font-body);
+  background-color: var(--guild-bg-main);
+}
+
+body {
+  line-height: 1.65;
+  letter-spacing: 0.01em;
+  position: relative;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+@media (max-width: 800px) {
+  body {
+    background-attachment: scroll;
+  }
+}
+
+:root[saved-theme="light"] body {
+  background-image:
+    linear-gradient(to bottom, rgba(255, 248, 231, 0.18), rgba(90, 60, 20, 0.06)),
+    url("/assets/public_assets/backgrounds/light-mode-bg.png");
+}
+
+:root[saved-theme="dark"] body {
+  background-image:
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.40)),
+    url("/assets/public_assets/backgrounds/dark-mode-bg.png");
+}
+
+/* =========================
+   PANELS
+   ========================= */
+
+/* Main readable markdown/content box only */
+article {
+  position: relative;
+  z-index: 1;
+  background-color: var(--guild-bg-panel);
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.015),
+    rgba(0, 0, 0, 0.02)
+  );
+  border: var(--guild-border-width) solid var(--guild-border);
+  border-radius: var(--guild-radius);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+    inset 0 0 18px rgba(90, 60, 20, 0.06),
+    var(--guild-shadow-light);
+  padding: 1.2rem;
+}
+
+/* Left/right utility boxes only */
+.explorer,
+.search,
+.toc {
+  position: relative;
+  z-index: 1;
+  background-color: var(--guild-bg-panel-strong);
+  background-image: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.015),
+    rgba(0, 0, 0, 0.02)
+  );
+  border: var(--guild-border-width) solid var(--guild-border);
+  border-radius: var(--guild-radius);
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.04),
+    inset 0 0 18px rgba(90, 60, 20, 0.06),
+    var(--guild-shadow-light);
+}
+
+/* Dark mode shadow tuning */
+:root[saved-theme="dark"] article,
+:root[saved-theme="dark"] .explorer,
+:root[saved-theme="dark"] .search,
+:root[saved-theme="dark"] .toc {
+  box-shadow:
+    inset 0 0 0 1px rgba(255, 255, 255, 0.02),
+    inset 0 0 22px rgba(255, 216, 140, 0.03),
+    var(--guild-shadow-dark);
+}
+
+/* =========================
+   TYPOGRAPHY
+   ========================= */
+
+body,
+p,
+li,
+td,
+th,
+blockquote {
+  font-family: var(--guild-font-body);
+  color: var(--guild-text);
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.article-title,
+.page-title {
+  font-family: var(--guild-font-display);
+  letter-spacing: 0.03em;
+  line-height: 1.2;
+  font-weight: 700;
+  position: relative;
+  text-rendering: optimizeLegibility;
+}
+
+h1,
+.article-title,
+.page-title {
+  color: var(--guild-h1);
+  font-size: clamp(2rem, 4vw, 2.8rem);
+  padding-bottom: 0.2em;
+  text-align: left;
+  text-wrap: balance;
+  display: inline-block;
+  text-shadow:
+    0.02em 0 rgba(255, 255, 255, 0.05),
+    -0.015em 0 rgba(0, 0, 0, 0.14);
+}
+
+h1::before,
+.article-title::before,
+.page-title::before {
+  content: "";
+  position: absolute;
+  inset: 0.12em 0 0.14em 0;
+  pointer-events: none;
+  opacity: 0.06;
+  mix-blend-mode: multiply;
+  background-image:
+    radial-gradient(rgba(0, 0, 0, 0.12) 0.6px, transparent 0.9px),
+    radial-gradient(rgba(255, 255, 255, 0.06) 0.6px, transparent 0.9px);
+  background-size: 18px 18px, 24px 24px;
+  background-position: 0 0, 7px 9px;
+}
+
+h2 {
+  color: var(--guild-h2);
+  font-size: 1.7rem;
+}
+
+h3 {
+  color: var(--guild-h3);
+  font-size: 1.4rem;
+}
+
+h4 {
+  color: var(--guild-h4);
+  font-size: 1.15rem;
+}
+
+h5 {
+  color: var(--guild-h5);
+  font-size: 1rem;
+}
+
+h6 {
+  color: var(--guild-h6);
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+h1::after,
+.article-title::after,
+.page-title::after {
+  content: "";
+  display: block;
+  width: 5rem;
+  max-width: 40%;
+  margin-top: 0.45rem;
+  border-top: 1px solid var(--guild-rule);
+  opacity: 0.9;
+}
+
+article h2::after {
+  content: "";
+  display: block;
+  width: 5rem;
+  margin-top: 0.4rem;
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--guild-h2),
+    transparent
+  );
+  opacity: 0.7;
+}
+
+.meta,
+.content-meta,
+p.meta,
+time {
+  color: var(--guild-text-soft);
+  font-family: var(--guild-font-ui);
+}
+
+/* =========================
+   LINKS
+   ========================= */
+
+a {
+  color: var(--guild-link);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.14em;
+}
+
+a:hover {
+  color: var(--guild-link-hover);
+}
+
+a.internal {
+  text-decoration-color: color-mix(in srgb, var(--guild-link) 55%, transparent);
+  text-decoration-style: dotted;
+}
+
+/* =========================
+   RULES, BLOCKS, TABLES
+   ========================= */
+
+hr {
+  border: 0;
+  border-top: 1px solid var(--guild-rule);
+  margin: 2rem 0;
+}
+
+blockquote {
+  margin: 1rem 0;
+  padding: 0.9rem 1rem;
+  border-left: 4px solid var(--guild-accent);
+  background: color-mix(in srgb, var(--guild-bg-paper) 72%, transparent);
+  color: var(--guild-text-soft);
+}
+
+code,
+pre {
+  font-family: "Iosevka", "Fira Code", monospace;
+}
+
+code {
+  background: var(--guild-code-bg);
+  padding: 0.12rem 0.35rem;
+  border-radius: 0.3rem;
+}
+
+pre {
+  background: var(--guild-code-bg);
+  border: 1px solid var(--guild-border);
+  border-radius: 8px;
+  padding: 1rem;
+  overflow-x: auto;
+}
+
+/* =========================
+   LISTS
+   ========================= */
+
+article ul,
+article ol {
+  padding-left: 1.5rem;
+}
+
+article ul ul {
+  list-style-type: circle;
+}
+
+article ul ul ul {
+  list-style-type: square;
+}
+
+.folder-tree {
+  list-style-type: disc;
+  padding-left: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+.folder-tree .folder-tree {
+  list-style-type: circle;
+  margin-top: 0.2rem;
+}
+
+.folder-tree .folder-tree .folder-tree {
+  list-style-type: square;
+}
+
+.folder-tree .folder-tree .folder-tree .folder-tree {
+  list-style-type: disc;
+}
+
+.folder-tree .folder-tree .folder-tree .folder-tree .folder-tree {
+  list-style-type: circle;
+}
+
+.folder-tree-item {
+  margin: 0.2rem 0;
+}
+
+.folder-tree-label {
+  font-weight: 700;
+  color: var(--guild-text-soft);
+}
+
+/* =========================
+   PAGE LISTING / FOLDER AREA
+   ========================= */
+
+.page-listing div.section {
+  grid-template-columns: 3fr 1fr;
+
+  p.meta:has(> time) {
+    display: none;
+  }
+}
+
+.folder-link--page.active {
+  font-weight: 700;
+}
+
+.folder-container.folder-no-page .folder-link--virtual {
+  font-style: normal;
+}
+
+.folder-link--page:focus,
+.folder-link--virtual:focus,
+.folder-button:focus,
+a:focus,
+button:focus {
+  outline: 2px solid var(--guild-accent);
+  outline-offset: 2px;
+}
+
+/* =========================
+   EXPLORER / SIDEBAR / SEARCH
+   ========================= */
+
+.explorer *,
+.sidebar * {
+  font-family: var(--guild-font-body);
+}
+
+button,
+input,
+textarea,
+select {
+  font-family: var(--guild-font-ui);
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid var(--guild-border);
+  background: var(--guild-bg-paper-2);
+  color: var(--guild-text);
+}
+
+button:hover {
+  border-color: var(--guild-accent);
+}
+
+.search input {
+  background: var(--guild-bg-paper);
+  border: 1px solid var(--guild-border);
+  color: var(--guild-text);
+  border-radius: 6px;
+  padding: 0.5rem 0.7rem;
+}
+
+.search input::placeholder {
+  color: var(--guild-text-soft);
+}
+
+.search input:focus {
+  outline: 2px solid var(--guild-accent);
+  border-color: var(--guild-accent);
+}
+
+/* =========================
+   CALENDAR
+   ========================= */
+
+.calendar {
+  border-collapse: collapse;
+  width: 100%;
+  background: color-mix(in srgb, var(--guild-bg-paper) 78%, transparent);
+}
+
+.calendar td,
+.calendar th {
+  border: 1px solid var(--guild-border);
+  padding: 6px;
+  text-align: center;
+}
+
+.calendar th {
+  background: color-mix(in srgb, var(--guild-bg-paper-2) 75%, transparent);
+  color: var(--guild-h2);
+}
