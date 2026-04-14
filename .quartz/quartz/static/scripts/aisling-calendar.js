@@ -89,13 +89,14 @@
 
           <p class="aisling-cal__desc">${escapeHtml(month.desc || "")}</p>
 
-          <table class="aisling-cal__table">
-            <thead>
-              <tr>
-                ${days.map((d) => `<th>${escapeHtml(d)}</th>`).join("")}
-              </tr>
-            </thead>
-            <tbody>
+          <div class="aisling-cal__tablewrap">
+            <table class="aisling-cal__table">
+              <thead>
+                <tr>
+                  ${days.map((d) => `<th>${escapeHtml(d)}</th>`).join("")}
+                </tr>
+              </thead>
+              <tbody>
       `
 
       let day = 1
@@ -123,8 +124,9 @@
       }
 
       html += `
-            </tbody>
-          </table>
+              </tbody>
+            </table>
+          </div>
         </div>
       `
 
@@ -147,128 +149,168 @@
   }
 
   function injectStyles() {
-    if (document.getElementById("aisling-calendar-styles")) return
+  if (document.getElementById("aisling-calendar-styles")) return
 
-    const style = document.createElement("style")
-    style.id = "aisling-calendar-styles"
-    style.textContent = `
-      .aisling-cal {
-        margin: 1rem 0;
-        font-size: 0.9rem;
-      }
-
-      .aisling-cal__top {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 0.75rem;
-        margin-bottom: 0.75rem;
-      }
-
-      .aisling-cal__titlewrap {
-        text-align: center;
-        min-width: 10rem;
-      }
-
-      .aisling-cal__title {
-        font-size: 1.1rem;
-        font-weight: 700;
-        line-height: 1.2;
-      }
-
-      .aisling-cal__btn {
-        border: 1px solid rgba(127, 127, 127, 0.35);
-        background: transparent;
-        padding: 0.3rem 0.55rem;
-        border-radius: 0.4rem;
-        cursor: pointer;
-        font-size: 0.9rem;
-        line-height: 1;
-      }
-
-      .aisling-cal__btn:hover {
-        background: rgba(127, 127, 127, 0.08);
-      }
-
-      .aisling-cal__desc {
-        text-align: center;
-        margin: 0 auto 0.9rem;
-        max-width: 62ch;
-        opacity: 0.82;
-        font-size: 0.8rem;
-        line-height: 1.45;
-      }
-
-      .aisling-cal__table {
-        width: 100%;
-        border-collapse: collapse;
-        table-layout: fixed;
-        font-size: 0.82rem;
-      }
-
-      .aisling-cal__table th,
-      .aisling-cal__table td {
-        border: 1px solid rgba(127, 127, 127, 0.22);
-      }
-
-      .aisling-cal__table th {
-        text-align: center;
-        padding: 0.45rem 0.2rem;
-        font-size: 0.72rem;
-        font-weight: 600;
-        opacity: 0.8;
-      }
-
-      .aisling-cal__cell {
-        padding: 0.35rem 0.25rem;
-        height: 3.2rem;
-        vertical-align: top;
-      }
-
-      .aisling-cal__cell--empty {
-        background: rgba(127, 127, 127, 0.03);
-      }
-
-      .aisling-cal__daynum {
-        font-size: 0.78rem;
-        font-weight: 700;
-        margin-bottom: 0.15rem;
-        line-height: 1;
-      }
-
-      .aisling-cal__moon {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 0.2rem;
-      }
-
-      .aisling-cal__moonicon {
-        font-size: 1rem;
-        line-height: 1;
-      }
-
-      @media (max-width: 900px) {
-        .aisling-cal {
-          font-size: 0.82rem;
-        }
-
-        .aisling-cal__table {
-          font-size: 0.74rem;
-        }
-
-        .aisling-cal__cell {
-          height: 2.8rem;
-          padding: 0.28rem 0.18rem;
-        }
-
-        .aisling-cal__moonicon {
-          font-size: 0.9rem;
-        }
-      }
-    `
-    document.head.appendChild(style)
+  const style = document.createElement("style")
+  style.id = "aisling-calendar-styles"
+  style.textContent = `
+  .aisling-cal {
+    margin: 1rem 0;
+    font-size: 0.9rem;
+    max-width: 100%;
   }
+
+  .aisling-cal__top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+    max-width: 100%;
+  }
+
+  .aisling-cal__titlewrap {
+    text-align: center;
+    min-width: 0;
+    flex: 1 1 auto;
+  }
+
+  .aisling-cal__title {
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+  }
+
+  .aisling-cal__btn {
+    border: 1px solid rgba(127, 127, 127, 0.35);
+    background: transparent;
+    padding: 0.3rem 0.55rem;
+    border-radius: 0.4rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    line-height: 1;
+    flex: 0 0 auto;
+  }
+
+  .aisling-cal__btn:hover {
+    background: rgba(127, 127, 127, 0.08);
+  }
+
+  .aisling-cal__desc {
+    text-align: center;
+    margin: 0 auto 0.9rem;
+    max-width: 62ch;
+    opacity: 0.82;
+    font-size: 0.8rem;
+    line-height: 1.45;
+    overflow-wrap: anywhere;
+  }
+
+  .aisling-cal__tablewrap {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .aisling-cal__table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
+    font-size: 0.82rem;
+  }
+
+  .aisling-cal__table th,
+  .aisling-cal__table td {
+    border: 1px solid rgba(127, 127, 127, 0.22);
+  }
+
+  .aisling-cal__table th {
+    text-align: center;
+    padding: 0.45rem 0.2rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    opacity: 0.8;
+  }
+
+  .aisling-cal__cell {
+    padding: 0.35rem 0.25rem;
+    height: 3.2rem;
+    vertical-align: top;
+  }
+
+  .aisling-cal__cell--empty {
+    background: rgba(127, 127, 127, 0.03);
+  }
+
+  .aisling-cal__daynum {
+    font-size: 0.78rem;
+    font-weight: 700;
+    margin-bottom: 0.15rem;
+    line-height: 1;
+  }
+
+  .aisling-cal__moon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0.2rem;
+  }
+
+  .aisling-cal__moonicon {
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  @media (max-width: 900px) {
+    .aisling-cal {
+      font-size: 0.82rem;
+    }
+
+    .aisling-cal__top {
+      gap: 0.4rem;
+    }
+
+    .aisling-cal__title {
+      font-size: 1rem;
+    }
+
+    .aisling-cal__btn {
+      padding: 0.25rem 0.45rem;
+      font-size: 0.82rem;
+    }
+
+    .aisling-cal__tablewrap {
+      display: block;
+      width: 100%;
+      max-width: 100%;
+      overflow-x: auto;
+      overflow-y: hidden;
+      -webkit-overflow-scrolling: touch;
+    }
+
+    .aisling-cal__table {
+      width: max-content;
+      min-width: 26rem;
+      font-size: 0.74rem;
+    }
+
+    .aisling-cal__table th,
+    .aisling-cal__table td {
+      min-width: 3.4rem;
+    }
+
+    .aisling-cal__cell {
+      height: 2.8rem;
+      padding: 0.28rem 0.18rem;
+    }
+
+    .aisling-cal__moonicon {
+      font-size: 0.9rem;
+    }
+  }
+`
+  document.head.appendChild(style)
+}
 
   if (document.readyState === "loading") {
     document.addEventListener("DOMContentLoaded", () => {

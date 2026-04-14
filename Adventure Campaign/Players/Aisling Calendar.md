@@ -4,9 +4,6 @@ title: Aisling Calendar
 
 
 
-# Aisling Calendar
-
-
 
 <div id="aisling-calendar"></div>
 
