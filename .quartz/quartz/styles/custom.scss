@@ -23,8 +23,15 @@
   --guild-bg-main: #e7d6ae;
   --guild-bg-paper: #f4e8c8;
   --guild-bg-paper-2: #eadbb1;
+
+  /* main reading/content area */
   --guild-bg-panel: rgba(248, 238, 211, 0.60);
+
+  /* explorer / search / toc */
   --guild-bg-panel-strong: rgba(248, 238, 211, 0.75);
+
+  /* mobile header strip */
+  --guild-bg-mobile-bar: rgba(234, 219, 177, 0.92);
 
   --guild-text: #2b2115;
   --guild-text-soft: #5c4934;
@@ -55,8 +62,15 @@
   --guild-bg-main: #17120e;
   --guild-bg-paper: #241c14;
   --guild-bg-paper-2: #2d2419;
+
+  /* main reading/content area */
   --guild-bg-panel: rgba(27, 20, 15, 0.60);
+
+  /* explorer / search / toc */
   --guild-bg-panel-strong: rgba(27, 20, 15, 0.75);
+
+  /* mobile header strip */
+  --guild-bg-mobile-bar: rgba(45, 36, 25, 0.92);
 
   --guild-text: #eadfca;
   --guild-text-soft: #b9aa8f;
@@ -88,7 +102,7 @@ body {
   min-height: 100%;
   color: var(--guild-text);
   font-family: var(--guild-font-body);
-  background-color: var(--guild-bg-main);
+  // background-color: var(--guild-bg-main);
 }
 
 body {
@@ -119,6 +133,10 @@ body {
     url("/assets/public_assets/backgrounds/dark-mode-bg.png");
 }
 
+::selection {
+  background: var(--guild-selection);
+}
+
 /* =========================
    PANELS
    ========================= */
@@ -142,7 +160,7 @@ article {
   padding: 1.2rem;
 }
 
-/* Left/right utility boxes only */
+/* Explorer / search / toc only */
 .explorer,
 .search,
 .toc {
@@ -162,7 +180,6 @@ article {
     var(--guild-shadow-light);
 }
 
-/* Dark mode shadow tuning */
 :root[saved-theme="dark"] article,
 :root[saved-theme="dark"] .explorer,
 :root[saved-theme="dark"] .search,
@@ -430,11 +447,10 @@ button:focus {
 }
 
 /* =========================
-   EXPLORER / SIDEBAR / SEARCH
+   EXPLORER / SEARCH / INPUTS
    ========================= */
 
-.explorer *,
-.sidebar * {
+.explorer * {
   font-family: var(--guild-font-body);
 }
 
@@ -493,4 +509,333 @@ button:hover {
 .calendar th {
   background: color-mix(in srgb, var(--guild-bg-paper-2) 75%, transparent);
   color: var(--guild-h2);
+}
+
+/* =========================
+   MOBILE HEADER / MENU
+   ========================= */
+
+@media (max-width: 800px) {
+  html,
+  body,
+  #quartz-root,
+  .page,
+  #quartz-body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  /* make the whole mobile header area your themed panel */
+  .page > #quartz-body > .left.sidebar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0.75rem;
+    overflow: visible;
+
+    background-color: var(--guild-bg-mobile-bar);
+    background-image: linear-gradient(
+      to bottom,
+      rgba(255, 255, 255, 0.015),
+      rgba(0, 0, 0, 0.02)
+    );
+    border: 0;
+    border-bottom: 1px solid var(--guild-border);
+    border-radius: 0;
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.03),
+      0 6px 16px rgba(0, 0, 0, 0.14);
+  }
+
+  /* kill default black/odd bar sources */
+  .page,
+  #quartz-body,
+  .left.sidebar,
+  .left.sidebar > .page-title,
+  .left.sidebar > .spacer.mobile-only,
+  .left.sidebar > .flex-component {
+    background-clip: padding-box;
+  }
+
+  .left.sidebar > .page-title,
+  .left.sidebar > .spacer.mobile-only,
+  .left.sidebar > .flex-component {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+    margin: 0;
+    max-width: 100%;
+  }
+
+  .left.sidebar > .page-title {
+    padding: 0;
+  }
+
+  .left.sidebar > .page-title a {
+    color: var(--guild-h1);
+    text-decoration: none;
+  }
+
+  /* tighten the action row so it doesn’t create overflow */
+  .left.sidebar > .flex-component {
+    width: 100%;
+    gap: 0.5rem !important;
+    align-items: center;
+    flex-wrap: nowrap !important;
+    min-width: 0;
+  }
+
+  .left.sidebar > .flex-component > div {
+    min-width: 0;
+  }
+
+  .left.sidebar .search,
+  .left.sidebar .search-container,
+  .left.sidebar .search-bar {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  .left.sidebar .search {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+  }
+
+  .left.sidebar .search-container {
+    background-color: var(--guild-bg-paper);
+    border: 1px solid var(--guild-border);
+    border-radius: 8px;
+  }
+
+  :root[saved-theme="dark"] .left.sidebar .search-container {
+    background-color: var(--guild-bg-paper-2);
+  }
+
+  /* explorer must span the whole header width */
+  .left.sidebar .explorer {
+    position: static;
+    width: 100%;
+    max-width: 100%;
+    margin-top: 0.6rem;
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    overflow: visible;
+  }
+
+  /* burger button */
+  .explorer-toggle.mobile-explorer {
+    position: relative;
+    z-index: 130;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.45rem 0.6rem;
+
+    background: color-mix(in srgb, var(--guild-bg-paper) 72%, transparent);
+    border: 1px solid var(--guild-border);
+    border-radius: 8px;
+    color: var(--guild-text);
+  }
+
+  :root[saved-theme="dark"] .explorer-toggle.mobile-explorer {
+    background: color-mix(in srgb, var(--guild-bg-paper-2) 72%, transparent);
+  }
+
+  /* desktop toggle hidden on mobile */
+  .explorer-toggle.desktop-explorer {
+    display: none;
+  }
+
+  /* FULL-WIDTH MOBILE DRAWER */
+.left.sidebar .explorer-content {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+
+  width: 100vw;
+  max-width: 100vw;
+  min-height: 100dvh;
+  max-height: 100dvh;
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  z-index: 120;
+  margin: 0;
+  padding:
+    calc(env(safe-area-inset-top, 0px) + 5.25rem)
+    1rem
+    calc(env(safe-area-inset-bottom, 0px) + 1.25rem);
+
+  background-color: #ffffff;
+  background-image: none;
+  border: none;
+  border-top: 1px solid var(--guild-border);
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.2);
+}
+
+:root[saved-theme="dark"] .left.sidebar .explorer-content {
+  background-color: #000000;
+  background-image: none;
+  box-shadow: 0 14px 32px rgba(0, 0, 0, 0.35);
+}
+
+
+:root[saved-theme="light"] .left.sidebar .explorer-content {
+  background-image:
+    linear-gradient(to bottom, rgba(255, 248, 231, 0.18), rgba(90, 60, 20, 0.06)),
+    url("/assets/public_assets/backgrounds/light-mode-bg.png");
+}
+
+:root[saved-theme="dark"] .left.sidebar .explorer-content {
+  background-image:
+    linear-gradient(to bottom, rgba(0, 0, 0, 0.28), rgba(0, 0, 0, 0.40)),
+    url("/assets/public_assets/backgrounds/dark-mode-bg.png");
+}
+
+
+
+  /* if Quartz uses aria-expanded for visibility, force proper display */
+  .left.sidebar .explorer[aria-expanded="true"] .explorer-content,
+  .left.sidebar .explorer-content[aria-expanded="true"] {
+    display: block;
+  }
+
+  .left.sidebar .explorer[aria-expanded="false"] .explorer-content,
+  .left.sidebar .explorer-content[aria-expanded="false"] {
+    display: none;
+  }
+
+  .left.sidebar .explorer-ul,
+  .left.sidebar .folder-container,
+  .left.sidebar .folder-outer,
+  .left.sidebar .folder-tree {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+
+  /* prevent content panels from exceeding screen width */
+  .center,
+  .page-header,
+  article,
+  .right.sidebar,
+  .toc {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+  }
+
+  article {
+    margin: 0;
+    padding: 1rem;
+    overflow-x: hidden;
+  }
+
+  pre,
+  table {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .calendar {
+    display: table;
+    width: max-content;
+    min-width: 100%;
+    max-width: none;
+    border-collapse: collapse;
+  }
+  .calendar td,
+  .calendar th {
+    padding: 4px;
+    font-size: 0.85rem;
+  }
+
+  img,
+  svg,
+  video,
+  canvas {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .left.sidebar {
+    background-color: rgba(234, 219, 177, 0.70);
+  }
+
+  :root[saved-theme="dark"] .left.sidebar {
+    background-color: rgba(45, 36, 25, 0.70);
+  }
+
+  
+}
+
+@media (max-width: 800px) {
+  .page > #quartz-body .sidebar.left:has(.explorer) {
+    background-color: rgba(234, 219, 177, 0.80) !important; /* light */
+  }
+
+  :root[saved-theme="dark"] .page > #quartz-body .sidebar.left:has(.explorer) {
+    background-color: rgba(45, 36, 25, 0.80) !important; /* dark */
+  }
+}
+
+@media (max-width: 800px) {
+  .page > #quartz-body .sidebar.left:has(.explorer) {
+    position: sticky;
+    top: 0;
+    z-index: 200;
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 0.75rem;
+    background-color: var(--guild-bg-mobile-bar) !important;
+    background-image: none !important;
+    border: 0;
+    border-bottom: 1px solid var(--guild-border);
+    box-sizing: border-box;
+    overflow: visible;
+  }
+
+  .page > #quartz-body .sidebar.left:has(.explorer)::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: -1px;
+    left: -100vw;
+    right: -100vw;
+    background-color: var(--guild-bg-mobile-bar);
+    background-image: none;
+    border-bottom: 1px solid var(--guild-border);
+    z-index: -1;
+    pointer-events: none;
+  }
+}
+@media (max-width: 800px) {
+  .left.sidebar .explorer {
+    margin-right: 0.5rem;
+  }
+}
+@media (max-width: 800px) {
+  .left.sidebar > .page-title {
+    margin-right: 0.5rem;
+  }
 }
