@@ -17,7 +17,7 @@ const config: QuartzConfig = {
     },
     locale: "en-US",
     baseUrl: "aisling-wiki.pages.dev",
-    ignorePatterns: ["private", "templates", ".obsidian", "z_Templates", "Adventure Campaign/GM", "tutorial map", ".quartz", "assets/z_Assets", "z_Example Notes", "Adventure Campaign/Players/Continents"],
+    ignorePatterns: ["private", "templates", ".obsidian", "z_Templates", "Adventure Campaign/GM", "tutorial map", ".quartz", "assets/z_Assets", "z_Example Notes", "Adventure Campaign/Players/Continents/Magalete"],
     defaultDateType: "modified",
     theme: {
       fontOrigin: "googleFonts",
